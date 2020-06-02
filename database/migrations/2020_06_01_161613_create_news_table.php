@@ -19,7 +19,7 @@ class CreateNewsTable extends Migration
             $table->string('title');
             $table->string('resume');
             $table->string('image');
-            $table->string('content');
+            $table->string('content', 250);
             $table->boolean('isActive')->default(true);
             $table->string('author');
         });

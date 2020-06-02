@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Brand extends Model
+class News extends Model
 {
     use Notifiable;
 
@@ -15,7 +15,13 @@ class Brand extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'banner', 'image', 'description',
-    ];
-
+        'title', 'resume', 'image','content', 'isActive','author'
+    ]; 
+    
+    /**
+     * The table associated with the model.
+     *
+     * @var array
+     */
+    protected $table = 'news';
 }

@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('brands', 'BrandsController@index');
+Route::get('brands/{brand_id}', 'BrandsController@show');
+Route::get('brands/{brand_id}/products', 'BrandsController@showItem');
+
+Route::get('products', 'ProductsController@index');
+Route::get('products/{product_id}', 'ProductsController@show');
+
+Route::get('news', 'NewsController@index');
+Route::get('news/{news_id}', 'NewsController@show');
+
+Route::post('contact', 'ContactController@store');
