@@ -24,4 +24,4 @@ Route::get('products/{product_id}', 'ProductsController@show');
 Route::get('news', 'NewsController@index');
 Route::get('news/{news_id}', 'NewsController@show');
 
-Route::post('contact', 'ContactController@store');
+Route::post('contact', 'ContactController@send');

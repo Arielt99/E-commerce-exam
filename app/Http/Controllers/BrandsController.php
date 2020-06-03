@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Product;
 use Illuminate\Http\Request;
 
 class BrandsController extends Controller
@@ -52,6 +53,27 @@ class BrandsController extends Controller
             return response()->json(['error' => true, 'message' => 'Unable to find Brand with ID '. $id], 404);
         }
         return response()->json($result, 200);
+    }
+
+        /**
+     * Display the specified resource's items.
+     *
+     * @param  \App\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function showItem(Brand $brand, $id)
+    {
+        $result = $brand -> find($id);
+        if (!$result){
+            return response()->json(['error' => true, 'message' => 'Unable to find Brand with ID '. $id], 404);
+        }
+
+        $BrandProduct = Product::where('brand_id', $id)->get();
+        if ($BrandProduct) {
+            return response()->json($BrandProduct);
+        } else {
+            return response()->json([], 204);
+        }
     }
 
     /**

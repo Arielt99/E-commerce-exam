@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Database\Eloquent\Builder;
 class ProductsController extends Controller
 {
     /**
@@ -13,10 +13,29 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::all();
+        $search = $request->query('search');
+        $sort = $request->query('sort');
+        $max = $request->query('max');
+        if($search){
+            $product = Product::where('name','like', '%'.$search.'%')
+            ->orderBy('name')
+            ->get();
 
+            if ($product) {
+                return response()->json($product);
+            } else {
+                return response()->json([], 204);
+            }
+        }
+        else if ($sort)
+        {
+            $product = Product::all()->random($max);
+            return response()->json($product);
+        }
+
+        $product = Product::all();
         return response()->json($product);
     }
 
@@ -47,21 +66,14 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product, $id)
     {
+        $result = $product -> find($id);
+        if (!$result){
+            return response()->json(['error' => true, 'message' => 'Unable to find Product with ID '. $id], 404);
+        }
+        return response()->json($result, 200);
     }
-
-        /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function showItem(Product $product)
-    {
-        //
-    }
-
 
     /**
      * Show the form for editing the specified resource.

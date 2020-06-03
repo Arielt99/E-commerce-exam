@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Mail\Mailable;
+use App\Mail\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -35,6 +38,38 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    /**
+     * Send an email with request's data.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function send(Request $request)
+    {
+        try {
+            $request->validate([
+                'last_name' => 'required',
+                'first_name' => 'required',
+                'email' => 'required',
+                'subject' => 'required',
+                'message' => 'required'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()], 422);
+        }
+        $infos = [
+            'last_name' => $request->get('last_name'),
+            'first_name' => $request->get('first_name'),
+            'email' => $request->get('email'),
+            'subject' => $request->get('subject'),
+            'message' => $request->get('message'),
+        ];
+
+        Mail::to('arielthibault@yahoo.fr')->send(new Contact($infos));
+ 
+        return response()->json([], 200);
     }
 
     /**

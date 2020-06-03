@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'SpaController@index');
+Route::get('/{vue_capture?}', function () {
+    return view('index_vue');
+})->where('vue_capture', '^(?!api\/)[\/\w\.-]*');
