@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '*',
     name: 'Home',
     component: Home
   },
@@ -48,8 +48,30 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function () {
       return import(/* webpackChunkName: "contact" */ '../views/News.vue')
-    },
-  }
+    }
+  },
+  {
+    path: '/brand/:id',
+    name: 'Brand',
+    props: true,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "contact" */ '../views/Brand.vue')
+    }
+  },
+  {
+    path: '/brand/:brandid/product/:id',
+    name: 'Product',
+    props: true,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "contact" */ '../views/Product.vue')
+    }
+  },
 ]
 
 const router = new VueRouter({

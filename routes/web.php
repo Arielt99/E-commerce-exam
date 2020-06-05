@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/{vue_capture?}', function () {
+Route::get('/{any}', function () {
     return view('index_vue');
-})->where('vue_capture', '^(?!api\/)[\/\w\.-]*');
+})->where('any', '^(?!api\/)[\/\w\.-]*');

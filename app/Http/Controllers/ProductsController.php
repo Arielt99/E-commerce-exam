@@ -19,7 +19,7 @@ class ProductsController extends Controller
         $sort = $request->query('sort');
         $max = $request->query('max');
         if($search){
-            $product = Product::where('name','like', '%'.$search.'%')
+            $product = Product::where('isActive', true)->where('name','like', '%'.$search.'%')
             ->orderBy('name')
             ->get();
 
@@ -31,12 +31,20 @@ class ProductsController extends Controller
         }
         else if ($sort)
         {
-            $product = Product::all()->random($max);
-            return response()->json($product);
+            $product = Product::where('isActive', true)->get()->random($max);
+            if ($product) {
+                return response()->json($product);
+            } else {
+                return response()->json([], 204);
+            }
         }
 
-        $product = Product::all();
-        return response()->json($product);
+        $product = Product::where('isActive', true)->get();
+        if ($product) {
+            return response()->json($product);
+        } else {
+            return response()->json([], 204);
+        }
     }
 
     /**
@@ -68,7 +76,7 @@ class ProductsController extends Controller
      */
     public function show(Product $product, $id)
     {
-        $result = $product -> find($id);
+        $result = $product::where('isActive', true) -> find($id);
         if (!$result){
             return response()->json(['error' => true, 'message' => 'Unable to find Product with ID '. $id], 404);
         }

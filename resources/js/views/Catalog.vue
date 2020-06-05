@@ -2,7 +2,7 @@
   <div class="Catalog">
     <h1>Nos marques</h1>
     <ul>
-        <BrandCard v-for="brand in brands" :key="brand.index" v-bind:emitedBrand="brand"/>
+        <BrandCard v-for="brand in brands" :key="brand.id" v-bind:emitedBrand="brand"/>
     </ul>
   </div>
 </template>
@@ -18,17 +18,11 @@ export default {
         BrandCard
     },
     methods:{
-        getBrandList(){
-            this.$store.dispatch('getBrandList');
-        },
     },
     computed:{
         brands(){
-            return this.$store.getters.brands;
+            return this.$store.getters.EveryBrands;
         },
     },
-    created: function(){
-        this.getBrandList()
-    }
 }
 </script>

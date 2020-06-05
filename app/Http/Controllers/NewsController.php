@@ -14,7 +14,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        $news = News::where('isActive', true);
         return response()->json($news);
     }
 
@@ -47,7 +47,7 @@ class NewsController extends Controller
      */
     public function show(News $news, $id)
     {
-        $result = $news -> find($id);
+        $result = $news::where('isActive', true) -> find($id);
         if (!$result){
             return response()->json(['error' => true, 'message' => 'Unable to find News with ID '. $id], 404);
         }

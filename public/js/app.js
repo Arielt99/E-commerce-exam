@@ -2014,6 +2014,60 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  methods: {
+    getBrandList: function getBrandList() {
+      this.$store.dispatch('getBrandList');
+    },
+    getProductList: function getProductList() {
+      this.$store.dispatch('getProductList');
+    },
+    getNewsList: function getNewsList() {
+      this.$store.dispatch('getNewsList');
+    }
+  },
+  created: function created() {
+    if (this.$store.getters.EveryBrands.length == 0) {
+      this.getBrandList();
+    }
+
+    if (this.$store.getters.EveryProducts.length == 0) {
+      this.getProductList();
+    }
+
+    if (this.$store.getters.EveryNews.length == 0) {
+      this.getNewsList();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -19802,15 +19856,17 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=f348271a& */ "./resources/js/App.vue?vue&type=template&id=f348271a&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./resources/js/App.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -19824,6 +19880,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/App.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/App.vue?vue&type=script&lang=js&":
+/*!*******************************************************!*\
+  !*** ./resources/js/App.vue?vue&type=script&lang=js& ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib??ref--4-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -19895,7 +19965,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
-  path: '/',
+  path: '*',
   name: 'Home',
   component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
@@ -19934,6 +20004,26 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/News.vue */ "./resources/js/views/News.vue"));
   }
+}, {
+  path: '/brand/:id',
+  name: 'Brand',
+  props: true,
+  // route level code-splitting
+  // this generates a separate chunk (about.[hash].js) for this route
+  // which is lazy-loaded when the route is visited.
+  component: function component() {
+    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Brand.vue */ "./resources/js/views/Brand.vue"));
+  }
+}, {
+  path: '/brand/:brandid/product/:id',
+  name: 'Product',
+  props: true,
+  // route level code-splitting
+  // this generates a separate chunk (about.[hash].js) for this route
+  // which is lazy-loaded when the route is visited.
+  component: function component() {
+    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Product.vue */ "./resources/js/views/Product.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -19949,12 +20039,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, sentMailContact */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, sentMailContact */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandList", function() { return getBrandList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductList", function() { return getProductList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsList", function() { return getNewsList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandProductList", function() { return getBrandProductList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sentMailContact", function() { return sentMailContact; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -19963,21 +20057,65 @@ __webpack_require__.r(__webpack_exports__);
 var getBrandList = function getBrandList(_ref) {
   var commit = _ref.commit;
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/brands').then(function (response) {
-    console.log(response.data);
-    commit("getBrands", response.data);
+    //console.log(response.data)
+    commit("getBrandList", response.data);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
   });
+}; //getting all the Products
+
+var getProductList = function getProductList(_ref2) {
+  var commit = _ref2.commit;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products').then(function (response) {
+    //console.log(response.data)
+    commit("getProductList", response.data);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+  });
+}; //getting all the News
+
+var getNewsList = function getNewsList(_ref3) {
+  var commit = _ref3.commit;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/news').then(function (response) {
+    //console.log(response.data)
+    commit("getNewsList", response.data);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+  });
+}; //getting all the Product of a brand
+
+var getBrandProductList = function getBrandProductList(_ref4, _ref5) {
+  var commit = _ref4.commit;
+  var id = _ref5.id;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/brands/' + id + '/products').then(function (response) {
+    //console.log(response.data)
+    commit("getBrandProductList", response.data);
+  })["catch"](function (error) {//console.log(error.response.data)
+    //alert("erreur du serveur, réessayez plus tard")
+  });
+}; //getting a specific product
+
+var getProduct = function getProduct(_ref6, _ref7) {
+  var commit = _ref6.commit;
+  var id = _ref7.id;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products/' + id).then(function (response) {
+    //console.log(response.data)
+    commit("getProduct", response.data);
+  })["catch"](function (error) {//console.log(error.response.data)
+    //alert("erreur du serveur, réessayez plus tard")
+  });
 }; //sending an e-email
 
-var sentMailContact = function sentMailContact(_ref2, _ref3) {
-  var commit = _ref2.commit;
-  var last_name = _ref3.last_name,
-      first_name = _ref3.first_name,
-      email = _ref3.email,
-      subject = _ref3.subject,
-      message = _ref3.message;
+var sentMailContact = function sentMailContact(_ref8, _ref9) {
+  var commit = _ref8.commit;
+  var last_name = _ref9.last_name,
+      first_name = _ref9.first_name,
+      email = _ref9.email,
+      subject = _ref9.subject,
+      message = _ref9.message;
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('h/api/contact', {
     last_name: last_name,
     first_name: first_name,
@@ -19999,14 +20137,30 @@ var sentMailContact = function sentMailContact(_ref2, _ref3) {
 /*!***************************************!*\
   !*** ./resources/js/store/getters.js ***!
   \***************************************/
-/*! exports provided: brands */
+/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "brands", function() { return brands; });
-var brands = function brands(state) {
-  return state.brands;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryBrands", function() { return EveryBrands; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryProducts", function() { return EveryProducts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryNews", function() { return EveryNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productList", function() { return productList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "product", function() { return product; });
+var EveryBrands = function EveryBrands(state) {
+  return state.EveryBrands;
+};
+var EveryProducts = function EveryProducts(state) {
+  return state.EveryProducts;
+};
+var EveryNews = function EveryNews(state) {
+  return state.EveryNews;
+};
+var productList = function productList(state) {
+  return state.productList;
+};
+var product = function product(state) {
+  return state.product;
 };
 
 /***/ }),
@@ -20048,18 +20202,22 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
   \*****************************************/
-/*! exports provided: getBrands */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrands", function() { return getBrands; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandList", function() { return getBrandList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductList", function() { return getProductList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsList", function() { return getNewsList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandProductList", function() { return getBrandProductList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
 //brandList = response.data from getBrandList in action
-var getBrands = function getBrands(state, brandList) {
-  state.brands = [];
+var getBrandList = function getBrandList(state, brandList) {
+  state.EveryBrands = [];
 
   for (var i = 0; i < brandList.length; i++) {
-    state.brands.push({
+    state.EveryBrands.push({
       banner: brandList[i].banner,
       description: brandList[i].description,
       id: brandList[i].id,
@@ -20067,6 +20225,60 @@ var getBrands = function getBrands(state, brandList) {
       name: brandList[i].name
     });
   }
+}; //productList = response.data from getProductList in action
+
+var getProductList = function getProductList(state, productList) {
+  state.EveryProducts = [];
+
+  for (var i = 0; i < productList.length; i++) {
+    state.EveryProducts.push({
+      id: productList[i].id,
+      principal_image: productList[i].principal_image,
+      name: productList[i].name,
+      price: productList[i].price,
+      brand_id: productList[i].brand_id
+    });
+  }
+}; //newsList = response.data from getNewsList in action
+
+var getNewsList = function getNewsList(state, newsList) {
+  state.EveryNews = [];
+
+  for (var i = 0; i < newsList.length; i++) {
+    state.EveryNews.push({
+      title: newsList[i].title,
+      resume: newsList[i].resume,
+      id: newsList[i].id,
+      image: newsList[i].image,
+      content: newsList[i].content,
+      author: newsList[i].author
+    });
+  }
+}; //BrandProductList = response.data from getBrandProductList in action
+
+var getBrandProductList = function getBrandProductList(state, BrandProductList) {
+  state.productList = [];
+
+  for (var i = 0; i < BrandProductList.length; i++) {
+    state.productList.push({
+      id: BrandProductList[i].id,
+      principal_image: BrandProductList[i].principal_image,
+      name: BrandProductList[i].name,
+      price: BrandProductList[i].price,
+      brand_id: BrandProductList[i].brand_id
+    });
+  }
+}; //productList = response.data from getProductList in action
+
+var getProduct = function getProduct(state, GetedProduct) {
+  state.product = [];
+  state.product.push({
+    id: GetedProduct.id,
+    principal_image: GetedProduct.principal_image,
+    name: GetedProduct.name,
+    price: GetedProduct.price,
+    brand_id: GetedProduct.brand_id
+  });
 };
 
 /***/ }),
@@ -20081,7 +20293,11 @@ var getBrands = function getBrands(state, brandList) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  brands: []
+  EveryBrands: [],
+  EveryProducts: [],
+  EveryNews: [],
+  productList: [],
+  product: []
 });
 
 /***/ }),

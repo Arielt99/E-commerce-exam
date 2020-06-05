@@ -4,15 +4,62 @@ import axios from "axios";
 export const getBrandList = ({ commit })=>{
     axios.get('/api/brands')
     .then( response => {
-        console.log(response.data)
-        commit("getBrands", response.data)
+        //console.log(response.data)
+        commit("getBrandList", response.data)
     })
     .catch( error =>  {
         //console.log(error.response.data)
         alert("erreur du serveur, réessayez plus tard")
     })
 }
-
+//getting all the Products
+export const getProductList = ({ commit })=>{
+    axios.get('/api/products')
+    .then( response => {
+        //console.log(response.data)
+        commit("getProductList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+    })
+}
+//getting all the News
+export const getNewsList = ({ commit })=>{
+    axios.get('/api/news')
+    .then( response => {
+        //console.log(response.data)
+        commit("getNewsList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+    })
+}
+//getting all the Product of a brand
+export const getBrandProductList = ({ commit },{id})=>{
+    axios.get('/api/brands/'+id+'/products')
+    .then( response => {
+        //console.log(response.data)
+        commit("getBrandProductList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        //alert("erreur du serveur, réessayez plus tard")
+    })
+}
+//getting a specific product
+export const getProduct = ({ commit },{id})=>{
+    axios.get('/api/products/'+id)
+    .then( response => {
+        //console.log(response.data)
+        commit("getProduct", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        //alert("erreur du serveur, réessayez plus tard")
+    })
+}
 
 
 

@@ -1,3 +1,7 @@
 export default{
-    brands:[]
+    EveryBrands:[],
+    EveryProducts:[],
+    EveryNews:[], 
+    productList:[],
+    product:[],
 };
