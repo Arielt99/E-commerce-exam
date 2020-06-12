@@ -4,4 +4,6 @@ export default{
     EveryNews:[], 
     productList:[],
     product:[],
+    RandomProducts:[],
+    searchResponse:[]
 };

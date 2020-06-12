@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class NewsController extends Controller
 {
@@ -14,7 +15,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::where('isActive', true);
+        $news = News::where('isActive', true)->orderBy('created_at','DESC')->get();
         return response()->json($news);
     }
 

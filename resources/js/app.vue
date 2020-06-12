@@ -2,11 +2,12 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <input type="text" placeholder="barre de recherche">|
-      <router-link to="/Catalog">Catalogue</router-link> |
+      <input type="text" v-model="searchContent" v-on:keyup.enter="search()" placeholder="barre de recherche"><button type="button" @click="search()">search</button>|
+      <router-link to="/Brand">Catalogue</router-link> |
       <router-link to="/News">News</router-link> |
       <router-link to="/Contact">Contact</router-link> |
       <router-link to="/Cart">Panier</router-link>
+      <router-link to="/Result">search</router-link>
     </div>
     <router-view/>
   </div>
@@ -15,9 +16,14 @@
 export default {
     data (){
       return {
+        searchContent:null,
       }
     },
     methods:{
+      search(){
+        this.$router.push('/Result/'+this.searchContent)
+        this.searchContent=null
+      },
       getBrandList(){
           this.$store.dispatch('getBrandList');
       },
@@ -41,3 +47,10 @@ export default {
     }
 }
 </script>
+<style>
+.product-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+</style>

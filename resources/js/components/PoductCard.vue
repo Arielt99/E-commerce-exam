@@ -1,11 +1,11 @@
 <template>
     <div class="productCard">
-        <RouterLink :to="'/brand/'+emitedProduct.brand_id+'/product/'+emitedProduct.id">
+        <RouterLink :to="'/Brand/'+emitedProduct.brand_id+'/Product/'+emitedProduct.id">
             <div class="card">
                 <div class="card-header">
                     <img :src="emitedProduct.principal_image"/>
                 </div>
-                    <div class="card-body">
+                    <div class="card-body" v-if=" this.CurrentBrand[0]">
                         <p>{{emitedProduct.name}}</p>
                         <p>{{emitedProduct.price}} €</p>
                         <p>{{CurrentBrand[0].name}}</p>

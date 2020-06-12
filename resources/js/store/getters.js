@@ -13,3 +13,9 @@ export const productList = state =>{
 export const product = state =>{
     return state.product;
 };
+export const RandomProducts = state =>{
+    return state.RandomProducts;
+};
+export const searchResponse = state =>{
+    return state.searchResponse;
+};

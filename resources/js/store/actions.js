@@ -60,8 +60,30 @@ export const getProduct = ({ commit },{id})=>{
         //alert("erreur du serveur, réessayez plus tard")
     })
 }
-
-
+//getting a list of random product
+export const getRandomProductList = ({ commit })=>{
+    axios.get('/api/products?sort=random&max=10')
+    .then( response => {
+        //console.log(response.data)
+        commit("getRandomProductList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+    })
+}
+//getting a specific product
+export const search = ({ commit },{searchContent})=>{
+    axios.get('/api/products?search='+searchContent)
+    .then( response => {
+        console.log(response.data)
+        commit("searchResponse", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        //alert("erreur du serveur, réessayez plus tard")
+    })
+}
 
 
 

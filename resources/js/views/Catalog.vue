@@ -1,9 +1,9 @@
 <template>
   <div class="Catalog">
     <h1>Nos marques</h1>
-    <ul>
+    <div class="brand-list">
         <BrandCard v-for="brand in brands" :key="brand.id" v-bind:emitedBrand="brand"/>
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -26,3 +26,10 @@ export default {
     },
 }
 </script>
+<style>
+.brand-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+</style>

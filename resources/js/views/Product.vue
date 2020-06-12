@@ -1,9 +1,14 @@
 <template>
-  <div class="Product" v-if="this.CurrentProduct[0]">
-    <h1>{{this.CurrentProduct[0].name}}</h1>
-    <img :src="this.CurrentProduct[0].principal_image"/>
-    <p>{{this.CurrentProduct[0].price}} €</p>
-    <p>{{CurrentBrand[0].name}}</p>
+  <div>
+    <div class="Product" v-if="this.CurrentProduct[0]">
+      <h1>{{this.CurrentProduct[0].name}}</h1>
+      <img :src="this.CurrentProduct[0].principal_image"/>
+      <p>{{this.CurrentProduct[0].price}} €</p>
+      <p>{{CurrentBrand[0].name}}</p>
+    </div>
+    <div class="empty" v-if=" !this.CurrentProduct[0]">
+      <p> Produit indisponible </p>
+    </div>
   </div>
 </template>
 

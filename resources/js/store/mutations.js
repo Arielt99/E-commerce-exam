@@ -35,6 +35,7 @@ export const getNewsList = (state, newsList)=>{
             image : newsList[i].image,
             content : newsList[i].content,
             author : newsList[i].author,
+            posted_at : newsList[i].created_at,
         })
     }
 }
@@ -51,7 +52,7 @@ export const getBrandProductList = (state, BrandProductList)=>{
         })
     }
 }
-//productList = response.data from getProductList in action
+//GetedProduct = response.data from getProduct in action
 export const getProduct = (state, GetedProduct)=>{
     state.product =[]
     state.product.push({
@@ -61,6 +62,32 @@ export const getProduct = (state, GetedProduct)=>{
         price : GetedProduct.price,
         brand_id : GetedProduct.brand_id,
     })
+}
+//RandomProductList = response.data from getRandomProductList in action
+export const getRandomProductList = (state, RandomProductList)=>{
+    state.RandomProducts =[]
+    for (let i=0; i<RandomProductList.length; i++){
+        state.RandomProducts.push({
+            id : RandomProductList[i].id,
+            principal_image : RandomProductList[i].principal_image,
+            name : RandomProductList[i].name,
+            price : RandomProductList[i].price,
+            brand_id : RandomProductList[i].brand_id,
+        })
+    }
+}
+//RandomProductList = response.data from getRandomProductList in action
+export const searchResponse = (state, search)=>{
+    state.searchResponse =[]
+    for (let i=0; i<search.length; i++){
+        state.searchResponse.push({
+            id : search[i].id,
+            principal_image : search[i].principal_image,
+            name : search[i].name,
+            price : search[i].price,
+            brand_id : search[i].brand_id,
+        })
+    }
 }
 
 
