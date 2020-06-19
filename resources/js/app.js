@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './routeur/index'
 import store from './store'
 import Vuelidate from 'vuelidate'
+require('./bootstrap');
 
 Vue.use(Vuelidate)
 

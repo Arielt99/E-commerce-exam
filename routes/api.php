@@ -25,3 +25,9 @@ Route::get('news', 'NewsController@index');
 Route::get('news/{news_id}', 'NewsController@show');
 
 Route::post('contact', 'ContactController@send');
+
+Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
+    Route::post('signin', 'SignInController');
+    Route::post('signout', 'SignOutController');
+    Route::get('me', 'MeController');
+});
