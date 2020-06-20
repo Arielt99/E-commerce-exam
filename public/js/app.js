@@ -56496,7 +56496,7 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
       email = _ref12.email,
       subject = _ref12.subject,
       message = _ref12.message;
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('h/api/contact', {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/contact', {
     last_name: last_name,
     first_name: first_name,
     email: email,
