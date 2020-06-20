@@ -10,7 +10,8 @@ Vue.use(Vuelidate)
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(routes => routes.meta.requiresAuth)
   const currentUser = localStorage.getItem('token')
-  if (requiresAuth && currentUser === null && to.path === '/admin' ) {
+  if (requiresAuth && currentUser === null ) {
+    //store.dispatch('attempt',localStorage.getItem('token'))
       next('/login')
   }
   else if (!requiresAuth && currentUser && (to.path === '/login' || to.path === '/homeAdmin')) {
@@ -20,8 +21,6 @@ router.beforeEach((to, from, next) => {
       next()
   }
 });
-
-store.dispatch('auth/attempt',localStorage.getItem('token'))
 
 new Vue({
   router,

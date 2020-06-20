@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="!this.$route.meta.requiresAuth">
       <router-link to="/">Home</router-link> |
       <input type="text" v-model="searchContent" v-on:keyup.enter="search()" placeholder="barre de recherche"><button type="button" @click="search()">search</button>|
       <router-link to="/Brand">Catalogue</router-link> |
@@ -48,9 +48,8 @@ export default {
 }
 </script>
 <style>
-.product-list{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+#nav a{
+  color: rgb(48, 48, 48);
+  text-decoration: none;
 }
 </style>

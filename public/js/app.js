@@ -6646,7 +6646,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.product-list{\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex-wrap: wrap;\n}\r\n", ""]);
+exports.push([module.i, "\n#nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\n}\r\n", ""]);
 
 // exports
 
@@ -38445,64 +38445,70 @@ var render = function() {
     "div",
     { attrs: { id: "app" } },
     [
-      _c(
-        "div",
-        { attrs: { id: "nav" } },
-        [
-          _c("router-link", { attrs: { to: "/" } }, [_vm._v("Home")]),
-          _vm._v(" |\n    "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.searchContent,
-                expression: "searchContent"
-              }
+      !this.$route.meta.requiresAuth
+        ? _c(
+            "div",
+            { attrs: { id: "nav" } },
+            [
+              _c("router-link", { attrs: { to: "/" } }, [_vm._v("Home")]),
+              _vm._v(" |\n    "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchContent,
+                    expression: "searchContent"
+                  }
+                ],
+                attrs: { type: "text", placeholder: "barre de recherche" },
+                domProps: { value: _vm.searchContent },
+                on: {
+                  keyup: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.search()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.searchContent = $event.target.value
+                  }
+                }
+              }),
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.search()
+                    }
+                  }
+                },
+                [_vm._v("search")]
+              ),
+              _vm._v("|\n    "),
+              _c("router-link", { attrs: { to: "/Brand" } }, [
+                _vm._v("Catalogue")
+              ]),
+              _vm._v(" |\n    "),
+              _c("router-link", { attrs: { to: "/News" } }, [_vm._v("News")]),
+              _vm._v(" |\n    "),
+              _c("router-link", { attrs: { to: "/Contact" } }, [
+                _vm._v("Contact")
+              ]),
+              _vm._v(" |\n    "),
+              _c("router-link", { attrs: { to: "/Cart" } }, [_vm._v("Panier")])
             ],
-            attrs: { type: "text", placeholder: "barre de recherche" },
-            domProps: { value: _vm.searchContent },
-            on: {
-              keyup: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.search()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.searchContent = $event.target.value
-              }
-            }
-          }),
-          _c(
-            "button",
-            {
-              attrs: { type: "button" },
-              on: {
-                click: function($event) {
-                  return _vm.search()
-                }
-              }
-            },
-            [_vm._v("search")]
-          ),
-          _vm._v("|\n    "),
-          _c("router-link", { attrs: { to: "/Brand" } }, [_vm._v("Catalogue")]),
-          _vm._v(" |\n    "),
-          _c("router-link", { attrs: { to: "/News" } }, [_vm._v("News")]),
-          _vm._v(" |\n    "),
-          _c("router-link", { attrs: { to: "/Contact" } }, [_vm._v("Contact")]),
-          _vm._v(" |\n    "),
-          _c("router-link", { attrs: { to: "/Cart" } }, [_vm._v("Panier")])
-        ],
-        1
-      ),
+            1
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("router-view")
     ],
@@ -56036,7 +56042,8 @@ _routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, 
   });
   var currentUser = localStorage.getItem('token');
 
-  if (requiresAuth && currentUser === null && to.path === '/admin') {
+  if (requiresAuth && currentUser === null) {
+    //store.dispatch('attempt',localStorage.getItem('token'))
     next('/login');
   } else if (!requiresAuth && currentUser && (to.path === '/login' || to.path === '/homeAdmin')) {
     next('/admin');
@@ -56044,7 +56051,6 @@ _routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, 
     next();
   }
 });
-_store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch('auth/attempt', localStorage.getItem('token'));
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -56385,7 +56391,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56398,9 +56404,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomProductList", function() { return getRandomProductList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "search", function() { return search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sentMailContact", function() { return sentMailContact; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attempt", function() { return attempt; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
- //getting all the brands
+ // client action
+//getting all the brands
 
 var getBrandList = function getBrandList(_ref) {
   var commit = _ref.commit;
@@ -56498,6 +56508,42 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
+  });
+}; //admin action
+//login admin
+
+var login = function login(_ref13, credentials) {
+  var dispatch = _ref13.dispatch;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/signin', credentials).then(function (response) {
+    return dispatch('attempt', response.data.token);
+  });
+}; //check if connected
+
+var attempt = function attempt(_ref14, token) {
+  var commit = _ref14.commit,
+      state = _ref14.state;
+
+  if (token) {
+    commit('set_token', token);
+  }
+
+  if (state.token !== null) {
+    try {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/me').then(function (response) {
+        commit('set_user', response.data);
+      });
+    } catch (e) {
+      commit('set_token', null);
+      commit('set_user', null);
+    }
+  }
+}; //logout admin
+
+var signOut = function signOut(_ref15) {
+  var commit = _ref15.commit;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/auth/signout").then(function () {
+    commit('set_token', null);
+    commit('set_user', null);
   });
 };
 
