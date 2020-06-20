@@ -7,7 +7,6 @@
       <router-link to="/News">News</router-link> |
       <router-link to="/Contact">Contact</router-link> |
       <router-link to="/Cart">Panier</router-link>
-      <router-link to="/Result">search</router-link>
     </div>
     <router-view/>
   </div>
@@ -21,8 +20,9 @@ export default {
     },
     methods:{
       search(){
+        if(this.searchContent != this.$route.params.search && this.searchContent.length != 0){
         this.$router.push('/Result/'+this.searchContent)
-        this.searchContent=null
+        }
       },
       getBrandList(){
           this.$store.dispatch('getBrandList');

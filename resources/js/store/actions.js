@@ -76,7 +76,7 @@ export const getRandomProductList = ({ commit })=>{
 export const search = ({ commit },{searchContent})=>{
     axios.get('/api/products?search='+searchContent)
     .then( response => {
-        console.log(response.data)
+        //console.log(response.data)
         commit("searchResponse", response.data)
     })
     .catch( error =>  {

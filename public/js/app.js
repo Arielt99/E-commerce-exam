@@ -2036,7 +2036,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2045,8 +2044,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     search: function search() {
-      this.$router.push('/Result/' + this.searchContent);
-      this.searchContent = null;
+      if (this.searchContent != this.$route.params.search && this.searchContent.length != 0) {
+        this.$router.push('/Result/' + this.searchContent);
+      }
     },
     getBrandList: function getBrandList() {
       this.$store.dispatch('getBrandList');
@@ -38499,9 +38499,7 @@ var render = function() {
           _vm._v(" |\n    "),
           _c("router-link", { attrs: { to: "/Contact" } }, [_vm._v("Contact")]),
           _vm._v(" |\n    "),
-          _c("router-link", { attrs: { to: "/Cart" } }, [_vm._v("Panier")]),
-          _vm._v(" "),
-          _c("router-link", { attrs: { to: "/Result" } }, [_vm._v("search")])
+          _c("router-link", { attrs: { to: "/Cart" } }, [_vm._v("Panier")])
         ],
         1
       ),
@@ -56032,6 +56030,21 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuelidate__WEBPACK_IMPORTED_MODULE_4___default.a);
+_routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
+  var requiresAuth = to.matched.some(function (routes) {
+    return routes.meta.requiresAuth;
+  });
+  var currentUser = localStorage.getItem('token');
+
+  if (requiresAuth && currentUser === null && to.path === '/admin') {
+    next('/login');
+  } else if (!requiresAuth && currentUser && (to.path === '/login' || to.path === '/homeAdmin')) {
+    next('/admin');
+  } else {
+    next();
+  }
+});
+_store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch('auth/attempt', localStorage.getItem('token'));
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -56339,6 +56352,24 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Contact.vue */ "./resources/js/views/Contact.vue"));
   }
+}, {
+  path: '/login',
+  name: 'admin.login',
+  component: function component() {
+    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Admin/Login.vue */ "./resources/js/views/Admin/Login.vue"));
+  },
+  meta: {
+    requiresAuth: false
+  }
+}, {
+  path: '/admin',
+  name: 'admin.dashboard',
+  component: function component() {
+    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Admin/Admin.vue */ "./resources/js/views/Admin/Admin.vue"));
+  },
+  meta: {
+    requiresAuth: true
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -56441,7 +56472,7 @@ var search = function search(_ref9, _ref10) {
   var commit = _ref9.commit;
   var searchContent = _ref10.searchContent;
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products?search=' + searchContent).then(function (response) {
-    console.log(response.data);
+    //console.log(response.data)
     commit("searchResponse", response.data);
   })["catch"](function (error) {//console.log(error.response.data)
     //alert("erreur du serveur, réessayez plus tard")

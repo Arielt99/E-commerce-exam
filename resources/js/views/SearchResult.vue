@@ -1,10 +1,10 @@
 <template>
 <div id="SearchResult">
-    <h1>{{reload}}</h1>
+    <h1>resultat pour {{reload}}</h1>
     <div class="product-list">
         <ProductCard v-for="product in ProductsResult" :key="product.id" v-bind:emitedProduct="product"/>
     </div>
-    <nav class="paginateNav">
+    <nav class="paginateNav" v-if="pages.length > 1">
         <div class="prev">
             <div v-if="page != 1">
             <button type="button" @click="page = 1" > first </button>
@@ -45,26 +45,26 @@ export default {
     },
 	methods:{
 		setPages () {
-            this.$store.dispatch('search', {searchContent: this.$route.params.search});
-			let numberOfPages = Math.ceil(this. SearchResult.length / this.perPage);
+            let numberOfPages = Math.ceil(this. SearchResult.length / this.perPage)
+            this.pages =[]
 			for (let index = 1; index <= numberOfPages; index++) {
-				this.pages.push(index);
+				this.pages.push(index)
 			}
 		},
-		paginate ( SearchResult) {
-			let page = this.page;
-			let perPage = this.perPage;
-			let from = (page * perPage) - perPage;
-			let to = (page * perPage);
-			return   SearchResult.slice(from, to);
+		paginate () {
+			let page = this.page
+			let perPage = this.perPage
+			let from = (page * perPage) - perPage
+			let to = (page * perPage)
+			return  this.SearchResult.slice(from, to)
 		}
 	},
 	computed: {
         SearchResult(){
-            return this.$store.getters.searchResponse;
+            return this.$store.getters.searchResponse
         },
 		ProductsResult () {
-			return this.paginate(this. SearchResult);
+			return this.paginate(this. SearchResult)
         },
         reload(){
             return this.$route.params.search;
@@ -73,18 +73,20 @@ export default {
 	},
 	watch: {
         reload(){
-            this.pages =[]
+            this.$store.dispatch('search', {searchContent: this.$route.params.search})
             this.setPages()
-            this.paginate(SearchResult)
+            this.paginate()
         },
         SearchResult(){
-            if(!this.$store.getters.searchResponse[0]){
-                console.log( this.$store.getters.EveryProducts)
-            }
+            this.setPages()
+            this.paginate()
         }
     },
     created: function(){
-        this.setPages();
+            this.$store.dispatch('search', {searchContent: this.$route.params.search})
+            this.setPages()
+            this.paginate()
+
     },
 }
 </script>

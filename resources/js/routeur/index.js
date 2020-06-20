@@ -93,6 +93,26 @@ const routes = [
       return import(/* webpackChunkName: "contact" */ '../views/Contact.vue')
     }
   },
+  {
+    path: '/login',
+    name: 'admin.login',
+    component: function () {
+      return import(/* webpackChunkName: "contact" */ '../views/Admin/Login.vue')
+    },
+    meta:{
+        requiresAuth : false
+    }
+},
+{
+    path: '/admin',
+    name: 'admin.dashboard',
+    component: function () {
+      return import(/* webpackChunkName: "contact" */ '../views/Admin/Admin.vue')
+    },
+    meta:{
+        requiresAuth : true
+    }
+},
 ]
 
 const router = new VueRouter({
