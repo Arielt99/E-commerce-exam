@@ -32,6 +32,6 @@ class Contact extends Mailable
     {
         return $this->subject($this->infos['subject'])
                     ->from($this->infos['email'], $this->infos['last_name']." ".$this->infos['first_name'])
-                    ->view('emails.Contact');
+                    ->view('emails.contact');
     }
 }
