@@ -66,14 +66,56 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Login'
+  data: function data() {
+    return {
+      form: {
+        email: "arielthibault@yahoo.fr",
+        password: "password"
+      }
+    };
+  },
+  validations: {
+    form: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+    }
+  },
+  methods: {
+    send: function send() {
+      this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        alert("vous devez remplir tout les champs !");
+      } else {
+        this.$store.dispatch('login', this.form);
+      }
+    }
+  },
+  computed: {
+    user: function user() {
+      return this.$store.getters.user;
+    }
+  },
+  watch: {
+    user: function user() {
+      this.$router.replace({
+        name: 'admin.dashboard'
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -516,7 +558,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.paginateNav{\r\n    display: flex;\r\n    flex-direction: row;\r\n    width: auto;\r\n    justify-content: center;\r\n    height: 30px;\n}\n.currentPage{\r\n    justify-content: center;\n}\n.miniNav{\r\n    width: 200px;\r\n    display: flex;\r\n    justify-content: center;\r\n    height: 100%;\r\n    align-items: center;\n}\n.miniNav button{\r\n    height: 100%;\r\n    width: 35px;\r\n    display: flex;\r\n    justify-content: center;\n}\n.prev{\r\n    width: 150px;\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-end;\r\n    align-items: center;\n}\n.prev div{\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-end;\r\n    align-items: center;\n}\n.next{\r\n    width: 150px;\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.next div{\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.active button{\r\n    background-color: blue;\r\n    color: cornsilk;\r\n    display: flex;\n}\r\n", ""]);
+exports.push([module.i, "\n.paginateNav{\r\n    display: flex;\r\n    flex-direction: row;\r\n    width: auto;\r\n    justify-content: center;\r\n    height: 20px;\n}\n.currentPage{\r\n    justify-content: center;\n}\n.miniNav{\r\n    width: 200px;\r\n    display: flex;\r\n    justify-content: center;\r\n    height: 100%;\r\n    align-items: center;\n}\n.miniNav button{\r\n    height: 20px;\r\n    width: 35px;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-wrap: nowrap;\n}\n.prev{\r\n    width: 150px;\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-end;\r\n    align-items: center;\n}\n.prev div{\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-end;\r\n    align-items: center;\n}\n.next{\r\n    width: 150px;\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.next div{\r\n    display: flex;\r\n    flex-direction:row ;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.active button{\r\n    background-color: blue;\r\n    color: cornsilk;\r\n    display: flex;\n}\n.product-list{\r\n    display: flex;\r\n    flex-wrap: wrap;\n}\r\n", ""]);
 
 // exports
 
@@ -665,16 +707,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "login" }, [
+    _c("h1", [_vm._v(" login")]),
+    _vm._v(" "),
+    _c("form", [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.form.email,
+            expression: "form.email"
+          }
+        ],
+        attrs: { type: "text", placeholder: "email" },
+        domProps: { value: _vm.form.email },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.form, "email", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.form.password,
+            expression: "form.password"
+          }
+        ],
+        attrs: { type: "text", placeholder: "password" },
+        domProps: { value: _vm.form.password },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.form, "password", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.send()
+            }
+          }
+        },
+        [_vm._v("connect")]
+      )
+    ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "Login" }, [_c("p", [_vm._v("Login")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -19,3 +19,10 @@ export const RandomProducts = state =>{
 export const searchResponse = state =>{
     return state.searchResponse;
 };
+
+export const authentificated = state => {
+    return state.token && state.user;
+};
+export const user = state => {
+    return state.user;
+};

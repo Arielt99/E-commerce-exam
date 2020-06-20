@@ -7,6 +7,10 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '*',
+    redirect: 'Home'
+  },
+  {
+    path: '/Home',
     name: 'Home',
     component: Home
   },
@@ -120,5 +124,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(routes => routes.meta.requiresAuth)
+  const currentUser = localStorage.getItem('token')
+  if (requiresAuth && currentUser === null ) {
+      next('/login')
+  }
+  else if (requiresAuth && currentUser && (to.path === '/login' || to.path === '/homeAdmin')) {
+      next('/admin')
+  }
+  else {
+      next()
+  }
+});
 
 export default router

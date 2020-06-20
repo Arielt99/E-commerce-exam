@@ -2036,6 +2036,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2047,6 +2062,15 @@ __webpack_require__.r(__webpack_exports__);
       if (this.searchContent != this.$route.params.search && this.searchContent.length != 0) {
         this.$router.push('/Result/' + this.searchContent);
       }
+    },
+    deconnection: function deconnection() {
+      var _this = this;
+
+      this.$store.dispatch('signOut').then(function () {
+        _this.$router.replace({
+          name: 'Home'
+        });
+      });
     },
     getBrandList: function getBrandList() {
       this.$store.dispatch('getBrandList');
@@ -6646,7 +6670,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n#nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\n}\n.logo{\r\n  height: 100px;\r\n  width: 100px;\n}\n.logo img{\r\n    width: 100%;\r\n    height: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\r\n", ""]);
 
 // exports
 
@@ -38450,7 +38474,17 @@ var render = function() {
             "div",
             { attrs: { id: "nav" } },
             [
-              _c("router-link", { attrs: { to: "/" } }, [_vm._v("Home")]),
+              _c("router-link", { attrs: { to: "/" } }, [
+                _c("div", { staticClass: "logo" }, [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        "https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png",
+                      alt: "logo"
+                    }
+                  })
+                ])
+              ]),
               _vm._v(" |\n    "),
               _c("input", {
                 directives: [
@@ -38505,6 +38539,43 @@ var render = function() {
               ]),
               _vm._v(" |\n    "),
               _c("router-link", { attrs: { to: "/Cart" } }, [_vm._v("Panier")])
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      this.$route.meta.requiresAuth
+        ? _c(
+            "div",
+            { attrs: { id: "navAdmin" } },
+            [
+              _c("router-link", { attrs: { to: "/" } }, [
+                _c("div", { staticClass: "logo" }, [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        "https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png",
+                      alt: "logo"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" |\n    "),
+              _c("router-link", { attrs: { to: "/Brand" } }, [
+                _vm._v("brands")
+              ]),
+              _vm._v(" |\n    "),
+              _c("router-link", { attrs: { to: "/Product" } }, [
+                _vm._v("products")
+              ]),
+              _vm._v(" |\n    "),
+              _c("router-link", { attrs: { to: "/News" } }, [_vm._v("News")]),
+              _vm._v(" |\n    "),
+              _c(
+                "button",
+                { attrs: { type: "button" }, on: { click: _vm.deconnection } },
+                [_vm._v("deconnect")]
+              )
             ],
             1
           )
@@ -56036,21 +56107,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuelidate__WEBPACK_IMPORTED_MODULE_4___default.a);
-_routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
-  var requiresAuth = to.matched.some(function (routes) {
-    return routes.meta.requiresAuth;
-  });
-  var currentUser = localStorage.getItem('token');
-
-  if (requiresAuth && currentUser === null) {
-    //store.dispatch('attempt',localStorage.getItem('token'))
-    next('/login');
-  } else if (!requiresAuth && currentUser && (to.path === '/login' || to.path === '/homeAdmin')) {
-    next('/admin');
-  } else {
-    next();
-  }
-});
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _routeur_index__WEBPACK_IMPORTED_MODULE_2__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -56281,6 +56337,9 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
   path: '*',
+  redirect: 'Home'
+}, {
+  path: '/Home',
   name: 'Home',
   component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
@@ -56381,6 +56440,20 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: routes
+});
+router.beforeEach(function (to, from, next) {
+  var requiresAuth = to.matched.some(function (routes) {
+    return routes.meta.requiresAuth;
+  });
+  var currentUser = localStorage.getItem('token');
+
+  if (requiresAuth && currentUser === null) {
+    next('/login');
+  } else if (requiresAuth && currentUser && (to.path === '/login' || to.path === '/homeAdmin')) {
+    next('/admin');
+  } else {
+    next();
+  }
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -56515,7 +56588,10 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
 var login = function login(_ref13, credentials) {
   var dispatch = _ref13.dispatch;
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/signin', credentials).then(function (response) {
-    return dispatch('attempt', response.data.token);
+    if (response) {
+      localStorage.setItem('token', response.data.token);
+      return dispatch('attempt', response.data.token);
+    }
   });
 }; //check if connected
 
@@ -56527,9 +56603,13 @@ var attempt = function attempt(_ref14, token) {
     commit('set_token', token);
   }
 
-  if (state.token !== null) {
+  if (state.token != null) {
     try {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/me').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/me', {
+        headers: {
+          'Authorization': "Bearer ".concat(state.token)
+        }
+      }).then(function (response) {
         commit('set_user', response.data);
       });
     } catch (e) {
@@ -56540,11 +56620,24 @@ var attempt = function attempt(_ref14, token) {
 }; //logout admin
 
 var signOut = function signOut(_ref15) {
-  var commit = _ref15.commit;
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/auth/signout").then(function () {
-    commit('set_token', null);
-    commit('set_user', null);
-  });
+  var commit = _ref15.commit,
+      state = _ref15.state;
+
+  if (state.token != null) {
+    try {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/signout', state.token, {
+        headers: {
+          'Authorization': "Bearer ".concat(state.token)
+        }
+      }).then(function (response) {
+        commit('set_token', null);
+        commit('set_user', null);
+        localStorage.removeItem('token');
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 };
 
 /***/ }),
@@ -56553,7 +56646,7 @@ var signOut = function signOut(_ref15) {
 /*!***************************************!*\
   !*** ./resources/js/store/getters.js ***!
   \***************************************/
-/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse */
+/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, authentificated, user */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56565,6 +56658,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "product", function() { return product; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RandomProducts", function() { return RandomProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authentificated", function() { return authentificated; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 var EveryBrands = function EveryBrands(state) {
   return state.EveryBrands;
 };
@@ -56585,6 +56680,12 @@ var RandomProducts = function RandomProducts(state) {
 };
 var searchResponse = function searchResponse(state) {
   return state.searchResponse;
+};
+var authentificated = function authentificated(state) {
+  return state.token && state.user;
+};
+var user = function user(state) {
+  return state.user;
 };
 
 /***/ }),
@@ -56626,7 +56727,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
   \*****************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, set_token, set_user */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56638,6 +56739,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomProductList", function() { return getRandomProductList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_token", function() { return set_token; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_user", function() { return set_user; });
 //brandList = response.data from getBrandList in action
 var getBrandList = function getBrandList(state, brandList) {
   state.EveryBrands = [];
@@ -56735,6 +56838,12 @@ var searchResponse = function searchResponse(state, search) {
     });
   }
 };
+var set_token = function set_token(state, token) {
+  state.token = token;
+};
+var set_user = function set_user(state, user) {
+  state.user = user;
+};
 
 /***/ }),
 
@@ -56754,7 +56863,8 @@ __webpack_require__.r(__webpack_exports__);
   productList: [],
   product: [],
   RandomProducts: [],
-  searchResponse: []
+  searchResponse: [],
+  user: []
 });
 
 /***/ }),

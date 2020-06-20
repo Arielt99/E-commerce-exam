@@ -5,5 +5,6 @@ export default{
     productList:[],
     product:[],
     RandomProducts:[],
-    searchResponse:[]
+    searchResponse:[],
+    user:[]
 };

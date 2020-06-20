@@ -96,7 +96,7 @@ export default {
     flex-direction: row;
     width: auto;
     justify-content: center;
-    height: 30px;
+    height: 20px;
 }
 .currentPage{
     justify-content: center;
@@ -109,10 +109,11 @@ export default {
     align-items: center;
 }
 .miniNav button{
-    height: 100%;
+    height: 20px;
     width: 35px;
     display: flex;
     justify-content: center;
+    flex-wrap: nowrap;
 }
 .prev{
     width: 150px;
@@ -145,5 +146,9 @@ export default {
     background-color: blue;
     color: cornsilk;
     display: flex;
+}
+.product-list{
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>

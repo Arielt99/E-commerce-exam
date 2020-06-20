@@ -104,7 +104,10 @@ export const sentMailContact = ({ commit }, {last_name, first_name, email, subje
 export const login = ({dispatch}, credentials)=>{
         axios.post('/api/auth/signin', credentials)
         .then(response =>{
-            return dispatch('attempt',response.data.token)
+            if(response){
+                localStorage.setItem('token',response.data.token)
+                return dispatch('attempt',response.data.token)
+            }
         })
 }
 //check if connected
@@ -112,9 +115,9 @@ export const  attempt = ({commit,state}, token)=>{
     if (token) {
         commit('set_token', token)
     }
-    if (state.token !== null) {
+    if (state.token != null) {
         try {
-             axios.get('/api/auth/me')
+            axios.get('/api/auth/me', {headers: {'Authorization': `Bearer ${state.token}`}})
                 .then(response => {
                     commit('set_user', response.data)
                 })
@@ -126,10 +129,18 @@ export const  attempt = ({commit,state}, token)=>{
     }
 }
 //logout admin
-export const signOut = ({commit})=>{
-    return axios.post("/api/auth/signout")
-        .then(()=>{
-            commit('set_token', null)
-            commit('set_user', null)
-        })
+export const signOut = ({commit,state})=>{
+    if (state.token != null) {
+    try {
+        axios.post('/api/auth/signout',state.token, {headers: {'Authorization': `Bearer ${state.token}`}})
+            .then(response =>{
+                commit('set_token', null)
+                commit('set_user', null)
+                localStorage.removeItem('token')
+            })
+    }
+    catch(e){
+        console.log(e)
+    }
+    }
 }

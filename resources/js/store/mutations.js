@@ -90,5 +90,11 @@ export const searchResponse = (state, search)=>{
     }
 }
 
+export const set_token=(state, token )=>{
+    state.token = token
+}
+export const set_user=(state, user )=>{
+    state.user = user
+}
 
 

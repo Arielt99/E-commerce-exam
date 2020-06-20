@@ -1,11 +1,48 @@
 <template>
-  <div class="Login">
-    <p>Login</p>
+  <div class="login">
+    <h1> login</h1>
+    <form>
+      <input type="text" v-model="form.email" placeholder="email">
+      <input type="text" v-model="form.password" placeholder="password">
+      <button type="button" @click="send()">connect</button>
+    </form>
   </div>
 </template>
-
 <script>
+
+import { required, email } from 'vuelidate/lib/validators'
 export default {
-  name: 'Login',
+    data (){
+      return {
+        form:{
+        email:"arielthibault@yahoo.fr",
+        password:"password",
+        }
+      }
+    },
+    validations: {
+    form: {required}
+  },
+    methods:{
+        send(){
+          this.$v.$touch()
+          if(this.$v.$invalid){
+            alert("vous devez remplir tout les champs !")
+          }
+          else{
+            this.$store.dispatch('login', this.form)
+          }
+        },
+    },
+    computed:{
+      user(){
+        return this.$store.getters.user
+      },
+    },
+    watch:{
+      user(){
+        this.$router.replace({name:'admin.dashboard'})
+      }
+    }
 }
 </script>
