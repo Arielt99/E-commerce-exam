@@ -16,16 +16,16 @@
       <router-link to="/Cart">Panier</router-link>
       </div>
     </div>
-    <div id="navAdmin" v-if="this.$route.meta.requiresAuth">
-      <router-link to="/">
-        <div class="logo">
+    <div id="adminNav" v-if="this.$route.meta.requiresAuth">
+      <router-link to="/" class="logo">
           <img src="https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png" alt="logo">
-        </div> 
-      </router-link> |
-      <router-link to="/Brand">brands</router-link> |
-      <router-link to="/Product">products</router-link> |
-      <router-link to="/News">News</router-link> |
+      </router-link> 
+      <div class="Nav">
+      <router-link to="/Brand">brands</router-link>
+      <router-link to="/Product">products</router-link>
+      <router-link to="/News">News</router-link>
       <button type="button" @click="deconnection">deconnect</button>
+      </div>
     </div>
     <router-view class="appContent"/>
   </div>
@@ -79,7 +79,8 @@ body{
 #app{
   background-color: rgb(241, 241, 241);
 }
-#clientNav{
+#clientNav, #adminNav{
+  z-index: 100000;
   position: fixed;
   height: 10vh;
   display: flex;
@@ -90,13 +91,12 @@ body{
   border-bottom: 0.5px solid lightgray;
   align-items: center ;
   justify-content: space-between;
-
 }
 .router-link-exact-active{
   background-color: rgb(241, 241, 241);
   border-radius: 10px;
 }
-#clientNav .Nav a{
+#clientNav .Nav a, #adminNav .Nav a{
   color: rgb(48, 48, 48);
   text-decoration: none;
   padding: 10px 20px;

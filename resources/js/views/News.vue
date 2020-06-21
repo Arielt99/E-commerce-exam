@@ -1,8 +1,7 @@
 <template>
   <div class="news">
-    <h1>Les actualités trépidantes</h1>
     <div class="news-list" v-if="this.News[0]">
-      <NewsCard v-for="News in News" :key="News.id" v-bind:emitedNews="News"/>
+      <NewsCard class="News" v-for="News in News" :key="News.id" v-bind:emitedNews="News"/>
     </div>
   </div>
 </template>
@@ -26,3 +25,13 @@ export default {
     },
 }
 </script>
+<style>
+.news-list{
+  padding-top: 10px ;
+  width: 100%;
+    display: grid;
+    grid-gap: 46px;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 300px);
+}
+</style>

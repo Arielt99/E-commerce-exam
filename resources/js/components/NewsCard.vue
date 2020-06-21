@@ -1,9 +1,10 @@
 <template>
-    <RouterLink :to="'News/'+emitedNews.id">
+    <RouterLink id="news" :to="'News/'+emitedNews.id">
         <img :src="emitedNews.image"/>
-        <h2>{{emitedNews.title}}</h2>
-        <label>{{emitedNews.author}}</label>
-        <p>{{emitedNews.resume}}</p>
+        <div class="item-resume">
+            <h2>{{emitedNews.title}}</h2>
+            <label>{{emitedNews.author}}</label>
+        </div>
     </RouterLink>
 </template>
 
@@ -19,3 +20,58 @@ export default {
     }
     }
 </script>
+<style>
+#news{
+    --background: none;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    position: relative;
+    padding: 0 !important;
+}
+#news img{
+    display: flex;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+    top:0;
+    bottom:0;
+    padding: 0;
+    margin: 0;
+}
+.item-resume{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    bottom:0;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(48, 48, 48, 0.705);
+    color:rgba(255, 255, 255, 0.90);
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+    opacity: 1;
+}
+.item-resume h2{
+    padding-left: 10px;
+    margin: 0;
+}
+.item-resume label{
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.item-resume:hover{
+    opacity: 0;
+    cursor: pointer;
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+}
+</style>
