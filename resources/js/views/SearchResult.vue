@@ -74,16 +74,19 @@ export default {
 	watch: {
         reload(){
             this.$store.dispatch('search', {searchContent: this.$route.params.search})
+            this.page = 1
             this.setPages()
             this.paginate()
         },
         SearchResult(){
+            this.page = 1
             this.setPages()
             this.paginate()
         }
     },
     created: function(){
             this.$store.dispatch('search', {searchContent: this.$route.params.search})
+            this.page = 1
             this.setPages()
             this.paginate()
 

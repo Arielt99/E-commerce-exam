@@ -4,6 +4,8 @@ import router from './routeur/index'
 import store from './store'
 import Vuelidate from 'vuelidate'
 require('./bootstrap');
+import moment from 'moment'
+Vue.prototype.$moment = moment
 
 Vue.use(Vuelidate)
 

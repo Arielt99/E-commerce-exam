@@ -1,29 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav" v-if="!this.$route.meta.requiresAuth">
-      <router-link to="/">
-        <div class="logo">
-          <img src="https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png" alt="logo">
-        </div> 
-      </router-link> |
-      <input type="text" v-model="searchContent" v-on:keyup.enter="search()" placeholder="barre de recherche"><button type="button" @click="search()">search</button>|
-      <router-link to="/Brand">Catalogue</router-link> |
-      <router-link to="/News">News</router-link> |
-      <router-link to="/Contact">Contact</router-link> |
+    <div id="clientNav" v-if="!this.$route.meta.requiresAuth">
+      <router-link to="/" class="logo">
+        <img src="https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png" alt="logo">
+      </router-link>
+      <div class="search">
+        <input type="text" v-model="searchContent" v-on:keyup.enter="search()" placeholder="barre de recherche">
+        <button type="button" @click="search()"><i class="fa fa-search"></i></button>
+      </div>
+      <div class="Nav">
+      <router-link to="/home">Home</router-link> 
+      <router-link to="/Brand">Catalogue</router-link> 
+      <router-link to="/News">News</router-link> 
+      <router-link to="/Contact">Contact</router-link> 
       <router-link to="/Cart">Panier</router-link>
+      </div>
     </div>
-    <div id="navAdmin" v-if="this.$route.meta.requiresAuth">
-      <router-link to="/">
-        <div class="logo">
+    <div id="adminNav" v-if="this.$route.meta.requiresAuth">
+      <router-link to="/" class="logo">
           <img src="https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png" alt="logo">
-        </div> 
-      </router-link> |
-      <router-link to="/Brand">brands</router-link> |
-      <router-link to="/Product">products</router-link> |
-      <router-link to="/News">News</router-link> |
+      </router-link> 
+      <div class="Nav">
+      <router-link to="/Brand">brands</router-link>
+      <router-link to="/Product">products</router-link>
+      <router-link to="/News">News</router-link>
       <button type="button" @click="deconnection">deconnect</button>
+      </div>
     </div>
-    <router-view/>
+    <router-view class="appContent"/>
+    <div class="footer"> © 2020 École webstart </div>
   </div>
 </template>
 <script>
@@ -68,17 +73,111 @@ export default {
 }
 </script>
 <style>
-#nav a{
+#app{
+  position: relative;
+  min-height:100vh;
+}
+body{
+  margin: 0;
+  font-family: sans-serif;
+  background-color: rgb(241, 241, 241);
+}
+
+#clientNav, #adminNav{
+  z-index: 100000;
+  position: fixed;
+  height: 10vh;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  border-bottom: 0.5px solid lightgray;
+  align-items: center ;
+  justify-content: space-between;
+}
+.router-link-exact-active{
+  background-color: rgb(241, 241, 241);
+  border-radius: 10px;
+}
+#clientNav .Nav a, #adminNav .Nav a{
   color: rgb(48, 48, 48);
   text-decoration: none;
+  padding: 10px 20px;
 }
 .logo{
-  height: 100px;
+  height: 100%;
   width: 100px;
+  display: flex;
+  align-content: flex-start;
+  padding-left: 20px;
+}
+#clientNav .search{
+  border-radius: 5px;
+  background-color :rgb(230, 230, 230);
+  width: 30vw;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-left: 10vw;
+}
+#clientNav .search input{
+  width: auto;
+  font-weight: bold;
+  background-color :transparent;
+  border: none;
+  padding: 10px 0px 10px 15px;
+}
+#clientNav .search input[type=text]:focus{
+  font-weight: bold;
+  outline: none;
+}
+#clientNav .search input::placeholder{
+  color: rgb(105, 105, 105);
+  font-weight: bold;
+}
+#clientNav .search button{
+  background-color :transparent;
+  border: none;
+}
+.Nav{
+  display: flex;
+  margin-right: 10px ;
 }
 .logo img{
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+.footer{
+  background: rgb(48, 48, 48);
+  color: white;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.appContent{
+  padding-top: 10vh;
+  padding-bottom: 50px;;
+}
+/* width */
+::-webkit-scrollbar {
+  background: rgb(241, 241, 241);
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background: rgb(241, 241, 241);
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(48, 48, 48); 
+  border-radius: 2px;
 }
 </style>

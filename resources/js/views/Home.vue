@@ -1,6 +1,5 @@
 <template>
   <div class="Home">
-    <h1>This is an home page</h1>
     <h2>random product list</h2>
     <div class="product-list" v-if="this.RandomProducts[0]">
       <ProductCard v-for="product in RandomProducts" :key="product.id" v-bind:emitedProduct="product"/>
