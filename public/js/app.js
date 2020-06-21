@@ -2051,6 +2051,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2183,7 +2187,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PoductCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/PoductCard */ "./resources/js/components/PoductCard.vue");
 /* harmony import */ var _components_NewsCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/NewsCard */ "./resources/js/components/NewsCard.vue");
-//
 //
 //
 //
@@ -6670,7 +6673,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\n}\n.logo{\r\n  height: 100px;\r\n  width: 100px;\n}\n.logo img{\r\n    width: 100%;\r\n    height: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\r\n", ""]);
+exports.push([module.i, "\nbody{\r\n  margin: 0;\r\n  font-family: sans-serif;\n}\n#app{\r\n  background-color: rgb(241, 241, 241);\n}\n#clientNav{\r\n  position: fixed;\r\n  height: 10vh;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  flex-direction: row;\r\n  background-color: white;\r\n  width: 100%;\r\n  border-bottom: 0.5px solid lightgray;\r\n  align-items: center ;\r\n  justify-content: space-between;\n}\n.router-link-exact-active{\r\n  background-color: rgb(241, 241, 241);\r\n  border-radius: 10px;\n}\n#clientNav .Nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\r\n  padding: 10px 20px;\n}\n.logo{\r\n  height: 100%;\r\n  width: 100px;\r\n  display: flex;\r\n  align-content: flex-start;\r\n  padding-left: 20px;\n}\n#clientNav .search{\r\n  border-radius: 5px;\r\n  background-color :rgb(230, 230, 230);\r\n  width: 30vw;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  margin-left: 10vw;\n}\n#clientNav .search input{\r\n  width: auto;\r\n  font-weight: bold;\r\n  background-color :transparent;\r\n  border: none;\r\n  padding: 10px 0px 10px 15px;\n}\n#clientNav .search input[type=text]:focus{\r\n  font-weight: bold;\r\n  outline: none;\n}\n#clientNav .search input::-moz-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input:-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search button{\r\n  background-color :transparent;\r\n  border: none;\n}\n.Nav{\r\n  display: flex;\r\n  margin-right: 10px ;\n}\n.logo img{\r\n    width: auto;\r\n    height: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.appContent{\r\n  padding-top: 10vh;\n}\r\n/* width */\n::-webkit-scrollbar {\r\n  background: rgb(241, 241, 241);\r\n  width: 5px;\n}\r\n/* Track */\n::-webkit-scrollbar-track {\r\n  border-radius: 2px;\r\n  background: rgb(241, 241, 241);\n}\r\n/* Handle */\n::-webkit-scrollbar-thumb {\r\n  background: rgb(48, 48, 48); \r\n  border-radius: 2px;\n}\r\n", ""]);
 
 // exports
 
@@ -38472,73 +38475,89 @@ var render = function() {
       !this.$route.meta.requiresAuth
         ? _c(
             "div",
-            { attrs: { id: "nav" } },
+            { attrs: { id: "clientNav" } },
             [
-              _c("router-link", { attrs: { to: "/" } }, [
-                _c("div", { staticClass: "logo" }, [
-                  _c("img", {
-                    attrs: {
-                      src:
-                        "https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png",
-                      alt: "logo"
-                    }
-                  })
-                ])
+              _c("router-link", { staticClass: "logo", attrs: { to: "/" } }, [
+                _c("img", {
+                  attrs: {
+                    src:
+                      "https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png",
+                    alt: "logo"
+                  }
+                })
               ]),
-              _vm._v(" |\n    "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.searchContent,
-                    expression: "searchContent"
-                  }
-                ],
-                attrs: { type: "text", placeholder: "barre de recherche" },
-                domProps: { value: _vm.searchContent },
-                on: {
-                  keyup: function($event) {
-                    if (
-                      !$event.type.indexOf("key") &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
+              _vm._v(" "),
+              _c("div", { staticClass: "search" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchContent,
+                      expression: "searchContent"
                     }
-                    return _vm.search()
-                  },
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.searchContent = $event.target.value
-                  }
-                }
-              }),
-              _c(
-                "button",
-                {
-                  attrs: { type: "button" },
+                  ],
+                  attrs: { type: "text", placeholder: "barre de recherche" },
+                  domProps: { value: _vm.searchContent },
                   on: {
-                    click: function($event) {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
                       return _vm.search()
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchContent = $event.target.value
                     }
                   }
-                },
-                [_vm._v("search")]
-              ),
-              _vm._v("|\n    "),
-              _c("router-link", { attrs: { to: "/Brand" } }, [
-                _vm._v("Catalogue")
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.search()
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fa fa-search" })]
+                )
               ]),
-              _vm._v(" |\n    "),
-              _c("router-link", { attrs: { to: "/News" } }, [_vm._v("News")]),
-              _vm._v(" |\n    "),
-              _c("router-link", { attrs: { to: "/Contact" } }, [
-                _vm._v("Contact")
-              ]),
-              _vm._v(" |\n    "),
-              _c("router-link", { attrs: { to: "/Cart" } }, [_vm._v("Panier")])
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "Nav" },
+                [
+                  _c("router-link", { attrs: { to: "/home" } }, [
+                    _vm._v("Home")
+                  ]),
+                  _vm._v(" "),
+                  _c("router-link", { attrs: { to: "/Brand" } }, [
+                    _vm._v("Catalogue")
+                  ]),
+                  _vm._v(" "),
+                  _c("router-link", { attrs: { to: "/News" } }, [
+                    _vm._v("News")
+                  ]),
+                  _vm._v(" "),
+                  _c("router-link", { attrs: { to: "/Contact" } }, [
+                    _vm._v("Contact")
+                  ]),
+                  _vm._v(" "),
+                  _c("router-link", { attrs: { to: "/Cart" } }, [
+                    _vm._v("Panier")
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -38581,7 +38600,7 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("router-view")
+      _c("router-view", { staticClass: "appContent" })
     ],
     1
   )
@@ -38700,8 +38719,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "Home" }, [
-    _c("h1", [_vm._v("This is an home page")]),
-    _vm._v(" "),
     _c("h2", [_vm._v("random product list")]),
     _vm._v(" "),
     this.RandomProducts[0]
@@ -56337,9 +56354,9 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
   path: '*',
-  redirect: 'Home'
+  redirect: 'home'
 }, {
-  path: '/Home',
+  path: '/home',
   name: 'Home',
   component: _views_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {

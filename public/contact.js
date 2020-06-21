@@ -466,10 +466,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('search', {
         searchContent: this.$route.params.search
       });
+      this.page = 1;
       this.setPages();
       this.paginate();
     },
     SearchResult: function SearchResult() {
+      this.page = 1;
       this.setPages();
       this.paginate();
     }
@@ -478,6 +480,7 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('search', {
       searchContent: this.$route.params.search
     });
+    this.page = 1;
     this.setPages();
     this.paginate();
   }
