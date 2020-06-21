@@ -38,6 +38,11 @@ export default {
     width: 250px;
     height: 350px;
 }
+.productCard:hover{
+    -webkit-box-shadow: 0px 0px 7px 0px rgba(105,105,105,0.2);
+    -moz-box-shadow: 0px 0px 7px 0px rgba(105,105,105,0.2);
+    box-shadow: 0px 0px 7px 0px rgba(105,105,105,0.2);
+}
 .card-header{
     width: 100%;
     height: 250px;

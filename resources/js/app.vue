@@ -28,6 +28,7 @@
       </div>
     </div>
     <router-view class="appContent"/>
+    <div class="footer"> © 2020 École webstart </div>
   </div>
 </template>
 <script>
@@ -72,13 +73,16 @@ export default {
 }
 </script>
 <style>
+#app{
+  position: relative;
+  min-height:100vh;
+}
 body{
   margin: 0;
   font-family: sans-serif;
-}
-#app{
   background-color: rgb(241, 241, 241);
 }
+
 #clientNav, #adminNav{
   z-index: 100000;
   position: fixed;
@@ -141,13 +145,25 @@ body{
   margin-right: 10px ;
 }
 .logo img{
-    width: auto;
-    height: 100%;
-    object-fit: cover;
+  width: auto;
+  height: 100%;
+  object-fit: cover;
 }
-
+.footer{
+  background: rgb(48, 48, 48);
+  color: white;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 .appContent{
   padding-top: 10vh;
+  padding-bottom: 50px;;
 }
 /* width */
 ::-webkit-scrollbar {

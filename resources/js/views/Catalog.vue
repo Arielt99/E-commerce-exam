@@ -2,7 +2,7 @@
   <div class="Catalog">
     <h1>Nos marques</h1>
     <div class="brand-list">
-        <BrandCard v-for="brand in brands" :key="brand.id" v-bind:emitedBrand="brand"/>
+        <BrandCard class="Brand" v-for="brand in brands" :key="brand.id" v-bind:emitedBrand="brand"/>
     </div>
   </div>
 </template>
@@ -28,8 +28,11 @@ export default {
 </script>
 <style>
 .brand-list{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  padding-top: 10px ;
+  width: 100%;
+  display: grid;
+  grid-gap: 46px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 400px);
 }
 </style>

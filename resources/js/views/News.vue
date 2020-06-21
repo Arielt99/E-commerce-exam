@@ -27,11 +27,11 @@ export default {
 </script>
 <style>
 .news-list{
-  padding-top: 10px ;
+  padding: 10px 0px;
   width: 100%;
-    display: grid;
-    grid-gap: 46px;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fit, 300px);
+  display: grid;
+  grid-gap: 46px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 300px);
 }
 </style>
