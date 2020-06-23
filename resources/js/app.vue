@@ -123,7 +123,7 @@ body{
   margin-left: 10vw;
 }
 #clientNav .search input{
-  width: auto;
+  width: 30vw;
   font-weight: bold;
   background-color :transparent;
   border: none;
