@@ -117,6 +117,36 @@ const routes = [
         requiresAuth : true
     }
 },
+{
+  path: '/BrandAdmin',
+  name: 'BrandAdmin',
+  component: function () {
+    return import(/* webpackChunkName: "contact" */ '../views/Admin/BrandAdmin.vue')
+  },
+  meta:{
+      requiresAuth : true
+  }
+},
+{
+  path: '/ProductAdmin',
+  name: 'ProductAdmin',
+  component: function () {
+    return import(/* webpackChunkName: "contact" */ '../views/Admin/ProductAdmin.vue')
+  },
+  meta:{
+      requiresAuth : true
+  }
+},
+{
+  path: '/NewsAdmin',
+  name: 'NewsAdmin',
+  component: function () {
+    return import(/* webpackChunkName: "contact" */ '../views/Admin/NewsAdmin.vue')
+  },
+  meta:{
+      requiresAuth : true
+  }
+},
 ]
 
 const router = new VueRouter({

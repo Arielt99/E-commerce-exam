@@ -21,9 +21,10 @@
           <img src="https://res.cloudinary.com/dourdjhqe/image/upload/v1592668041/basicImg/Sneak-Heir-logo-black_2000x1225_j8ixjh.png" alt="logo">
       </router-link> 
       <div class="Nav">
-      <router-link to="/Brand">brands</router-link>
-      <router-link to="/Product">products</router-link>
-      <router-link to="/News">News</router-link>
+      <router-link to="/admin">dashboard</router-link>
+      <router-link to="/BrandAdmin">brands</router-link>
+      <router-link to="/ProductAdmin">products</router-link>
+      <router-link to="/NewsAdmin">News</router-link>
       <button type="button" @click="deconnection">deconnect</button>
       </div>
     </div>

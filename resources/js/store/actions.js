@@ -144,3 +144,14 @@ export const signOut = ({commit,state})=>{
     }
     }
 }
+//add a brand
+export const createBrand = ({commit,dispatch},object,token)=>{
+    axios.post('/api/auth/AddBrand',object,{headers: {'Authorization': `Bearer ${token}`}})
+        .then( response => {
+            dispatch('GetBrandList')
+            alert('produit ajouté')
+        })
+        .catch(error =>{
+            alert('erreur server')
+        })
+}

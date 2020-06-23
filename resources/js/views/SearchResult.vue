@@ -7,8 +7,8 @@
     <nav class="paginateNav" v-if="pages.length > 1">
         <div class="prev">
             <div v-if="page != 1">
-            <button type="button" @click="page = 1" > first </button>
-            <button type="button" @click="page--" > Previous </button>
+            <button type="button" @click="page = 1" > &#8810; </button>
+            <button type="button" @click="page--" > &#60; </button>
             </div>
         </div>
         <div class="miniNav">
@@ -22,8 +22,8 @@
         </div>
         <div class="next">
             <div v-if="page < pages.length">
-            <button type="button" @click="page++" > Next </button>
-            <button type="button" @click="page = pages.length" > last </button>
+            <button type="button" @click="page++" > &#62; </button>
+            <button type="button" @click="page = pages.length" > &#8811; </button>
             </div>
         </div>
 	</nav>	
