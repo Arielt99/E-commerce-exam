@@ -144,14 +144,61 @@ export const signOut = ({commit,state})=>{
     }
     }
 }
+//getting all the brands, also the inactives ones
+export const getBrandAdminList = ({ commit})=>{
+    axios.get('/api/auth/AdminBrand',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then( response => {
+        //console.log(response.data)
+        commit("getBrandAdminList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+    })
+}
+//getting all the products, also the inactives ones
+export const getProductAdminList = ({ commit})=>{
+    axios.get('/api/auth/AdminProduct ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then( response => {
+        //console.log(response.data)
+        commit("getProductAdminList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+    })
+}
+//getting all the news, also the inactives ones
+export const getNewsAdminList = ({ commit})=>{
+    axios.get('/api/auth/AdminNews ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then( response => {
+        //console.log(response.data)
+        //commit("getBrandAdminList", response.data)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+    })
+}
 //add a brand
-export const createBrand = ({commit,dispatch},object,token)=>{
-    axios.post('/api/auth/AddBrand',object,{headers: {'Authorization': `Bearer ${token}`}})
+export const createBrand = ({commit,dispatch},object)=>{
+    axios.post('/api/auth/AddBrand',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
         .then( response => {
-            dispatch('GetBrandList')
-            alert('produit ajouté')
+            dispatch('getBrandAdminList')
+            alert('Marque ajoutée')
         })
         .catch(error =>{
             alert('erreur server')
         })
+}
+//delete a brand
+export const deleteBrand = ({commit, dispatch},{id})=>{
+        axios.delete('/api/auth/DeleteBrand/'+id, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+            .then(response =>{
+                dispatch('getBrandAdminList')
+                alert('Marque supprimée')
+            })
+            .catch(error =>{
+                alert('erreur serveur')
+            })
 }

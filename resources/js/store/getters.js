@@ -20,9 +20,19 @@ export const searchResponse = state =>{
     return state.searchResponse;
 };
 
+//admin
 export const authentificated = state => {
     return state.token && state.user;
 };
 export const user = state => {
     return state.user;
+};
+export const EveryAdminBrands = state =>{
+    return state.EveryAdminBrands;
+};
+export const EveryAdminProducts = state =>{
+    return state.EveryAdminProducts;
+};
+export const EveryAdminNews = state =>{
+    return state.EveryAdminBrands;
 };

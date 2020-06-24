@@ -15,7 +15,7 @@ export default {
     data (){
       return {
         form:{
-        email:"arielthibault@yahoo.fr",
+        email:"admin@webstart.fr",
         password:"password",
         }
       }

@@ -31,6 +31,12 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
     Route::post('signout', 'SignOutController');
     Route::get('me', 'MeController');
 
+    Route::get('AdminBrand', 'AdminBrandController@index');
     Route::post('AddBrand', 'AdminBrandController@store');
     Route::delete('DeleteBrand/{id}', 'AdminBrandController@destroy');
+
+    Route::get('AdminProduct', 'AdminProductController@index');
+
+    Route::get('AdminNews', 'AdminNewsController@index');
+    
 });

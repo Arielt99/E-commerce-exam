@@ -60013,7 +60013,7 @@ var render = function() {
         [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _c("img", { attrs: { src: _vm.emitedProduct.principal_image } })
+              _c("img", { attrs: { src: _vm.emitedProduct.images } })
             ]),
             _vm._v(" "),
             this.CurrentBrand[0]
@@ -77891,7 +77891,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, createBrand */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, getProductAdminList, getNewsAdminList, createBrand, deleteBrand */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77907,7 +77907,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attempt", function() { return attempt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandAdminList", function() { return getBrandAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBrand", function() { return createBrand; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBrand", function() { return deleteBrand; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
  // client action
@@ -78066,20 +78070,80 @@ var signOut = function signOut(_ref15) {
       console.log(e);
     }
   }
-}; //add a brand
+}; //getting all the brands, also the inactives ones
 
-var createBrand = function createBrand(_ref16, object, token) {
-  var commit = _ref16.commit,
-      dispatch = _ref16.dispatch;
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
+var getBrandAdminList = function getBrandAdminList(_ref16) {
+  var commit = _ref16.commit;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminBrand', {
     headers: {
-      'Authorization': "Bearer ".concat(token)
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
     }
   }).then(function (response) {
-    dispatch('GetBrandList');
-    alert('produit ajouté');
+    //console.log(response.data)
+    commit("getBrandAdminList", response.data);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+  });
+}; //getting all the products, also the inactives ones
+
+var getProductAdminList = function getProductAdminList(_ref17) {
+  var commit = _ref17.commit;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminProduct ', {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    //console.log(response.data)
+    commit("getProductAdminList", response.data);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+  });
+}; //getting all the news, also the inactives ones
+
+var getNewsAdminList = function getNewsAdminList(_ref18) {
+  var commit = _ref18.commit;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {//console.log(response.data)
+    //commit("getBrandAdminList", response.data)
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+  });
+}; //add a brand
+
+var createBrand = function createBrand(_ref19, object) {
+  var commit = _ref19.commit,
+      dispatch = _ref19.dispatch;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getBrandAdminList');
+    alert('Marque ajoutée');
   })["catch"](function (error) {
     alert('erreur server');
+  });
+}; //delete a brand
+
+var deleteBrand = function deleteBrand(_ref20, _ref21) {
+  var commit = _ref20.commit,
+      dispatch = _ref20.dispatch;
+  var id = _ref21.id;
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteBrand/' + id, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getBrandAdminList');
+    alert('Marque supprimée');
+  })["catch"](function (error) {
+    alert('erreur serveur');
   });
 };
 
@@ -78089,7 +78153,7 @@ var createBrand = function createBrand(_ref16, object, token) {
 /*!***************************************!*\
   !*** ./resources/js/store/getters.js ***!
   \***************************************/
-/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, authentificated, user */
+/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78103,6 +78167,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authentificated", function() { return authentificated; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminBrands", function() { return EveryAdminBrands; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminProducts", function() { return EveryAdminProducts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminNews", function() { return EveryAdminNews; });
 var EveryBrands = function EveryBrands(state) {
   return state.EveryBrands;
 };
@@ -78123,12 +78190,22 @@ var RandomProducts = function RandomProducts(state) {
 };
 var searchResponse = function searchResponse(state) {
   return state.searchResponse;
-};
+}; //admin
+
 var authentificated = function authentificated(state) {
   return state.token && state.user;
 };
 var user = function user(state) {
   return state.user;
+};
+var EveryAdminBrands = function EveryAdminBrands(state) {
+  return state.EveryAdminBrands;
+};
+var EveryAdminProducts = function EveryAdminProducts(state) {
+  return state.EveryAdminProducts;
+};
+var EveryAdminNews = function EveryAdminNews(state) {
+  return state.EveryAdminBrands;
 };
 
 /***/ }),
@@ -78170,7 +78247,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
   \*****************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, set_token, set_user */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, set_token, set_user, getBrandAdminList, getProductAdminList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78184,6 +78261,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_token", function() { return set_token; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_user", function() { return set_user; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandAdminList", function() { return getBrandAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
 //brandList = response.data from getBrandList in action
 var getBrandList = function getBrandList(state, brandList) {
   state.EveryBrands = [];
@@ -78205,7 +78284,7 @@ var getProductList = function getProductList(state, productList) {
   for (var i = 0; i < productList.length; i++) {
     state.EveryProducts.push({
       id: productList[i].id,
-      principal_image: productList[i].principal_image,
+      images: productList[i].images,
       name: productList[i].name,
       price: productList[i].price,
       brand_id: productList[i].brand_id
@@ -78235,7 +78314,7 @@ var getBrandProductList = function getBrandProductList(state, BrandProductList) 
   for (var i = 0; i < BrandProductList.length; i++) {
     state.productList.push({
       id: BrandProductList[i].id,
-      principal_image: BrandProductList[i].principal_image,
+      images: BrandProductList[i].images,
       name: BrandProductList[i].name,
       price: BrandProductList[i].price,
       brand_id: BrandProductList[i].brand_id
@@ -78247,7 +78326,7 @@ var getProduct = function getProduct(state, GetedProduct) {
   state.product = [];
   state.product.push({
     id: GetedProduct.id,
-    principal_image: GetedProduct.principal_image,
+    images: GetedProduct.images,
     name: GetedProduct.name,
     price: GetedProduct.price,
     brand_id: GetedProduct.brand_id
@@ -78260,13 +78339,13 @@ var getRandomProductList = function getRandomProductList(state, RandomProductLis
   for (var i = 0; i < RandomProductList.length; i++) {
     state.RandomProducts.push({
       id: RandomProductList[i].id,
-      principal_image: RandomProductList[i].principal_image,
+      images: RandomProductList[i].images,
       name: RandomProductList[i].name,
       price: RandomProductList[i].price,
       brand_id: RandomProductList[i].brand_id
     });
   }
-}; //RandomProductList = response.data from getRandomProductList in action
+}; //search = response.data from searchResponse in action
 
 var searchResponse = function searchResponse(state, search) {
   state.searchResponse = [];
@@ -78274,7 +78353,7 @@ var searchResponse = function searchResponse(state, search) {
   for (var i = 0; i < search.length; i++) {
     state.searchResponse.push({
       id: search[i].id,
-      principal_image: search[i].principal_image,
+      images: search[i].images,
       name: search[i].name,
       price: search[i].price,
       brand_id: search[i].brand_id
@@ -78286,6 +78365,34 @@ var set_token = function set_token(state, token) {
 };
 var set_user = function set_user(state, user) {
   state.user = user;
+}; //BrandAdminList = response.data from getBrandAdminList in action
+
+var getBrandAdminList = function getBrandAdminList(state, BrandAdminList) {
+  state.EveryAdminBrands = [];
+
+  for (var i = 0; i < BrandAdminList.length; i++) {
+    state.EveryAdminBrands.push({
+      banner: BrandAdminList[i].banner,
+      description: BrandAdminList[i].description,
+      id: BrandAdminList[i].id,
+      image: BrandAdminList[i].image,
+      name: BrandAdminList[i].name
+    });
+  }
+}; //ProductAdminList = response.data from getProductAdminList in action
+
+var getProductAdminList = function getProductAdminList(state, ProductAdminList) {
+  state.EveryAdminProducts = [];
+
+  for (var i = 0; i < ProductAdminList.length; i++) {
+    state.EveryAdminProducts.push({
+      id: ProductAdminList[i].id,
+      images: ProductAdminList[i].images,
+      name: ProductAdminList[i].name,
+      price: ProductAdminList[i].price,
+      brand_id: ProductAdminList[i].brand_id
+    });
+  }
 };
 
 /***/ }),
@@ -78307,7 +78414,12 @@ __webpack_require__.r(__webpack_exports__);
   product: [],
   RandomProducts: [],
   searchResponse: [],
-  user: []
+  //admin
+  user: [],
+  token: [],
+  EveryAdminBrands: [],
+  EveryAdminProducts: [],
+  EveryAdminNews: []
 });
 
 /***/ }),

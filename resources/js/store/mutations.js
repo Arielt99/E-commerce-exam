@@ -17,7 +17,7 @@ export const getProductList = (state, productList)=>{
     for (let i=0; i<productList.length; i++){
         state.EveryProducts.push({
             id : productList[i].id,
-            principal_image : productList[i].principal_image,
+            images : productList[i].images,
             name : productList[i].name,
             price : productList[i].price,
             brand_id : productList[i].brand_id,
@@ -45,7 +45,7 @@ export const getBrandProductList = (state, BrandProductList)=>{
     for (let i=0; i<BrandProductList.length; i++){
         state.productList.push({
             id : BrandProductList[i].id,
-            principal_image : BrandProductList[i].principal_image,
+            images : BrandProductList[i].images,
             name : BrandProductList[i].name,
             price : BrandProductList[i].price,
             brand_id : BrandProductList[i].brand_id,
@@ -57,7 +57,7 @@ export const getProduct = (state, GetedProduct)=>{
     state.product =[]
     state.product.push({
         id : GetedProduct.id,
-        principal_image : GetedProduct.principal_image,
+        images : GetedProduct.images,
         name : GetedProduct.name,
         price : GetedProduct.price,
         brand_id : GetedProduct.brand_id,
@@ -69,20 +69,20 @@ export const getRandomProductList = (state, RandomProductList)=>{
     for (let i=0; i<RandomProductList.length; i++){
         state.RandomProducts.push({
             id : RandomProductList[i].id,
-            principal_image : RandomProductList[i].principal_image,
+            images : RandomProductList[i].images,
             name : RandomProductList[i].name,
             price : RandomProductList[i].price,
             brand_id : RandomProductList[i].brand_id,
         })
     }
 }
-//RandomProductList = response.data from getRandomProductList in action
+//search = response.data from searchResponse in action
 export const searchResponse = (state, search)=>{
     state.searchResponse =[]
     for (let i=0; i<search.length; i++){
         state.searchResponse.push({
             id : search[i].id,
-            principal_image : search[i].principal_image,
+            images : search[i].images,
             name : search[i].name,
             price : search[i].price,
             brand_id : search[i].brand_id,
@@ -90,11 +90,42 @@ export const searchResponse = (state, search)=>{
     }
 }
 
+
+
 export const set_token=(state, token )=>{
     state.token = token
 }
 export const set_user=(state, user )=>{
     state.user = user
+}
+
+
+
+//BrandAdminList = response.data from getBrandAdminList in action
+export const getBrandAdminList = (state, BrandAdminList)=>{
+    state.EveryAdminBrands =[]
+    for (let i=0; i<BrandAdminList.length; i++){
+        state.EveryAdminBrands.push({
+        banner : BrandAdminList[i].banner,
+        description : BrandAdminList[i].description,
+        id : BrandAdminList[i].id,
+        image : BrandAdminList[i].image,
+        name : BrandAdminList[i].name
+        })
+    }
+}
+//ProductAdminList = response.data from getProductAdminList in action
+export const getProductAdminList = (state, ProductAdminList)=>{
+    state.EveryAdminProducts =[]
+    for (let i=0; i<ProductAdminList.length; i++){
+        state.EveryAdminProducts.push({
+            id : ProductAdminList[i].id,
+            images : ProductAdminList[i].images,
+            name : ProductAdminList[i].name,
+            price : ProductAdminList[i].price,
+            brand_id : ProductAdminList[i].brand_id,
+        })
+    }
 }
 
 

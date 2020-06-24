@@ -6,5 +6,10 @@ export default{
     product:[],
     RandomProducts:[],
     searchResponse:[],
-    user:[]
+    //admin
+    user:[],
+    token:[],
+    EveryAdminBrands:[],
+    EveryAdminProducts:[],
+    EveryAdminNews:[],
 };

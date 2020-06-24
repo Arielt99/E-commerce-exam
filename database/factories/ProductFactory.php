@@ -8,8 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'principal_image' => "https://picsum.photos/200",
-        'secondary_image' => "https://picsum.photos/200",
+        'images' => "https://picsum.photos/200",
         'description' => $faker->realText($maxNbChars = rand(100, 180), $indexSize = 2),
         'color' => $faker->safeColorName,
         'brand_id' => rand(1, 5),

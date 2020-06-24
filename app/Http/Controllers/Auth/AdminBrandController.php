@@ -14,6 +14,19 @@ class AdminBrandController extends Controller
     {
         $this->middleware(['auth:api']);
     }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $brand = Brand::all();
+        return response()->json($brand,200);
+    }
+
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
