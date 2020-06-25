@@ -1,10 +1,10 @@
 ## make the db manageable and put content 
 
-wipe a posible existing db
+remove a possible existing db
 ```bash
 php artisan db:wipe
 ```
-build it
+make a new one
 ```bash
 php artisan migrate
 ```
