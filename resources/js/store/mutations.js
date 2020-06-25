@@ -141,7 +141,7 @@ export const getNewsAdminList = (state, NewsAdminList)=>{
             image : NewsAdminList[i].image,
             content : NewsAdminList[i].content,
             author : NewsAdminList[i].author,
-            posted_at : NewsAdminList[i].created_at,
+            releaseDate : NewsAdminList[i].releaseDate,
         })
     }
 }

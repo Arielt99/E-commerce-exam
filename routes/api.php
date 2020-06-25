@@ -39,5 +39,6 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
     Route::get('AdminProduct', 'AdminProductController@index');
 
     Route::get('AdminNews', 'AdminNewsController@index');
+    Route::post('AddNews', 'AdminNewsController@store');
     
 });

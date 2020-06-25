@@ -127,39 +127,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'modal',
   data: function data() {
     return {
-      Image: "",
-      Name: "",
-      Banner: "",
-      Description: "",
-      message: ""
+      ImageNews: "",
+      Title: "News",
+      Resume: "Ma nouvelle news",
+      Content: "Description de la news",
+      ReleaseDate: this.$moment().format('YYYY-MM-DD[T]HH:mm:ss'),
+      min: this.$moment().format('YYYY-MM-DD[T]HH:mm:ss'),
+      IsActive: 1
     };
   },
   methods: {
     close: function close() {
       this.$emit('closeAddNews');
-    } //  AddLogo(file){
-    //       this.Image = file.target.files[0]
-    //   },
-    //   AddBanner(file){
-    //       this.Banner = file.target.files[0]
-    //   },
-    //   AddBrand(){
-    //       let formData = new FormData();
-    //             formData.append('image', this.Image);
-    //             formData.append('name', this.Name);
-    //             formData.append('banner', this.Banner);
-    //             if (this.Description != null){
-    //                 formData.append('description', this.Description);
-    //             }
-    //     var data = {logo: this.Logo, name: this.Name, banner: this.Banner, description: this.Description}
-    //     this.$store.dispatch('createBrand', formData);
-    //     this.$emit('closeAddBrand');
-    //   },
+    },
+    AddImage: function AddImage(file) {
+      this.ImageNews = file.target.files[0];
+    },
+    AddNews: function AddNews() {
+      if (this.IsActive) {
+        this.Active = 1;
+      } else {
+        this.Active = 0;
+      }
 
+      var formData = new FormData();
+      formData.append('title', this.Title);
+      formData.append('image', this.ImageNews);
+      formData.append('resume', this.Resume);
+      formData.append('content', this.Content);
+      formData.append('releaseDate', this.ReleaseDate);
+      formData.append('isActive', this.IsActive);
+      formData.append('author', localStorage.getItem("user"));
+      this.$store.dispatch('createNews', formData);
+      this.$emit('closeAddNews');
+    }
   }
 });
 
@@ -1124,7 +1143,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.modal {\n  background: #FFFFFF;\n  box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: flex;\n  flex-direction: column;\n  width: 60vw;\n  height: 75vh;\n  flex-direction: column;\n}\n.modal-header,\n.modal-footer {\n  padding: 15px;\n  display: flex;\n}\n.modal-header {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  justify-content: space-between;\n}\n.modal-footer {\n  border-top: 1px solid #eeeeee;\n  justify-content: flex-end;\n}\n.modal-body {\n  position: relative;\n  padding: 20px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.btn-close {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
 
 // exports
 
@@ -1836,62 +1855,176 @@ var render = function() {
             { staticClass: "modal-body", attrs: { id: "modalDescription" } },
             [
               _vm._t("body", [
-                _c("label", { attrs: { for: "logo" } }, [
-                  _vm._v(" logo :\n              "),
-                  _c("input", { attrs: { type: "file", name: "logo" } })
+                _c("label", { attrs: { for: "image" } }, [
+                  _vm._v(" image :\n              "),
+                  _c("input", {
+                    attrs: { type: "file", name: "image" },
+                    on: { change: _vm.AddImage }
+                  })
                 ]),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "name" } }, [
-                  _vm._v(" nom :\n              "),
+                _c("label", { attrs: { for: "title" } }, [
+                  _vm._v(" title :\n              "),
                   _c("input", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.Name,
-                        expression: "Name"
+                        value: _vm.Title,
+                        expression: "Title"
                       }
                     ],
-                    attrs: { type: "text", name: "name" },
-                    domProps: { value: _vm.Name },
+                    attrs: { type: "text", name: "title" },
+                    domProps: { value: _vm.Title },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.Name = $event.target.value
+                        _vm.Title = $event.target.value
                       }
                     }
                   })
                 ]),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "banner" } }, [
-                  _vm._v(" bannière :\n              "),
-                  _c("input", { attrs: { type: "file", name: "banner" } })
+                _c("label", { attrs: { for: "resume" } }, [
+                  _vm._v(" resume :\n              "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.Resume,
+                        expression: "Resume"
+                      }
+                    ],
+                    attrs: { type: "text", name: "resume" },
+                    domProps: { value: _vm.Resume },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.Resume = $event.target.value
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "description" } }, [
+                _c("label", { attrs: { for: "content" } }, [
                   _vm._v(" description :\n              "),
                   _c("textarea", {
                     directives: [
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.Description,
-                        expression: "Description"
+                        value: _vm.Content,
+                        expression: "Content"
                       }
                     ],
-                    attrs: { name: "description" },
-                    domProps: { value: _vm.Description },
+                    attrs: { name: "content" },
+                    domProps: { value: _vm.Content },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.Description = $event.target.value
+                        _vm.Content = $event.target.value
                       }
                     }
                   })
+                ]),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "releaseDate" } }, [
+                  _vm._v(" releaseDate :\n              "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.ReleaseDate,
+                        expression: "ReleaseDate"
+                      }
+                    ],
+                    attrs: {
+                      type: "datetime-local",
+                      min: _vm.min,
+                      name: "releaseDate"
+                    },
+                    domProps: { value: _vm.ReleaseDate },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.ReleaseDate = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("label", [
+                  _vm._v(" isActive :\n            "),
+                  _c("label", { staticClass: "switch" }, [
+                    _c("div", { staticClass: "onoffswitch" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.IsActive,
+                            expression: "IsActive"
+                          }
+                        ],
+                        staticClass: "onoffswitch-checkbox",
+                        attrs: {
+                          type: "checkbox",
+                          name: "onoffswitch",
+                          id: "myonoffswitch",
+                          tabindex: "0"
+                        },
+                        domProps: {
+                          checked: Array.isArray(_vm.IsActive)
+                            ? _vm._i(_vm.IsActive, null) > -1
+                            : _vm.IsActive
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.IsActive,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = null,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 && (_vm.IsActive = $$a.concat([$$v]))
+                              } else {
+                                $$i > -1 &&
+                                  (_vm.IsActive = $$a
+                                    .slice(0, $$i)
+                                    .concat($$a.slice($$i + 1)))
+                              }
+                            } else {
+                              _vm.IsActive = $$c
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "onoffswitch-label",
+                          attrs: { for: "myonoffswitch" }
+                        },
+                        [
+                          _c("span", { staticClass: "onoffswitch-inner" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "onoffswitch-switch" })
+                        ]
+                      )
+                    ])
+                  ])
                 ])
               ])
             ],
@@ -1907,7 +2040,8 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn-green",
-                    attrs: { type: "button", "aria-label": "Add Brand" }
+                    attrs: { type: "button", "aria-label": "Add Brand" },
+                    on: { click: _vm.AddNews }
                   },
                   [_vm._v("Ajouter")]
                 )

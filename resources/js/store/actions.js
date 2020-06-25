@@ -131,6 +131,7 @@ export const  attempt = ({commit,state}, token)=>{
         try {
             axios.get('/api/auth/me', {headers: {'Authorization': `Bearer ${state.token}`}})
                 .then(response => {
+                    localStorage.setItem('user',response.data.name)
                     commit('set_user', response.data)
                     commit("loading", false)
                 })
@@ -181,10 +182,10 @@ export const getBrandAdminList = ({commit})=>{
 //add a brand
 export const createBrand = ({commit,dispatch},object)=>{
     commit("loading", true)
-    console.log("objet",object)
     axios.post('/api/auth/AddBrand',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
         .then( response => {
             dispatch('getBrandAdminList')
+            dispatch('getProductAdminList')
             commit("loading", false)
         })
         .catch(error =>{
@@ -198,6 +199,7 @@ export const updateBrand = ({commit,dispatch},{id, object})=>{
     axios.post('/api/auth/UpdateBrand/'+id, object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
         .then(response => {
             dispatch('getBrandAdminList')
+            dispatch('getProductAdminList')
             commit("loading", false)
         })
         .catch(error =>{
@@ -212,6 +214,7 @@ export const deleteBrand = ({commit, dispatch},{id})=>{
         axios.delete('/api/auth/DeleteBrand/'+id, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then(response =>{
                 dispatch('getBrandAdminList')
+                dispatch('getProductAdminList')
                 commit("loading", false)
             })
             .catch(error =>{
@@ -249,4 +252,19 @@ export const getNewsAdminList = ({commit})=>{
         alert("erreur du serveur, réessayez plus tard")
         commit("loading", false)
     })
+}
+//add a news
+export const createNews = ({commit,dispatch},object)=>{
+    commit("loading", true)
+    axios.post('/api/auth/AddNews',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        .then( response => {
+            console.log(response)
+            dispatch('getNewsAdminList')
+            commit("loading", false)
+        })
+        .catch(error =>{
+            alert('erreur server')
+            console.log(error)
+            commit("loading", false)
+        })
 }

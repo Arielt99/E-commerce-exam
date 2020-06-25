@@ -77913,7 +77913,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, getNewsAdminList */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, getNewsAdminList, createNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77935,6 +77935,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBrand", function() { return deleteBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNews", function() { return createNews; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
  // client action
@@ -78079,6 +78080,7 @@ var attempt = function attempt(_ref14, token) {
           'Authorization': "Bearer ".concat(state.token)
         }
       }).then(function (response) {
+        localStorage.setItem('user', response.data.name);
         commit('set_user', response.data);
         commit("loading", false);
       });
@@ -78137,13 +78139,13 @@ var createBrand = function createBrand(_ref17, object) {
   var commit = _ref17.commit,
       dispatch = _ref17.dispatch;
   commit("loading", true);
-  console.log("objet", object);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
     headers: {
       'Authorization': "Bearer ".concat(localStorage.getItem("token"))
     }
   }).then(function (response) {
     dispatch('getBrandAdminList');
+    dispatch('getProductAdminList');
     commit("loading", false);
   })["catch"](function (error) {
     alert('erreur server');
@@ -78163,6 +78165,7 @@ var updateBrand = function updateBrand(_ref18, _ref19) {
     }
   }).then(function (response) {
     dispatch('getBrandAdminList');
+    dispatch('getProductAdminList');
     commit("loading", false);
   })["catch"](function (error) {
     alert('erreur serveur');
@@ -78181,6 +78184,7 @@ var deleteBrand = function deleteBrand(_ref20, _ref21) {
     }
   }).then(function (response) {
     dispatch('getBrandAdminList');
+    dispatch('getProductAdminList');
     commit("loading", false);
   })["catch"](function (error) {
     alert('erreur serveur');
@@ -78219,6 +78223,25 @@ var getNewsAdminList = function getNewsAdminList(_ref23) {
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
+  });
+}; //add a news
+
+var createNews = function createNews(_ref24, object) {
+  var commit = _ref24.commit,
+      dispatch = _ref24.dispatch;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddNews', object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    console.log(response);
+    dispatch('getNewsAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur server');
+    console.log(error);
     commit("loading", false);
   });
 };
@@ -78491,7 +78514,7 @@ var getNewsAdminList = function getNewsAdminList(state, NewsAdminList) {
       image: NewsAdminList[i].image,
       content: NewsAdminList[i].content,
       author: NewsAdminList[i].author,
-      posted_at: NewsAdminList[i].created_at
+      releaseDate: NewsAdminList[i].releaseDate
     });
   }
 };

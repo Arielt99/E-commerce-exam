@@ -12,6 +12,7 @@ $factory->define(News::class, function (Faker $faker) {
         'image' => "https://picsum.photos/200",
         'content' => $faker->realText($maxNbChars = rand(200, 250), $indexSize = 2),
         'isActive'=> true,
-        'author' => $faker->name
+        'author' => $faker->name,
+        'releaseDate' => now(),
     ];
 });

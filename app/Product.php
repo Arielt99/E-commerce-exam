@@ -15,6 +15,16 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'images', 'description', 'color', 'brand_id', 'price', 'isActive'
+        'name', 'brand', 'color','description','price','image','brand_id','actif'
     ];
+
+    public function brand()
+    {
+        return $this->hasOne('App\Brand');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
 }

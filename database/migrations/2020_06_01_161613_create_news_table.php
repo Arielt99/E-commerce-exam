@@ -20,8 +20,9 @@ class CreateNewsTable extends Migration
             $table->string('resume');
             $table->string('image');
             $table->string('content', 250);
-            $table->boolean('isActive')->default(true);
+            $table->bool('isActive')->default(true);
             $table->string('author');
+            $table->date('releaseDate')->nullable();
         });
     }
 
