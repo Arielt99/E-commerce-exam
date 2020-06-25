@@ -22,7 +22,7 @@ class CreateNewsTable extends Migration
             $table->string('content', 250);
             $table->bool('isActive')->default(true);
             $table->string('author');
-            $table->date('releaseDate')->nullable();
+            $table->dateTime('releaseDate')->nullable();
         });
     }
 

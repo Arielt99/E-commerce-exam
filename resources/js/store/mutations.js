@@ -35,7 +35,7 @@ export const getNewsList = (state, newsList)=>{
             image : newsList[i].image,
             content : newsList[i].content,
             author : newsList[i].author,
-            posted_at : newsList[i].created_at,
+            releaseDate : newsList[i].created_at,
         })
     }
 }
@@ -142,6 +142,7 @@ export const getNewsAdminList = (state, NewsAdminList)=>{
             content : NewsAdminList[i].content,
             author : NewsAdminList[i].author,
             releaseDate : NewsAdminList[i].releaseDate,
+            isActive : NewsAdminList[i].isActive,
         })
     }
 }

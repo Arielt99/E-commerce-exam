@@ -68,48 +68,34 @@ class AdminNewsController extends Controller
                 'error' => true, 'message' => 'Erreur lors du remplissage.',400]);
         }
     }
-    public function destroy(Request $request)
-    {
-        $path_image = News::findOrFail($request->id);
-        $extension = pathinfo($path_image->image);
-
-        $public_id = basename($path_image->image,".".$extension['extension']);
-        Cloudder::delete("News/".$public_id);
-        News::findOrFail($request->id)->delete();
-        return response()->json('Suppression réussis !');
-    }
-
-    public function show($id)
-    {
-        return response(News::findOrFail($id));
-    }
-
+    
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
+            'title'=>'required',
             'resume'=>'required',
-            'description'=>'required',
+            'content'=>'required',
             'releaseDate'=>'required',
-            'actif'=>'required|integer',
+            'isActive'=>'required',
         ]);
 
         if (!$validator->fails()) {
-            if ($request->newImage){
+            if ($request->image){
                 $oldImage = News::findOrFail($request->id);
                 $extension = pathinfo($oldImage->image);
                 $public_id = basename($oldImage->image, "." . $extension['extension']);
                 Cloudder::delete("News/" . $public_id);
 
-                $image_name = $request->newImage->getRealPath();
+                $image_name = $request->image->getRealPath();
                 Cloudder::upload($image_name, null, ['folder' => 'News']);
                 $cloudinary_new = Cloudder::getResult();
 
                 $updateNew = News::findOrFail($request->id)->update([
                     'title' => $request->title,
                     'resume' => $request->resume,
-                    'content' => $request->description,
+                    'content' => $request->content,
                     'releaseDate' => $request->releaseDate,
-                    "actif" => $request->actif,
+                    "isActive" => $request->isActive,
                     "image" => $cloudinary_new['secure_url']
                 ]);
                 $newNew = News::findOrFail($request->id);
@@ -129,9 +115,9 @@ class AdminNewsController extends Controller
                 $updateNew = News::findOrFail($request->id)->update([
                     'title' => $request->title,
                     'resume' => $request->resume,
-                    'content' => $request->description,
+                    'content' => $request->content,
                     'releaseDate' => $request->releaseDate,
-                    "actif" => $request->actif,
+                    "isActive" => $request->isActive,
                 ]);
                 $newNew = News::findOrFail($request->id);
 
@@ -150,5 +136,16 @@ class AdminNewsController extends Controller
         else{
             return response()->json(['msg' => 'Tous les champs sont obliagtoire et le champ Titre doit $etre unique.','type' => 0]);
         }
+    }
+    
+    public function destroy(Request $request)
+    {
+        $path_image = News::findOrFail($request->id);
+        $extension = pathinfo($path_image->image);
+
+        $public_id = basename($path_image->image,".".$extension['extension']);
+        Cloudder::delete("News/".$public_id);
+        News::findOrFail($request->id)->delete();
+        return response()->json('Suppression réussis !',200);
     }
 }

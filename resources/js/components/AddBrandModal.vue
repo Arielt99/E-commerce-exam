@@ -35,7 +35,7 @@
 </template>
 <script>
   export default {
-    name: 'modal',
+    name: 'AddBrandModal',
     data (){
       return {
         Image:"",

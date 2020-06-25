@@ -77913,7 +77913,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, getNewsAdminList, createNews */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, getNewsAdminList, createNews, updateNews, deleteNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77936,6 +77936,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNews", function() { return createNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNews", function() { return updateNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteNews", function() { return deleteNews; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
  // client action
@@ -78107,7 +78109,10 @@ var signOut = function signOut(_ref15) {
         commit('set_token', null);
         commit('set_user', null);
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         commit("loading", false);
+      })["catch"](function (error) {
+        console.log(error);
       });
     } catch (e) {
       //console.log(e)
@@ -78236,12 +78241,49 @@ var createNews = function createNews(_ref24, object) {
       'Authorization': "Bearer ".concat(localStorage.getItem("token"))
     }
   }).then(function (response) {
-    console.log(response);
     dispatch('getNewsAdminList');
     commit("loading", false);
   })["catch"](function (error) {
     alert('erreur server');
     console.log(error);
+    commit("loading", false);
+  });
+}; //add a news
+
+var updateNews = function updateNews(_ref25, _ref26) {
+  var commit = _ref25.commit,
+      dispatch = _ref25.dispatch;
+  var id = _ref26.id,
+      object = _ref26.object;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateNews/' + id, object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getNewsAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur server');
+    console.log(error);
+    commit("loading", false);
+  });
+}; //delete a news
+
+var deleteNews = function deleteNews(_ref27, _ref28) {
+  var commit = _ref27.commit,
+      dispatch = _ref27.dispatch;
+  var id = _ref28.id;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteNews/' + id, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getNewsAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur serveur');
     commit("loading", false);
   });
 };
@@ -78408,7 +78450,7 @@ var getNewsList = function getNewsList(state, newsList) {
       image: newsList[i].image,
       content: newsList[i].content,
       author: newsList[i].author,
-      posted_at: newsList[i].created_at
+      releaseDate: newsList[i].created_at
     });
   }
 }; //BrandProductList = response.data from getBrandProductList in action
@@ -78514,7 +78556,8 @@ var getNewsAdminList = function getNewsAdminList(state, NewsAdminList) {
       image: NewsAdminList[i].image,
       content: NewsAdminList[i].content,
       author: NewsAdminList[i].author,
-      releaseDate: NewsAdminList[i].releaseDate
+      releaseDate: NewsAdminList[i].releaseDate,
+      isActive: NewsAdminList[i].isActive
     });
   }
 };

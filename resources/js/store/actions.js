@@ -153,7 +153,11 @@ export const signOut = ({commit,state})=>{
                 commit('set_token', null)
                 commit('set_user', null)
                 localStorage.removeItem('token')
+                localStorage.removeItem('user')
                 commit("loading", false)
+            })
+            .catch(error=>{
+                console.log(error)
             })
     }
     catch(e){
@@ -258,7 +262,6 @@ export const createNews = ({commit,dispatch},object)=>{
     commit("loading", true)
     axios.post('/api/auth/AddNews',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
         .then( response => {
-            console.log(response)
             dispatch('getNewsAdminList')
             commit("loading", false)
         })
@@ -267,4 +270,31 @@ export const createNews = ({commit,dispatch},object)=>{
             console.log(error)
             commit("loading", false)
         })
+}
+//add a news
+export const updateNews = ({commit,dispatch},{id, object})=>{
+    commit("loading", true)
+    axios.post('/api/auth/UpdateNews/'+id,object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        .then( response => {
+            dispatch('getNewsAdminList')
+            commit("loading", false)
+        })
+        .catch(error =>{
+            alert('erreur server')
+            console.log(error)
+            commit("loading", false)
+        })
+}
+//delete a news
+export const deleteNews = ({commit, dispatch},{id})=>{
+    commit("loading", true)
+        axios.delete('/api/auth/DeleteNews/'+id, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+            .then(response =>{
+                dispatch('getNewsAdminList')
+                commit("loading", false)
+            })
+            .catch(error =>{
+                alert('erreur serveur')
+                commit("loading", false)
+            })
 }

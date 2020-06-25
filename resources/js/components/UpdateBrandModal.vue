@@ -35,7 +35,7 @@
 </template>
 <script>
   export default {
-    name: 'modal',
+    name: 'UpdateBrandModal',
     data (){
       return {
         Image :"",
@@ -66,7 +66,6 @@
             formData.append('image', this.Image);
           }
           formData.append('description', this.emitedBrand.description);
-          var data = {logo: this.Image, name: this.emitedBrand.name, banner: this.Banner, description: this.emitedBrand.description}
           this.$store.dispatch('updateBrand',{id: id, object: formData});
           this.$emit('closeUpdateBrand');
         }

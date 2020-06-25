@@ -4,7 +4,7 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Ajouter une News
+            Modifier une News
             <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
           </slot>
         </header>
@@ -14,21 +14,21 @@
                 <input v-on:change="AddImage" type="file" name="image">
             </label>
             <label for="title"> title :
-                <input v-model="Title" type="text" name="title">
+                <input v-model="emitedNews.title" type="text" name="title">
             </label>
             <label for="resume"> resume :
-                <input v-model="Resume" type="text" name="resume">
+                <input v-model="emitedNews.resume" type="text" name="resume">
             </label>
             <label for="content"> description :
-                <textarea v-model="Content" name="content"></textarea>
+                <textarea v-model="emitedNews.content" name="content"></textarea>
             </label>
             <label for="releaseDate"> releaseDate :
-                <input type="datetime-local" v-model="ReleaseDate" :min="min" name="releaseDate">
+                <input type="datetime-local" v-model="newsDate" :min="emitedNewsDate" name="releaseDate">
             </label>
             <label> isActive :
               <label class="switch">
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" v-model="IsActive">
+                <div class="onoffswitch" @click='onToggle()'>
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" :checked="active == 1">
                     <label class="onoffswitch-label" for="myonoffswitch">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
@@ -40,7 +40,7 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="AddNews" aria-label="Add Brand">Ajouter</button>
+            <button type="button" class="btn-green" @click="UpdateNews(emitedNews.id)" aria-label="Add Brand">Modifier</button>
           </slot>
         </footer>
       </div>
@@ -49,44 +49,60 @@
 </template>
 <script>
   export default {
-    name: 'AddNewsModal',
+    name: 'UpdateNewsModal',
     data (){
       return {
         ImageNews:"",
-        Title:"News",
-        Resume:"Ma nouvelle news",
-        Content:"Description de la news",
-        ReleaseDate: this.$moment().startOf('minute').format('YYYY-MM-DD[T]HH:mm:ss'),
-        min:this.$moment().startOf('minute').format('YYYY-MM-DD[T]HH:mm:ss'),
-        IsActive:true,
+        newsDate:"",
+        active: ""
       }
     },
-    methods: {
-      close() {
-        this.$emit('closeAddNews');
-      },
-     AddImage(file){
-          this.ImageNews = file.target.files[0]
-      },
-      AddNews(){
-        if(this.IsActive == true){
-          this.IsActive = 1
-          }
-          else if(this.IsActive == false){
-            this.IsActive = 0
-          }
-        let formData = new FormData();
-        formData.append('title', this.Title);
-        formData.append('image', this.ImageNews);
-        formData.append('resume', this.Resume);
-        formData.append('content', this.Content);
-        formData.append('releaseDate', this.ReleaseDate);
-        formData.append('isActive',this.IsActive);
-        formData.append('author', localStorage.getItem("user"));
-        this.$store.dispatch('createNews', formData);
-        this.$emit('closeAddNews');
-      },
+    props:{
+        emitedNews: Object,
+        emitedNewsDate: String,
+        emitedNewsIsActive: Number
     },
+    methods:{
+        onToggle(){
+            if (this.active == 1){
+                this.active = 0
+            }
+            else if(this.active == 0){
+                this.active = 1
+            }
+            return this.active
+        },
+        close() {
+            this.$emit('closeUpdateNews');
+        },
+        AddImage(file){
+            this.ImageNews = file.target.files[0]
+        },
+        UpdateNews(id){
+            let formData = new FormData();
+            formData.append('title', this.emitedNews.title);
+            formData.append('resume', this.emitedNews.resume);
+            formData.append('content', this.emitedNews.content);
+            formData.append('releaseDate', this.newsDate);
+            formData.append('isActive',this.active);
+            if (this.ImageNews != null){
+            formData.append('image', this.ImageNews);
+            }
+            this.$store.dispatch('updateNews', {id: id, object: formData});
+            this.$emit('closeUpdateNews');
+        },
+    },
+      watch: {
+    // `visible(value) => this.isVisible = value` could work too
+        emitedNewsIsActive() {
+            this.active = this.emitedNewsIsActive
+        },
+        emitedNewsDate() {
+            this.newsDate = this.emitedNewsDate
+        },
+    }
+
+
   };
 </script>
 <style>

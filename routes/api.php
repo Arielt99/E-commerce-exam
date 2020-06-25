@@ -40,5 +40,7 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
 
     Route::get('AdminNews', 'AdminNewsController@index');
     Route::post('AddNews', 'AdminNewsController@store');
+    Route::post('UpdateNews/{id}', 'AdminNewsController@update');
+    Route::delete('DeleteNews/{id}', 'AdminNewsController@destroy');
     
 });
