@@ -4,7 +4,7 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Ajouter une marque
+            Modifier une marque
             <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
           </slot>
         </header>
@@ -14,19 +14,19 @@
                 <input v-on:change="AddLogo" type="file" name="logo">
             </label>
             <label for="name"> nom :
-                <input v-model="Name" type="text" name="name">
+                <input v-model="emitedBrand.name" type="text" name="name">
             </label>
             <label for="banner"> bannière :
                 <input v-on:change="AddBanner" type="file" name="banner">
             </label>
             <label for="description"> description :
-                <textarea v-model="Description" name="description"></textarea>
+                <textarea v-model="emitedBrand.description" name="description"></textarea>
             </label>
           </slot>
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="AddBrand" aria-label="Add Brand">Ajouter</button>
+            <button type="button" class="btn-green" @click="UpdateBrand(emitedBrand.id)" aria-label="Add Brand">Modifier</button>
           </slot>
         </footer>
       </div>
@@ -38,16 +38,16 @@
     name: 'modal',
     data (){
       return {
-        Image:"",
-        Name:"",
-        Banner:"",
-        Description:"",
-        message:""
+        Image :"",
+        Banner :""
       }
+    },
+    props:{
+        emitedBrand: Object
     },
     methods: {
       close() {
-        this.$emit('closeAddBrand');
+        this.$emit('closeUpdateBrand');
       },
      AddLogo(file){
           this.Image = file.target.files[0]
@@ -55,16 +55,21 @@
       AddBanner(file){
           this.Banner = file.target.files[0]
       },
-      AddBrand(){
-        let formData = new FormData();
-        formData.append('image', this.Image);
-        formData.append('name', this.Name);
-        formData.append('banner', this.Banner);
-        if (this.Description != null){
-            formData.append('description', this.Description);
+      UpdateBrand(id){
+        if (this.emitedBrand.name != null){
+          let formData = new FormData();
+          formData.append('name', this.emitedBrand.name);
+          if (this.Banner != null){
+            formData.append('banner', this.Banner);
+          }
+          if (this.Image != null){
+            formData.append('image', this.Image);
+          }
+          formData.append('description', this.emitedBrand.description);
+          var data = {logo: this.Image, name: this.emitedBrand.name, banner: this.Banner, description: this.emitedBrand.description}
+          this.$store.dispatch('updateBrand',{id: id, object: formData});
+          this.$emit('closeUpdateBrand');
         }
-        this.$store.dispatch('createBrand', formData);
-        this.$emit('closeAddBrand');
       },
     },
   };

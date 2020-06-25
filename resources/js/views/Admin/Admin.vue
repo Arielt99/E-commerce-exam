@@ -1,6 +1,5 @@
 <template>
   <div class="Admin">
-    <p>Admin</p>
     <div v-if="EveryAdminBrands">
       <p> {{EveryAdminBrands.length}} Marque{{ EveryAdminBrands.length > 1  ?  's' : ' '}} </p>
     </div>

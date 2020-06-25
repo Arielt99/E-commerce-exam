@@ -1,7 +1,7 @@
 <template>
   <div class="BrandAdmin">
     <p>BrandAdmin</p>
-    <button type="button" @click="showModal"> ajouter </button>
+    <button type="button" @click="showAddModal"> ajouter </button>
     <table class="adminbrandlist">
       <thead>
           <tr>
@@ -21,37 +21,48 @@
               <td><img :src="brand.banner"/></td>
               <td>{{brand.description}}</td>
               <td>
-                <button type="button">modifier</button>
+                <button type="button" @click="showUpdateModal(brand)">modifier</button>
                 <button type="button" @click="del(brand.id)">X</button>
               </td>
           </tr>
       </tbody>
     </table>
-    <AddBrandModal       v-show="isAddBrandModalVisible"
-      @closeAddBrand="closeAddBrandModal"/>
+    <AddBrandModal v-show="isAddBrandModalVisible" @closeAddBrand="closeAddBrandModal"/>
+    <UpdateBrandModal v-show="isUpdateBrandModalVisible" @closeUpdateBrand="closeUpdateBrandModal" v-bind:emitedBrand="this.brand"/>
   </div>
 </template>
 <script>
 import AddBrandModal from '../../components/AddBrandModal'
+import UpdateBrandModal from '../../components/UpdateBrandModal'
 export default {
   name: 'BrandAdmin',
       data (){
       return {
         isAddBrandModalVisible : false,
+        isUpdateBrandModalVisible : false,
+        brand:{}
       }
     },
     components:{
-        AddBrandModal
+        AddBrandModal,
+        UpdateBrandModal
     },
     methods:{
       getBrandAdminList(){
-          this.$store.dispatch('getBrandAdminList');
+          this.$store.dispatch('getBrandAdminList')
       },
-      showModal() {
-        this.isAddBrandModalVisible = true;
+      showAddModal() {
+        this.isAddBrandModalVisible = true
+      },
+      showUpdateModal(brand) {
+        this.brand = brand
+        this.isUpdateBrandModalVisible = true
       },
       closeAddBrandModal() {
-        this.isAddBrandModalVisible = false;
+        this.isAddBrandModalVisible = false
+      },
+      closeUpdateBrandModal() {
+        this.isUpdateBrandModalVisible = false
       },
       del(id){
         if ( confirm( "Vous êtes sûr ?" ) ) {

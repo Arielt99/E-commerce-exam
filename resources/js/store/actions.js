@@ -181,6 +181,7 @@ export const getBrandAdminList = ({commit})=>{
 //add a brand
 export const createBrand = ({commit,dispatch},object)=>{
     commit("loading", true)
+    console.log("objet",object)
     axios.post('/api/auth/AddBrand',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
         .then( response => {
             dispatch('getBrandAdminList')
@@ -190,6 +191,20 @@ export const createBrand = ({commit,dispatch},object)=>{
             alert('erreur server')
             commit("loading", false)
         })
+}
+//update a brand
+export const updateBrand = ({commit,dispatch},{id, object})=>{
+    commit("loading", true)
+    axios.post('/api/auth/UpdateBrand/'+id, object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        .then(response => {
+            dispatch('getBrandAdminList')
+            commit("loading", false)
+        })
+        .catch(error =>{
+            alert('erreur serveur')
+            commit("loading", false)
+        })
+
 }
 //delete a brand
 export const deleteBrand = ({commit, dispatch},{id})=>{

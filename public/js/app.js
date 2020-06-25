@@ -77913,7 +77913,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, deleteBrand, getProductAdminList, getNewsAdminList */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, getNewsAdminList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77931,6 +77931,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandAdminList", function() { return getBrandAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBrand", function() { return createBrand; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBrand", function() { return updateBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBrand", function() { return deleteBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
@@ -78136,6 +78137,7 @@ var createBrand = function createBrand(_ref17, object) {
   var commit = _ref17.commit,
       dispatch = _ref17.dispatch;
   commit("loading", true);
+  console.log("objet", object);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
     headers: {
       'Authorization': "Bearer ".concat(localStorage.getItem("token"))
@@ -78147,12 +78149,31 @@ var createBrand = function createBrand(_ref17, object) {
     alert('erreur server');
     commit("loading", false);
   });
-}; //delete a brand
+}; //update a brand
 
-var deleteBrand = function deleteBrand(_ref18, _ref19) {
+var updateBrand = function updateBrand(_ref18, _ref19) {
   var commit = _ref18.commit,
       dispatch = _ref18.dispatch;
-  var id = _ref19.id;
+  var id = _ref19.id,
+      object = _ref19.object;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateBrand/' + id, object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getBrandAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur serveur');
+    commit("loading", false);
+  });
+}; //delete a brand
+
+var deleteBrand = function deleteBrand(_ref20, _ref21) {
+  var commit = _ref20.commit,
+      dispatch = _ref20.dispatch;
+  var id = _ref21.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteBrand/' + id, {
     headers: {
@@ -78167,8 +78188,8 @@ var deleteBrand = function deleteBrand(_ref18, _ref19) {
   });
 }; //getting all the products, also the inactives ones
 
-var getProductAdminList = function getProductAdminList(_ref20) {
-  var commit = _ref20.commit;
+var getProductAdminList = function getProductAdminList(_ref22) {
+  var commit = _ref22.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminProduct ', {
     headers: {
@@ -78185,8 +78206,8 @@ var getProductAdminList = function getProductAdminList(_ref20) {
   });
 }; //getting all the news, also the inactives ones
 
-var getNewsAdminList = function getNewsAdminList(_ref21) {
-  var commit = _ref21.commit;
+var getNewsAdminList = function getNewsAdminList(_ref23) {
+  var commit = _ref23.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
     headers: {
