@@ -92,6 +92,9 @@ export const searchResponse = (state, search)=>{
 
 
 
+export const loading=(state, loading )=>{
+    state.loading = loading
+}
 export const set_token=(state, token )=>{
     state.token = token
 }
@@ -124,6 +127,21 @@ export const getProductAdminList = (state, ProductAdminList)=>{
             name : ProductAdminList[i].name,
             price : ProductAdminList[i].price,
             brand_id : ProductAdminList[i].brand_id,
+        })
+    }
+}
+//newsList = response.data from getNewsAdminList in action
+export const getNewsAdminList = (state, NewsAdminList)=>{
+    state.EveryAdminNews =[]
+    for (let i=0; i<NewsAdminList.length; i++){
+        state.EveryAdminNews.push({
+            title : NewsAdminList[i].title,
+            resume : NewsAdminList[i].resume,
+            id : NewsAdminList[i].id,
+            image : NewsAdminList[i].image,
+            content : NewsAdminList[i].content,
+            author : NewsAdminList[i].author,
+            posted_at : NewsAdminList[i].created_at,
         })
     }
 }

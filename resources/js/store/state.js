@@ -6,6 +6,7 @@ export default{
     product:[],
     RandomProducts:[],
     searchResponse:[],
+    loading:false,
     //admin
     user:[],
     token:[],

@@ -34,5 +34,8 @@ export const EveryAdminProducts = state =>{
     return state.EveryAdminProducts;
 };
 export const EveryAdminNews = state =>{
-    return state.EveryAdminBrands;
+    return state.EveryAdminNews;
+};
+export const loading = state =>{
+    return state.loading;
 };

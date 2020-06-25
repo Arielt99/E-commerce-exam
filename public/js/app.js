@@ -2057,6 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2086,6 +2087,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     getNewsList: function getNewsList() {
       this.$store.dispatch('getNewsList');
+    }
+  },
+  computed: {
+    loading: function loading() {
+      return this.$store.getters.loading;
     }
   },
   created: function created() {
@@ -6683,7 +6689,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#app{\r\n  position: relative;\r\n  min-height:100vh;\n}\nbody{\r\n  margin: 0;\r\n  font-family: sans-serif;\r\n  background-color: rgb(241, 241, 241);\n}\n#clientNav, #adminNav{\r\n  z-index: 100000;\r\n  position: fixed;\r\n  height: 10vh;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  flex-direction: row;\r\n  background-color: white;\r\n  width: 100%;\r\n  border-bottom: 0.5px solid lightgray;\r\n  align-items: center ;\r\n  justify-content: space-between;\n}\n.router-link-exact-active{\r\n  background-color: rgb(241, 241, 241);\r\n  border-radius: 10px;\n}\n#clientNav .Nav a, #adminNav .Nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\r\n  padding: 10px 20px;\n}\n.logo{\r\n  height: 100%;\r\n  width: 100px;\r\n  display: flex;\r\n  align-content: flex-start;\r\n  padding-left: 20px;\n}\n#clientNav .search{\r\n  border-radius: 5px;\r\n  background-color :rgb(230, 230, 230);\r\n  width: 30vw;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  margin-left: 10vw;\n}\n#clientNav .search input{\r\n  width: 30vw;\r\n  font-weight: bold;\r\n  background-color :transparent;\r\n  border: none;\r\n  padding: 10px 0px 10px 15px;\n}\n#clientNav .search input[type=text]:focus{\r\n  font-weight: bold;\r\n  outline: none;\n}\n#clientNav .search input::-moz-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input:-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search button{\r\n  background-color :transparent;\r\n  border: none;\n}\n.Nav{\r\n  display: flex;\r\n  margin-right: 10px ;\n}\n.logo img{\r\n  width: auto;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.footer{\r\n  background: rgb(48, 48, 48);\r\n  color: white;\r\n  position:absolute;\r\n  bottom:0;\r\n  width:100%;\r\n  height:50px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\n}\n.appContent{\r\n  padding-top: 10vh;\r\n  padding-bottom: 50px;\n}\r\n/* width */\n::-webkit-scrollbar {\r\n  background: rgb(241, 241, 241);\r\n  width: 5px;\n}\r\n/* Track */\n::-webkit-scrollbar-track {\r\n  border-radius: 2px;\r\n  background: rgb(241, 241, 241);\n}\r\n/* Handle */\n::-webkit-scrollbar-thumb {\r\n  background: rgb(48, 48, 48); \r\n  border-radius: 2px;\n}\r\n", ""]);
+exports.push([module.i, "\n#app{\r\n  position: relative;\r\n  min-height:100vh;\n}\nbody{\r\n  margin: 0;\r\n  font-family: sans-serif;\r\n  background-color: rgb(241, 241, 241);\n}\n#clientNav, #adminNav{\r\n  z-index: 100000;\r\n  position: fixed;\r\n  height: 10vh;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  flex-direction: row;\r\n  background-color: white;\r\n  width: 100%;\r\n  border-bottom: 0.5px solid lightgray;\r\n  align-items: center ;\r\n  justify-content: space-between;\n}\n.router-link-exact-active{\r\n  background-color: rgb(241, 241, 241);\r\n  border-radius: 10px;\n}\n#clientNav .Nav a, #adminNav .Nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\r\n  padding: 10px 20px;\n}\n.logo{\r\n  height: 100%;\r\n  width: 100px;\r\n  display: flex;\r\n  align-content: flex-start;\r\n  padding-left: 20px;\n}\n#clientNav .search{\r\n  border-radius: 5px;\r\n  background-color :rgb(230, 230, 230);\r\n  width: 30vw;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  margin-left: 10vw;\n}\n#clientNav .search input{\r\n  width: 30vw;\r\n  font-weight: bold;\r\n  background-color :transparent;\r\n  border: none;\r\n  padding: 10px 0px 10px 15px;\n}\n#clientNav .search input[type=text]:focus{\r\n  font-weight: bold;\r\n  outline: none;\n}\n#clientNav .search input::-moz-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input:-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search button{\r\n  background-color :transparent;\r\n  border: none;\n}\n.Nav{\r\n  display: flex;\r\n  margin-right: 10px ;\n}\n.logo img{\r\n  width: auto;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.footer{\r\n  background: rgb(48, 48, 48);\r\n  color: white;\r\n  position:absolute;\r\n  bottom:0;\r\n  width:100%;\r\n  height:50px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\n}\n.appContent{\r\n  padding-top: 10vh;\r\n  padding-bottom: 50px;\n}\r\n/* width */\n::-webkit-scrollbar {\r\n  background: rgb(241, 241, 241);\r\n  width: 5px;\n}\r\n/* Track */\n::-webkit-scrollbar-track {\r\n  border-radius: 2px;\r\n  background: rgb(241, 241, 241);\n}\r\n/* Handle */\n::-webkit-scrollbar-thumb {\r\n  background: rgb(48, 48, 48); \r\n  border-radius: 2px;\n}\n.loading {\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: rgba(0, 0, 0, 0.3);\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.lds-ring {\r\n  display: inline-block;\r\n  position: relative;\r\n  width: 80px;\r\n  height: 80px;\n}\n.lds-ring div {\r\n  box-sizing: border-box;\r\n  display: block;\r\n  position: absolute;\r\n  width: 64px;\r\n  height: 64px;\r\n  margin: 8px;\r\n  border: 8px solid #fff;\r\n  border-radius: 50%;\r\n  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\r\n          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\r\n  border-color: #fff transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\r\n  -webkit-animation-delay: -0.45s;\r\n          animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\r\n  -webkit-animation-delay: -0.3s;\r\n          animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\r\n  -webkit-animation-delay: -0.15s;\r\n          animation-delay: -0.15s;\n}\n@-webkit-keyframes lds-ring {\n0% {\r\n    transform: rotate(0deg);\n}\n100% {\r\n    transform: rotate(360deg);\n}\n}\n@keyframes lds-ring {\n0% {\r\n    transform: rotate(0deg);\n}\n100% {\r\n    transform: rotate(360deg);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -59932,12 +59938,28 @@ var render = function() {
       _vm._v(" "),
       _c("router-view", { staticClass: "appContent" }),
       _vm._v(" "),
+      _vm.loading
+        ? _c("div", { staticClass: "loading" }, [_vm._m(0)])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "footer" }, [_vm._v(" © 2020 École webstart ")])
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "lds-ring" }, [
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -77891,7 +77913,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, getProductAdminList, getNewsAdminList, createBrand, deleteBrand */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, deleteBrand, getProductAdminList, getNewsAdminList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77908,10 +77930,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attempt", function() { return attempt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandAdminList", function() { return getBrandAdminList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBrand", function() { return createBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBrand", function() { return deleteBrand; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
  // client action
@@ -77974,23 +77996,30 @@ var getProduct = function getProduct(_ref6, _ref7) {
 
 var getRandomProductList = function getRandomProductList(_ref8) {
   var commit = _ref8.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products?sort=random&max=10').then(function (response) {
     //console.log(response.data)
     commit("getRandomProductList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
   });
 }; //getting a specific product
 
 var search = function search(_ref9, _ref10) {
   var commit = _ref9.commit;
   var searchContent = _ref10.searchContent;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products?search=' + searchContent).then(function (response) {
     //console.log(response.data)
     commit("searchResponse", response.data);
-  })["catch"](function (error) {//console.log(error.response.data)
-    //alert("erreur du serveur, réessayez plus tard")
+    commit("loading", false);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
   });
 }; //sending an e-email
 
@@ -78001,6 +78030,7 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
       email = _ref12.email,
       subject = _ref12.subject,
       message = _ref12.message;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/contact', {
     last_name: last_name,
     first_name: first_name,
@@ -78010,18 +78040,23 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
   }).then(function (response) {
     //console.log(response.data)
     alert("E-mail envoyé avec succès, nous vous repondrons dans les plus bref délais");
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
   });
 }; //admin action
 //login admin
 
 var login = function login(_ref13, credentials) {
-  var dispatch = _ref13.dispatch;
+  var commit = _ref13.commit,
+      dispatch = _ref13.dispatch;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/signin', credentials).then(function (response) {
     if (response) {
       localStorage.setItem('token', response.data.token);
+      commit("loading", false);
       return dispatch('attempt', response.data.token);
     }
   });
@@ -78030,6 +78065,7 @@ var login = function login(_ref13, credentials) {
 var attempt = function attempt(_ref14, token) {
   var commit = _ref14.commit,
       state = _ref14.state;
+  commit("loading", true);
 
   if (token) {
     commit('set_token', token);
@@ -78043,10 +78079,12 @@ var attempt = function attempt(_ref14, token) {
         }
       }).then(function (response) {
         commit('set_user', response.data);
+        commit("loading", false);
       });
     } catch (e) {
       commit('set_token', null);
       commit('set_user', null);
+      commit("loading", false);
     }
   }
 }; //logout admin
@@ -78054,6 +78092,7 @@ var attempt = function attempt(_ref14, token) {
 var signOut = function signOut(_ref15) {
   var commit = _ref15.commit,
       state = _ref15.state;
+  commit("loading", true);
 
   if (state.token != null) {
     try {
@@ -78065,15 +78104,19 @@ var signOut = function signOut(_ref15) {
         commit('set_token', null);
         commit('set_user', null);
         localStorage.removeItem('token');
+        commit("loading", false);
       });
     } catch (e) {
-      console.log(e);
+      //console.log(e)
+      commit("loading", false);
     }
   }
-}; //getting all the brands, also the inactives ones
+}; //admin brand section
+//getting all the brands, also the inactives ones
 
 var getBrandAdminList = function getBrandAdminList(_ref16) {
   var commit = _ref16.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminBrand', {
     headers: {
       'Authorization': "Bearer ".concat(localStorage.getItem("token"))
@@ -78081,14 +78124,52 @@ var getBrandAdminList = function getBrandAdminList(_ref16) {
   }).then(function (response) {
     //console.log(response.data)
     commit("getBrandAdminList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
+  });
+}; //add a brand
+
+var createBrand = function createBrand(_ref17, object) {
+  var commit = _ref17.commit,
+      dispatch = _ref17.dispatch;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getBrandAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur server');
+    commit("loading", false);
+  });
+}; //delete a brand
+
+var deleteBrand = function deleteBrand(_ref18, _ref19) {
+  var commit = _ref18.commit,
+      dispatch = _ref18.dispatch;
+  var id = _ref19.id;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteBrand/' + id, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getBrandAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur serveur');
+    commit("loading", false);
   });
 }; //getting all the products, also the inactives ones
 
-var getProductAdminList = function getProductAdminList(_ref17) {
-  var commit = _ref17.commit;
+var getProductAdminList = function getProductAdminList(_ref20) {
+  var commit = _ref20.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminProduct ', {
     headers: {
       'Authorization': "Bearer ".concat(localStorage.getItem("token"))
@@ -78096,54 +78177,28 @@ var getProductAdminList = function getProductAdminList(_ref17) {
   }).then(function (response) {
     //console.log(response.data)
     commit("getProductAdminList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
   });
 }; //getting all the news, also the inactives ones
 
-var getNewsAdminList = function getNewsAdminList(_ref18) {
-  var commit = _ref18.commit;
+var getNewsAdminList = function getNewsAdminList(_ref21) {
+  var commit = _ref21.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
     headers: {
       'Authorization': "Bearer ".concat(localStorage.getItem("token"))
     }
-  }).then(function (response) {//console.log(response.data)
-    //commit("getBrandAdminList", response.data)
+  }).then(function (response) {
+    commit("getNewsAdminList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
-  });
-}; //add a brand
-
-var createBrand = function createBrand(_ref19, object) {
-  var commit = _ref19.commit,
-      dispatch = _ref19.dispatch;
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
-    headers: {
-      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
-    }
-  }).then(function (response) {
-    dispatch('getBrandAdminList');
-    alert('Marque ajoutée');
-  })["catch"](function (error) {
-    alert('erreur server');
-  });
-}; //delete a brand
-
-var deleteBrand = function deleteBrand(_ref20, _ref21) {
-  var commit = _ref20.commit,
-      dispatch = _ref20.dispatch;
-  var id = _ref21.id;
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteBrand/' + id, {
-    headers: {
-      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
-    }
-  }).then(function (response) {
-    dispatch('getBrandAdminList');
-    alert('Marque supprimée');
-  })["catch"](function (error) {
-    alert('erreur serveur');
+    commit("loading", false);
   });
 };
 
@@ -78153,7 +78208,7 @@ var deleteBrand = function deleteBrand(_ref20, _ref21) {
 /*!***************************************!*\
   !*** ./resources/js/store/getters.js ***!
   \***************************************/
-/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews */
+/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews, loading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78170,6 +78225,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminBrands", function() { return EveryAdminBrands; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminProducts", function() { return EveryAdminProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminNews", function() { return EveryAdminNews; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loading", function() { return loading; });
 var EveryBrands = function EveryBrands(state) {
   return state.EveryBrands;
 };
@@ -78205,7 +78261,10 @@ var EveryAdminProducts = function EveryAdminProducts(state) {
   return state.EveryAdminProducts;
 };
 var EveryAdminNews = function EveryAdminNews(state) {
-  return state.EveryAdminBrands;
+  return state.EveryAdminNews;
+};
+var loading = function loading(state) {
+  return state.loading;
 };
 
 /***/ }),
@@ -78247,7 +78306,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
   \*****************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, set_token, set_user, getBrandAdminList, getProductAdminList */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, loading, set_token, set_user, getBrandAdminList, getProductAdminList, getNewsAdminList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78259,10 +78318,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomProductList", function() { return getRandomProductList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loading", function() { return loading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_token", function() { return set_token; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_user", function() { return set_user; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBrandAdminList", function() { return getBrandAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 //brandList = response.data from getBrandList in action
 var getBrandList = function getBrandList(state, brandList) {
   state.EveryBrands = [];
@@ -78360,6 +78421,9 @@ var searchResponse = function searchResponse(state, search) {
     });
   }
 };
+var loading = function loading(state, _loading) {
+  state.loading = _loading;
+};
 var set_token = function set_token(state, token) {
   state.token = token;
 };
@@ -78393,6 +78457,22 @@ var getProductAdminList = function getProductAdminList(state, ProductAdminList) 
       brand_id: ProductAdminList[i].brand_id
     });
   }
+}; //newsList = response.data from getNewsAdminList in action
+
+var getNewsAdminList = function getNewsAdminList(state, NewsAdminList) {
+  state.EveryAdminNews = [];
+
+  for (var i = 0; i < NewsAdminList.length; i++) {
+    state.EveryAdminNews.push({
+      title: NewsAdminList[i].title,
+      resume: NewsAdminList[i].resume,
+      id: NewsAdminList[i].id,
+      image: NewsAdminList[i].image,
+      content: NewsAdminList[i].content,
+      author: NewsAdminList[i].author,
+      posted_at: NewsAdminList[i].created_at
+    });
+  }
 };
 
 /***/ }),
@@ -78414,6 +78494,7 @@ __webpack_require__.r(__webpack_exports__);
   product: [],
   RandomProducts: [],
   searchResponse: [],
+  loading: false,
   //admin
   user: [],
   token: [],

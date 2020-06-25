@@ -1,7 +1,16 @@
 <template>
   <div class="Admin">
     <p>Admin</p>
-    
+    <div v-if="EveryAdminBrands">
+      <p> {{EveryAdminBrands.length}} Marque{{ EveryAdminBrands.length > 1  ?  's' : ' '}} </p>
+    </div>
+    <div v-if="EveryAdminProducts">
+      <p> {{EveryAdminProducts.length}} Produit{{ EveryAdminProducts.length > 1  ?  's' : ' '}} </p>
+    </div>
+    <div v-if="EveryAdminNews">
+      <p> {{EveryAdminNews.length}} actualité{{ EveryAdminNews.length > 1  ?  's' : ' '}} </p>
+    </div>
+
   </div>
 </template>
 
@@ -12,6 +21,17 @@ export default {
     return{
 
     }
+  },
+  computed:{
+    EveryAdminBrands(){
+      return this.$store.getters.EveryAdminBrands;
+    },
+    EveryAdminProducts(){
+      return this.$store.getters.EveryAdminProducts;
+    },
+    EveryAdminNews(){
+      return this.$store.getters.EveryAdminNews;
+    },
   },
   methods:{
     getBrandAdminList(){

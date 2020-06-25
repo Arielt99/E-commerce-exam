@@ -4,7 +4,7 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Ajouter un produit
+            Ajouter une marque
             <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
           </slot>
         </header>
@@ -39,23 +39,21 @@
     data (){
       return {
         Image:"",
-        Name:"test",
+        Name:"",
         Banner:"",
-        Description:"description",
+        Description:"",
         message:""
       }
     },
     methods: {
       close() {
-        this.$emit('close');
+        this.$emit('closeAddBrand');
       },
      AddLogo(file){
           this.Image = file.target.files[0]
-          console.log(this.Image)
       },
       AddBanner(file){
           this.Banner = file.target.files[0]
-          console.log(this.Banner)
       },
       AddBrand(){
           let formData = new FormData();
@@ -66,8 +64,8 @@
                     formData.append('description', this.Description);
                 }
         var data = {logo: this.Logo, name: this.Name, banner: this.Banner, description: this.Description}
-        console.log(formData)
         this.$store.dispatch('createBrand', formData);
+        this.$emit('closeAddBrand');
       },
     },
   };

@@ -63,55 +63,67 @@ export const getProduct = ({ commit },{id})=>{
 }
 //getting a list of random product
 export const getRandomProductList = ({ commit })=>{
+    commit("loading", true)
     axios.get('/api/products?sort=random&max=10')
     .then( response => {
         //console.log(response.data)
         commit("getRandomProductList", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
         alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //getting a specific product
 export const search = ({ commit },{searchContent})=>{
+    commit("loading", true)
     axios.get('/api/products?search='+searchContent)
     .then( response => {
         //console.log(response.data)
         commit("searchResponse", response.data)
-    })
-    .catch( error =>  {
-        //console.log(error.response.data)
-        //alert("erreur du serveur, réessayez plus tard")
-    })
-}
-//sending an e-email
-export const sentMailContact = ({ commit }, {last_name, first_name, email, subject, message})=>{
-    axios.post('/api/contact', {last_name, first_name, email, subject, message})
-    .then( response => {
-        //console.log(response.data)
-        alert("E-mail envoyé avec succès, nous vous repondrons dans les plus bref délais")
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
         alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
+    })
+}
+//sending an e-email
+export const sentMailContact = ({ commit }, {last_name, first_name, email, subject, message})=>{
+    commit("loading", true)
+    axios.post('/api/contact', {last_name, first_name, email, subject, message})
+    .then( response => {
+        //console.log(response.data)
+        alert("E-mail envoyé avec succès, nous vous repondrons dans les plus bref délais")
+        commit("loading", false)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 
 
 //admin action
 //login admin
-export const login = ({dispatch}, credentials)=>{
+export const login = ({commit,dispatch}, credentials)=>{
+    commit("loading", true)
         axios.post('/api/auth/signin', credentials)
         .then(response =>{
             if(response){
                 localStorage.setItem('token',response.data.token)
+                commit("loading", false)
                 return dispatch('attempt',response.data.token)
             }
         })
 }
 //check if connected
 export const  attempt = ({commit,state}, token)=>{
+    commit("loading", true)
     if (token) {
         commit('set_token', token)
     }
@@ -120,16 +132,19 @@ export const  attempt = ({commit,state}, token)=>{
             axios.get('/api/auth/me', {headers: {'Authorization': `Bearer ${state.token}`}})
                 .then(response => {
                     commit('set_user', response.data)
+                    commit("loading", false)
                 })
         }
         catch (e) {
             commit('set_token', null)
             commit('set_user', null)
+            commit("loading", false)
         }
     }
 }
 //logout admin
 export const signOut = ({commit,state})=>{
+    commit("loading", true)
     if (state.token != null) {
     try {
         axios.post('/api/auth/signout',state.token, {headers: {'Authorization': `Bearer ${state.token}`}})
@@ -137,68 +152,86 @@ export const signOut = ({commit,state})=>{
                 commit('set_token', null)
                 commit('set_user', null)
                 localStorage.removeItem('token')
+                commit("loading", false)
             })
     }
     catch(e){
-        console.log(e)
+        //console.log(e)
+        commit("loading", false)
     }
     }
 }
+
+//admin brand section
 //getting all the brands, also the inactives ones
-export const getBrandAdminList = ({ commit})=>{
+export const getBrandAdminList = ({commit})=>{
+    commit("loading", true)
     axios.get('/api/auth/AdminBrand',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
     .then( response => {
         //console.log(response.data)
         commit("getBrandAdminList", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
         alert("erreur du serveur, réessayez plus tard")
-    })
-}
-//getting all the products, also the inactives ones
-export const getProductAdminList = ({ commit})=>{
-    axios.get('/api/auth/AdminProduct ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
-    .then( response => {
-        //console.log(response.data)
-        commit("getProductAdminList", response.data)
-    })
-    .catch( error =>  {
-        //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
-    })
-}
-//getting all the news, also the inactives ones
-export const getNewsAdminList = ({ commit})=>{
-    axios.get('/api/auth/AdminNews ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
-    .then( response => {
-        //console.log(response.data)
-        //commit("getBrandAdminList", response.data)
-    })
-    .catch( error =>  {
-        //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //add a brand
 export const createBrand = ({commit,dispatch},object)=>{
+    commit("loading", true)
     axios.post('/api/auth/AddBrand',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
         .then( response => {
             dispatch('getBrandAdminList')
-            alert('Marque ajoutée')
+            commit("loading", false)
         })
         .catch(error =>{
             alert('erreur server')
+            commit("loading", false)
         })
 }
 //delete a brand
 export const deleteBrand = ({commit, dispatch},{id})=>{
+    commit("loading", true)
         axios.delete('/api/auth/DeleteBrand/'+id, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then(response =>{
                 dispatch('getBrandAdminList')
-                alert('Marque supprimée')
+                commit("loading", false)
             })
             .catch(error =>{
                 alert('erreur serveur')
+                commit("loading", false)
             })
+}
+
+
+//getting all the products, also the inactives ones
+export const getProductAdminList = ({commit})=>{
+    commit("loading", true)
+    axios.get('/api/auth/AdminProduct ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then( response => {
+        //console.log(response.data)
+        commit("getProductAdminList", response.data)
+        commit("loading", false)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
+    })
+}
+//getting all the news, also the inactives ones
+export const getNewsAdminList = ({commit})=>{
+    commit("loading", true)
+    axios.get('/api/auth/AdminNews ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+    .then( response => {
+        commit("getNewsAdminList", response.data)
+        commit("loading", false)
+    })
+    .catch( error =>  {
+        //console.log(error.response.data)
+        alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
+    })
 }

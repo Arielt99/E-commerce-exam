@@ -62,23 +62,6 @@ class AdminBrandController extends Controller
             ]);
         }
     }
-
-    public function destroy(Request $request)
-    {
-        $path_image = Brand::findOrFail($request->id);
-        $extension = pathinfo($path_image->image);
-        $extension_banner = pathinfo($path_image->banner);
-
-        $public_id = basename($path_image->image,".".$extension['extension']);
-        Cloudder::delete("Brands/".$public_id);
-
-        $public_id_banner = basename($path_image->banner,".".$extension_banner['extension']);
-        Cloudder::delete("Brands/".$public_id_banner);
-
-        Brand::findOrFail($request->id)->delete();
-        return response()->json('Suppression réussis !',200);
-    }
-
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
@@ -131,5 +114,20 @@ class AdminBrandController extends Controller
                 return response()->json(['msg' => 'Erreur lors de la mise à jour de la marque.','type' => 0]);
             }
         }
+    }
+    public function destroy(Request $request)
+    {
+        $path_image = Brand::findOrFail($request->id);
+        $extension = pathinfo($path_image->image);
+        $extension_banner = pathinfo($path_image->banner);
+
+        $public_id = basename($path_image->image,".".$extension['extension']);
+        Cloudder::delete("Brands/".$public_id);
+
+        $public_id_banner = basename($path_image->banner,".".$extension_banner['extension']);
+        Cloudder::delete("Brands/".$public_id_banner);
+
+        Brand::findOrFail($request->id)->delete();
+        return response()->json('Suppression réussis !',200);
     }
 }

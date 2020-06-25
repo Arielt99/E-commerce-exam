@@ -33,6 +33,7 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
 
     Route::get('AdminBrand', 'AdminBrandController@index');
     Route::post('AddBrand', 'AdminBrandController@store');
+    Route::post('UpdateBrand/{id}', 'AdminBrandController@update');
     Route::delete('DeleteBrand/{id}', 'AdminBrandController@destroy');
 
     Route::get('AdminProduct', 'AdminProductController@index');

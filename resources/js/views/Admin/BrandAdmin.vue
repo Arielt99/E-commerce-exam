@@ -27,31 +27,31 @@
           </tr>
       </tbody>
     </table>
-    <BrandModal       v-show="isModalVisible"
-      @close="closeModal"/>
+    <AddBrandModal       v-show="isAddBrandModalVisible"
+      @closeAddBrand="closeAddBrandModal"/>
   </div>
 </template>
 <script>
-import BrandModal from '../../components/BrandModal'
+import AddBrandModal from '../../components/AddBrandModal'
 export default {
   name: 'BrandAdmin',
       data (){
       return {
-        isModalVisible : false,
+        isAddBrandModalVisible : false,
       }
     },
     components:{
-        BrandModal
+        AddBrandModal
     },
     methods:{
       getBrandAdminList(){
           this.$store.dispatch('getBrandAdminList');
       },
       showModal() {
-        this.isModalVisible = true;
+        this.isAddBrandModalVisible = true;
       },
-      closeModal() {
-        this.isModalVisible = false;
+      closeAddBrandModal() {
+        this.isAddBrandModalVisible = false;
       },
       del(id){
         if ( confirm( "Vous êtes sûr ?" ) ) {
@@ -73,7 +73,20 @@ export default {
 }
 </script>
 <style>
+.BrandAdmin{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .adminbrandlist{
   max-width: 100vw;
+}
+.adminbrandlist img{
+  object-fit: cover;
+  width: 100px;
+  height: auto;
+}
+table{
+  width: 90vw;
 }
 </style>
