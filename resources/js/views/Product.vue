@@ -2,9 +2,9 @@
   <div>
     <div class="Product" v-if="this.CurrentProduct[0]">
       <h1>{{this.CurrentProduct[0].name}}</h1>
-      <img :src="this.CurrentProduct[0].images"/>
+      <img :src="this.CurrentProduct[0].principal_images"/>
       <p>{{this.CurrentProduct[0].price}} €</p>
-      <p>{{CurrentBrand[0].name}}</p>
+      <p>{{CurrentBrand.filter(brand =>brand.id === this.CurrentProduct[0].brand_id)[0].name}}</p>
     </div>
     <div class="empty" v-if=" !this.CurrentProduct[0]">
       <p> Produit indisponible </p>
@@ -21,14 +21,12 @@ export default {
     methods:{
     },
     computed:{
-        CurrentProduct(){
-          return this.$store.getters.product
-        },
-        CurrentBrand(){
-            return this.$store.getters.EveryBrands.filter(brand =>
-              brand.id === this.CurrentProduct[0].brand_id
-            )
-        },
+      CurrentProduct(){
+        return this.$store.getters.product
+      },
+      CurrentBrand(){
+        return this.$store.getters.EveryBrands;
+      },
     },
     created: function(){
         this.$store.dispatch('getProduct',{id: this.$route.params.id})

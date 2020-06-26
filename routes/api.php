@@ -37,6 +37,8 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
     Route::delete('DeleteBrand/{id}', 'AdminBrandController@destroy');
 
     Route::get('AdminProduct', 'AdminProductController@index');
+    Route::post('AddProduct', 'AdminProductController@store');
+    Route::delete('DeleteProduct/{id}', 'AdminProductController@destroy');
 
     Route::get('AdminNews', 'AdminNewsController@index');
     Route::post('AddNews', 'AdminNewsController@store');

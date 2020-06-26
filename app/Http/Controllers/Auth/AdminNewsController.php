@@ -58,17 +58,19 @@ class AdminNewsController extends Controller
                 return response()->json(['error' => false,'message' => 'Ajout de lactualité avec succès.', 201]);
             }
             catch(\Exception $e){
-                return response()->json([
-                    'error' => true, 'message' => 'Erreur lors du remplissage.',400]);
+                return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
             }
            
         }
         else {
-            return response()->json([
-                'error' => true, 'message' => 'Erreur lors du remplissage.',400]);
+            return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
         }
     }
-    
+    /**
+     * Modify the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
@@ -101,14 +103,10 @@ class AdminNewsController extends Controller
                 $newNew = News::findOrFail($request->id);
 
                 if ($updateNew){
-                    return response()->json([
-                        'msg' => 'Modification de l\'actualité avec succès.',
-                        'type' => 1,
-                        'new' => $newNew
-                    ]);
+                    return response()->json(['error' => false,'message' => 'Modification de lactualité avec succès.','UpdatedNews'=>$newNew, 201]);
                 }
                 else{
-                    return response()->json(['msg' => 'Erreur lors de la mise à jour de l\'actualité.','type' => 0]);
+                    return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
                 }
             }
             else{
@@ -122,22 +120,23 @@ class AdminNewsController extends Controller
                 $newNew = News::findOrFail($request->id);
 
                 if ($updateNew){
-                    return response()->json([
-                        'msg' => 'Modification de l\'actualité avec succès.',
-                        'type' => 1,
-                        'new' => $newNew
-                    ]);
+                    return response()->json(['error' => false,'message' => 'Modification de lactualité avec succès.','UpdatedNews'=>$newNew, 201]);
+
                 }
                 else{
-                    return response()->json(['msg' => 'Erreur lors de la mise à jour de l\'actualité.','type' => 0]);
+                    return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
                 }
             }
         }
         else{
-            return response()->json(['msg' => 'Tous les champs sont obliagtoire et le champ Titre doit $etre unique.','type' => 0]);
+            return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
         }
     }
-    
+    /**
+     * Destroy the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request)
     {
         $path_image = News::findOrFail($request->id);

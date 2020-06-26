@@ -17,7 +17,7 @@ export const getProductList = (state, productList)=>{
     for (let i=0; i<productList.length; i++){
         state.EveryProducts.push({
             id : productList[i].id,
-            images : productList[i].images,
+            principal_images : productList[i].principal_images,
             name : productList[i].name,
             price : productList[i].price,
             brand_id : productList[i].brand_id,
@@ -42,22 +42,15 @@ export const getNewsList = (state, newsList)=>{
 //BrandProductList = response.data from getBrandProductList in action
 export const getBrandProductList = (state, BrandProductList)=>{
     state.productList =[]
-    for (let i=0; i<BrandProductList.length; i++){
-        state.productList.push({
-            id : BrandProductList[i].id,
-            images : BrandProductList[i].images,
-            name : BrandProductList[i].name,
-            price : BrandProductList[i].price,
-            brand_id : BrandProductList[i].brand_id,
-        })
-    }
+    state.productList =BrandProductList
+
 }
 //GetedProduct = response.data from getProduct in action
 export const getProduct = (state, GetedProduct)=>{
     state.product =[]
     state.product.push({
         id : GetedProduct.id,
-        images : GetedProduct.images,
+        principal_images : GetedProduct.principal_images,
         name : GetedProduct.name,
         price : GetedProduct.price,
         brand_id : GetedProduct.brand_id,
@@ -66,15 +59,7 @@ export const getProduct = (state, GetedProduct)=>{
 //RandomProductList = response.data from getRandomProductList in action
 export const getRandomProductList = (state, RandomProductList)=>{
     state.RandomProducts =[]
-    for (let i=0; i<RandomProductList.length; i++){
-        state.RandomProducts.push({
-            id : RandomProductList[i].id,
-            images : RandomProductList[i].images,
-            name : RandomProductList[i].name,
-            price : RandomProductList[i].price,
-            brand_id : RandomProductList[i].brand_id,
-        })
-    }
+    state.RandomProducts =RandomProductList
 }
 //search = response.data from searchResponse in action
 export const searchResponse = (state, search)=>{
@@ -120,15 +105,7 @@ export const getBrandAdminList = (state, BrandAdminList)=>{
 //ProductAdminList = response.data from getProductAdminList in action
 export const getProductAdminList = (state, ProductAdminList)=>{
     state.EveryAdminProducts =[]
-    for (let i=0; i<ProductAdminList.length; i++){
-        state.EveryAdminProducts.push({
-            id : ProductAdminList[i].id,
-            images : ProductAdminList[i].images,
-            name : ProductAdminList[i].name,
-            price : ProductAdminList[i].price,
-            brand_id : ProductAdminList[i].brand_id,
-        })
-    }
+    state.EveryAdminProducts =ProductAdminList
 }
 //newsList = response.data from getNewsAdminList in action
 export const getNewsAdminList = (state, NewsAdminList)=>{

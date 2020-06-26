@@ -60035,7 +60035,7 @@ var render = function() {
         [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _c("img", { attrs: { src: _vm.emitedProduct.images } })
+              _c("img", { attrs: { src: _vm.emitedProduct.principal_images } })
             ]),
             _vm._v(" "),
             this.CurrentBrand[0]
@@ -77913,7 +77913,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, getNewsAdminList, createNews, updateNews, deleteNews */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, deleteProduct, getNewsAdminList, createNews, updateNews, deleteNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77934,6 +77934,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateBrand", function() { return updateBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBrand", function() { return deleteBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProduct", function() { return createProduct; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProduct", function() { return deleteProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNews", function() { return createNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNews", function() { return updateNews; });
@@ -78206,17 +78208,53 @@ var getProductAdminList = function getProductAdminList(_ref22) {
     }
   }).then(function (response) {
     //console.log(response.data)
-    commit("getProductAdminList", response.data);
+    commit("getProductAdminList", response.data.produit);
     commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
     alert("erreur du serveur, réessayez plus tard");
     commit("loading", false);
   });
+}; //add a product
+
+var createProduct = function createProduct(_ref23, object) {
+  var commit = _ref23.commit,
+      dispatch = _ref23.dispatch;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddProduct', object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getProductAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur server');
+    console.log(error);
+    commit("loading", false);
+  });
+}; //delete a product
+
+var deleteProduct = function deleteProduct(_ref24, _ref25) {
+  var commit = _ref24.commit,
+      dispatch = _ref24.dispatch;
+  var id = _ref25.id;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteProduct/' + id, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getProductAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur serveur');
+    commit("loading", false);
+  });
 }; //getting all the news, also the inactives ones
 
-var getNewsAdminList = function getNewsAdminList(_ref23) {
-  var commit = _ref23.commit;
+var getNewsAdminList = function getNewsAdminList(_ref26) {
+  var commit = _ref26.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
     headers: {
@@ -78232,9 +78270,9 @@ var getNewsAdminList = function getNewsAdminList(_ref23) {
   });
 }; //add a news
 
-var createNews = function createNews(_ref24, object) {
-  var commit = _ref24.commit,
-      dispatch = _ref24.dispatch;
+var createNews = function createNews(_ref27, object) {
+  var commit = _ref27.commit,
+      dispatch = _ref27.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddNews', object, {
     headers: {
@@ -78250,11 +78288,11 @@ var createNews = function createNews(_ref24, object) {
   });
 }; //add a news
 
-var updateNews = function updateNews(_ref25, _ref26) {
-  var commit = _ref25.commit,
-      dispatch = _ref25.dispatch;
-  var id = _ref26.id,
-      object = _ref26.object;
+var updateNews = function updateNews(_ref28, _ref29) {
+  var commit = _ref28.commit,
+      dispatch = _ref28.dispatch;
+  var id = _ref29.id,
+      object = _ref29.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateNews/' + id, object, {
     headers: {
@@ -78270,10 +78308,10 @@ var updateNews = function updateNews(_ref25, _ref26) {
   });
 }; //delete a news
 
-var deleteNews = function deleteNews(_ref27, _ref28) {
-  var commit = _ref27.commit,
-      dispatch = _ref27.dispatch;
-  var id = _ref28.id;
+var deleteNews = function deleteNews(_ref30, _ref31) {
+  var commit = _ref30.commit,
+      dispatch = _ref30.dispatch;
+  var id = _ref31.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteNews/' + id, {
     headers: {
@@ -78431,7 +78469,7 @@ var getProductList = function getProductList(state, productList) {
   for (var i = 0; i < productList.length; i++) {
     state.EveryProducts.push({
       id: productList[i].id,
-      images: productList[i].images,
+      principal_images: productList[i].principal_images,
       name: productList[i].name,
       price: productList[i].price,
       brand_id: productList[i].brand_id
@@ -78457,23 +78495,14 @@ var getNewsList = function getNewsList(state, newsList) {
 
 var getBrandProductList = function getBrandProductList(state, BrandProductList) {
   state.productList = [];
-
-  for (var i = 0; i < BrandProductList.length; i++) {
-    state.productList.push({
-      id: BrandProductList[i].id,
-      images: BrandProductList[i].images,
-      name: BrandProductList[i].name,
-      price: BrandProductList[i].price,
-      brand_id: BrandProductList[i].brand_id
-    });
-  }
+  state.productList = BrandProductList;
 }; //GetedProduct = response.data from getProduct in action
 
 var getProduct = function getProduct(state, GetedProduct) {
   state.product = [];
   state.product.push({
     id: GetedProduct.id,
-    images: GetedProduct.images,
+    principal_images: GetedProduct.principal_images,
     name: GetedProduct.name,
     price: GetedProduct.price,
     brand_id: GetedProduct.brand_id
@@ -78482,16 +78511,7 @@ var getProduct = function getProduct(state, GetedProduct) {
 
 var getRandomProductList = function getRandomProductList(state, RandomProductList) {
   state.RandomProducts = [];
-
-  for (var i = 0; i < RandomProductList.length; i++) {
-    state.RandomProducts.push({
-      id: RandomProductList[i].id,
-      images: RandomProductList[i].images,
-      name: RandomProductList[i].name,
-      price: RandomProductList[i].price,
-      brand_id: RandomProductList[i].brand_id
-    });
-  }
+  state.RandomProducts = RandomProductList;
 }; //search = response.data from searchResponse in action
 
 var searchResponse = function searchResponse(state, search) {
@@ -78533,16 +78553,7 @@ var getBrandAdminList = function getBrandAdminList(state, BrandAdminList) {
 
 var getProductAdminList = function getProductAdminList(state, ProductAdminList) {
   state.EveryAdminProducts = [];
-
-  for (var i = 0; i < ProductAdminList.length; i++) {
-    state.EveryAdminProducts.push({
-      id: ProductAdminList[i].id,
-      images: ProductAdminList[i].images,
-      name: ProductAdminList[i].name,
-      price: ProductAdminList[i].price,
-      brand_id: ProductAdminList[i].brand_id
-    });
-  }
+  state.EveryAdminProducts = ProductAdminList;
 }; //newsList = response.data from getNewsAdminList in action
 
 var getNewsAdminList = function getNewsAdminList(state, NewsAdminList) {

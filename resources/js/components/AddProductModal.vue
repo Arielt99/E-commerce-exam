@@ -4,31 +4,37 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         <header class="modal-header" id="modalTitle">
           <slot name="header">
-            Modifier une News
+            Ajouter un produit
             <button type="button" class="btn-close" @click="close" aria-label="Close modal">x</button>
           </slot>
         </header>
         <section class="modal-body" id="modalDescription">
           <slot name="body">
-            <label for="image"> image :
-                <input v-on:change="AddImage" type="file" name="image">
+            <label for="name"> Name :
+                <input v-model="Name" type="text" name="name">
             </label>
-            <label for="title"> title :
-                <input v-model="emitedNews.title" type="text" name="title">
+            <label for="PrincipalImage"> Principal Image :
+                <input v-on:change="AddPrincipalImage" type="file" name="PrincipalImage">
             </label>
-            <label for="resume"> resume :
-                <input v-model="emitedNews.resume" type="text" name="resume">
+            <label for="Brand"> Brand :
+                <select name="Brand" v-model="ProductBrand">
+                    <option :value="null">Choisir la marque</option>
+                    <option v-for="brand in AdminBrands" :key="brand.id" :value="brand.id">{{brand.name}}</option>
+                </select>
             </label>
-            <label for="content"> description :
-                <textarea v-model="emitedNews.content" name="content"></textarea>
+            <label for="price"> Price :
+                <input v-model="Price" type="number" name="price">€
             </label>
-            <label for="releaseDate"> releaseDate :
-                <input type="datetime-local" v-model="newsDate" :min="emitedNewsDate" name="releaseDate">
+            <label for="color"> Color :
+                <input v-model="Color" type="text" name="color">
+            </label>
+            <label for="description"> Description :
+                <textarea v-model="Description" name="description"></textarea>
             </label>
             <label> isActive :
               <label class="switch">
-                <div class="onoffswitch" @click='onToggle()'>
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" :checked="active == 1">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0" v-model="IsActive">
                     <label class="onoffswitch-label" for="myonoffswitch">
                         <span class="onoffswitch-inner"></span>
                         <span class="onoffswitch-switch"></span>
@@ -36,11 +42,14 @@
                 </div>
             </label>
             </label>
+            <label for="SecondaryImage"> Secondary Image :
+                <input v-on:change="AddSecondaryImage" multiple type="file" name="SecondaryImage">
+            </label>
           </slot>
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="UpdateNews(emitedNews.id)" aria-label="Update News">Modifier</button>
+            <button type="button" class="btn-green" aria-label="Add Product" @click="AddProduct">Ajouter</button>
           </slot>
         </footer>
       </div>
@@ -49,62 +58,68 @@
 </template>
 <script>
   export default {
-    name: 'UpdateNewsModal',
+    name: 'AddProductModal',
     data (){
       return {
-        ImageNews:"",
-        newsDate:"",
-        active: ""
+        PrincipalImage:"",
+        SecondaryImage:[],
+        Name:"TestProduit",
+        ProductBrand:"",
+        Description:"Description produit test",
+        Price:123,
+        Color:"bleu",
+        IsActive:true,
       }
     },
-    props:{
-        emitedNews: Object,
-        emitedNewsDate: String,
-        emitedNewsIsActive: Number
-    },
-    methods:{
-        onToggle(){
-            if (this.active == 1){
-                this.active = 0
-            }
-            else if(this.active == 0){
-                this.active = 1
-            }
-            return this.active
-        },
+    methods: {
         close() {
-          this.active =""
-          this.$emit('closeUpdateNews');
+            this.$emit('closeAddProduct');
         },
-        AddImage(file){
-          this.ImageNews = file.target.files[0]
+        AddPrincipalImage(file){
+            this.PrincipalImage = file.target.files[0]
         },
-        UpdateNews(id){
-          let formData = new FormData();
-          formData.append('title', this.emitedNews.title);
-          formData.append('resume', this.emitedNews.resume);
-          formData.append('content', this.emitedNews.content);
-          formData.append('releaseDate', this.newsDate);
-          formData.append('isActive',this.active);
-          if (this.ImageNews != null){
-          formData.append('image', this.ImageNews);
+        AddSecondaryImage(files){
+            let selectedFiles = files.target.files
+            for (let i = 0; i < selectedFiles.length; i++)
+            {
+                this.SecondaryImage.push(selectedFiles[i])
+            }
+        },
+      AddProduct(){
+        if(this.IsActive == true){
+          this.IsActive = 1
           }
-          this.$store.dispatch('updateNews', {id: id, object: formData});
-          this.active = ""
-          this.$emit('closeUpdateNews');
+          else if(this.IsActive == false){
+            this.IsActive = 0
+          }
+        let formData = new FormData();
+        formData.append('principal_images', this.PrincipalImage);
+        formData.append('name', this.Name);
+        formData.append('brand_id', this.ProductBrand);
+        formData.append('description', this.Description);
+        formData.append('price', this.Price);
+        formData.append('color', this.Color);
+        formData.append('isActive',this.IsActive);
+        for (let i = 0; i <= this.SecondaryImage.length; i++) {
+            formData.append('secondary_images[]', this.SecondaryImage[i]);
+        }
+        this.$store.dispatch('createProduct', formData);
+        this.$emit('closeAddProduct');
+      },
+        getBrandAdminList(){
+            this.$store.dispatch('getBrandAdminList')
         },
     },
-      watch: {
-    // `visible(value) => this.isVisible = value` could work too
-        emitedNewsIsActive() {
-            this.active = this.emitedNewsIsActive
+    computed:{
+        AdminBrands(){
+            return this.$store.getters.EveryAdminBrands;
         },
-        emitedNewsDate() {
-            this.newsDate = this.emitedNewsDate
-        },
-    }
-
-
+    },
+    created: function(){
+      if(this.$store.getters.EveryAdminBrands.length == 0){
+          this.getBrandAdminList()
+      }
+    },
   };
 </script>
 <style>

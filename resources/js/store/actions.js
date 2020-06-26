@@ -234,7 +234,7 @@ export const getProductAdminList = ({commit})=>{
     axios.get('/api/auth/AdminProduct ',{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
     .then( response => {
         //console.log(response.data)
-        commit("getProductAdminList", response.data)
+        commit("getProductAdminList", response.data.produit)
         commit("loading", false)
     })
     .catch( error =>  {
@@ -243,6 +243,35 @@ export const getProductAdminList = ({commit})=>{
         commit("loading", false)
     })
 }
+//add a product
+export const createProduct = ({commit,dispatch},object)=>{
+    commit("loading", true)
+    axios.post('/api/auth/AddProduct',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        .then( response => {
+            dispatch('getProductAdminList')
+            commit("loading", false)
+        })
+        .catch(error =>{
+            alert('erreur server')
+            console.log(error)
+            commit("loading", false)
+        })
+}
+//delete a product
+export const deleteProduct = ({commit, dispatch},{id})=>{
+    commit("loading", true)
+        axios.delete('/api/auth/DeleteProduct/'+id, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+            .then(response =>{
+                dispatch('getProductAdminList')
+                commit("loading", false)
+            })
+            .catch(error =>{
+                alert('erreur serveur')
+                commit("loading", false)
+            })
+}
+
+
 //getting all the news, also the inactives ones
 export const getNewsAdminList = ({commit})=>{
     commit("loading", true)

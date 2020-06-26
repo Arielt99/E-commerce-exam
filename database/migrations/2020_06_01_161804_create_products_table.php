@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('images');
+            $table->string('principal_images');
             $table->string('description');
             $table->string('color');
             $table->integer('brand_id')->unsigned();

@@ -60,8 +60,7 @@ class AdminBrandController extends Controller
             return response()->json(['error' => false,'message' => 'Ajout de la marque avec succès.', 201]);
         }
         else {
-            return response()->json([
-                'error' => true, 'message' => 'Erreur lors du remplissage.',400]);
+            return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
         }
     }
     /**

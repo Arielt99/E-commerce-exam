@@ -26,7 +26,7 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="UpdateBrand(emitedBrand.id)" aria-label="Add Brand">Modifier</button>
+            <button type="button" class="btn-green" @click="UpdateBrand(emitedBrand.id)" aria-label="Update Brand">Modifier</button>
           </slot>
         </footer>
       </div>

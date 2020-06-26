@@ -40,7 +40,7 @@
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <button type="button" class="btn-green" @click="AddNews" aria-label="Add Brand">Ajouter</button>
+            <button type="button" class="btn-green" @click="AddNews" aria-label="Add News">Ajouter</button>
           </slot>
         </footer>
       </div>

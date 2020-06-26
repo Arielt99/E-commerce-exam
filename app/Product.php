@@ -15,7 +15,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'brand', 'color','description','price','image','brand_id','actif'
+        'name', 'brand', 'color','description','price','principal_images','brand_id','isActif'
     ];
 
     public function brand()
@@ -25,6 +25,6 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany('App\Image');
+        return $this->hasMany('App\Images');
     }
 }

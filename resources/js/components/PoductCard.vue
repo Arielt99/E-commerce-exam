@@ -3,7 +3,7 @@
         <RouterLink :to="'/Brand/'+emitedProduct.brand_id+'/Product/'+emitedProduct.id">
             <div class="card">
                 <div class="card-header">
-                    <img :src="emitedProduct.images"/>
+                    <img :src="emitedProduct.principal_images"/>
                 </div>
                     <div class="card-body" v-if=" this.CurrentBrand[0]">
                         <p>{{emitedProduct.name}}</p>
