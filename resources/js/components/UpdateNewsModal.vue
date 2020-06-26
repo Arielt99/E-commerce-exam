@@ -60,7 +60,7 @@
     props:{
         emitedNews: Object,
         emitedNewsDate: String,
-        emitedNewsIsActive: Number
+        emitedNewsIsActive : Number
     },
     methods:{
         onToggle(){
@@ -73,7 +73,7 @@
             return this.active
         },
         close() {
-          this.active =""
+          this.active = this.emitedNewsIsActive
           this.$emit('closeUpdateNews');
         },
         AddImage(file){
@@ -90,12 +90,10 @@
           formData.append('image', this.ImageNews);
           }
           this.$store.dispatch('updateNews', {id: id, object: formData});
-          this.active = ""
           this.$emit('closeUpdateNews');
         },
     },
       watch: {
-    // `visible(value) => this.isVisible = value` could work too
         emitedNewsIsActive() {
             this.active = this.emitedNewsIsActive
         },

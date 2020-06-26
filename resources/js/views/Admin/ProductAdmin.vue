@@ -11,6 +11,7 @@
             <th>Brand</th>
             <th>price</th>
             <th>Color</th>
+            <th>Is Active</th>
             <th>Description</th>
             <th>secondary image</th>
             <th>Action</th>
@@ -24,6 +25,7 @@
             <td>{{CurrentBrand.filter(brand =>brand.id === product.brand_id)[0].name}}</td>
             <td>{{product.price}} €</td>
             <td>{{product.color}}</td>
+            <td>{{product.isActive}}</td>
             <td>{{product.description}}</td>
             <td class="carroussel">
               <carousel :autoplay="true" :scrollPerPage="true" :centerMode="true" :paginationEnabled="false" :per-page="1" :navigationEnabled="true" :loop="true" :autoplayTimeout="5000">
@@ -33,28 +35,34 @@
               </carousel>
             </td>
             <td>
-              <button type="button">modifier</button>
+              <button type="button" @click="showUpdateModal(product)">modifier</button>
               <button type="button" @click="del(product.id)">X</button>
             </td>
         </tr>
     </tbody>
 </table>
-  <AddProductModal v-show="isAddProductModalVisible" @closeAddProduct="closeAddProductModal"/>
+    <AddProductModal v-show="isAddProductModalVisible" @closeAddProduct="closeAddProductModal"/>
+    <UpdateProductModal v-show="isUpdateProductModalVisible" @closeUpdateProduct="closeUpdateProductModal" v-bind:emitedProduct="this.product" v-bind:emitedProductSecondaryImages="this.product.images" v-bind:emitedProductIsActive="product.isActive==1  ?  1 : 0" />
   </div>
 </template>
 
 <script>
 import AddProductModal from '../../components/AddProductModal'
+import UpdateProductModal from '../../components/UpdateProductModal'
+
 import { Carousel, Slide } from 'vue-carousel';
 export default {
   name: 'ProductAdmin',
       data (){
       return {
         isAddProductModalVisible : false,
+        isUpdateProductModalVisible: false,
+        product:{},
       }
     },
     components:{
       AddProductModal,
+      UpdateProductModal,
       Carousel,
       Slide,
     },
@@ -65,8 +73,15 @@ export default {
       showAddModal() {
         this.isAddProductModalVisible = true;
       },
+      showUpdateModal(product) {
+        this.product = product
+        this.isUpdateProductModalVisible = true;
+      },
       closeAddProductModal() {
         this.isAddProductModalVisible = false;
+      },
+      closeUpdateProductModal() {
+        this.isUpdateProductModalVisible = false;
       },
       del(id){
         if ( confirm( "Vous êtes sûr ?" ) ) {

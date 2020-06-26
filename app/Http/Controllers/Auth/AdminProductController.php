@@ -43,7 +43,6 @@ class AdminProductController extends Controller
             'description'=>'required',
             'isActive'=>'required',
             'brand_id'=>'required|integer',
-            'secondary_images'=>'required',
         ]);
         if (!$validator->fails()) {
             $image_name = $request->principal_images->getRealPath();
@@ -77,7 +76,78 @@ class AdminProductController extends Controller
             return response()->json(['error' => true, 'message' => 'Erreur lors du remplissage.',400]);
         }
     }
-        /**
+    /**
+     * Modify the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'color' => 'required',
+            'price'=>'required|numeric',
+            'description'=>'required',
+            'brand_id'=>'required|integer',
+            'isActive'=>'required',
+        ]);
+        if (!$validator->fails()) {
+            $updateProduct = Product::findOrFail($id)->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'color' => $request->color,
+                "isActive" => $request->isActive,
+                'brand_id' => $request->brand_id
+            ]);
+
+            if ($request->principal_images) {
+                $oldImage = Product::findOrFail($id);
+                $extension = pathinfo($oldImage->principal_images);
+                $public_id = basename($oldImage->principal_images, "." . $extension['extension']);
+                Cloudder::delete("Products/".$public_id);
+
+                $image_name = $request->principal_images->getRealPath();
+                Cloudder::upload($image_name, null, ['folder' => 'Products']);
+                $cloudinary_Banner = Cloudder::getResult();
+
+                $updateProduct = Product::findOrFail($id)->update([
+                    'principal_images' => $cloudinary_Banner['secure_url'],
+                ]);
+            }
+            if ($request->secondary_images){
+                $ProductToUpdated = Product::findOrFail($id);
+                foreach ($request->secondary_images as $secondPicture){
+                    $image_second = $secondPicture->getRealPath();
+                    Cloudder::upload($image_second, null, ['folder' => 'ProductsOtherImage']);
+                    $cloudinary_secondPicture = Cloudder::getResult();
+
+                    $secondary_pictures = new Images();
+                    $secondary_pictures->image = $cloudinary_secondPicture['secure_url'];
+                    $secondary_pictures->product_id = $ProductToUpdated->id;
+                    $secondary_pictures->save();
+                }
+            }
+            $newProductUpdated = Product::with('images')->findOrFail($id);
+            if ($updateProduct){
+                return response()->json([
+                    'msg' => 'Modification de la paire avec succès.',
+                    'type' => 1,
+                    'info' => $request->isActive,
+                    'product' => $newProductUpdated
+                ]);
+            }
+            else{
+                return response()->json(['msg' => 'Erreur lors de la mise à jour de la paire.','type' => 0]);
+            }
+        }
+    }
+
+
+
+
+
+    /**
      * Destroy the resource.
      *
      * @return \Illuminate\Http\Response
@@ -103,5 +173,4 @@ class AdminProductController extends Controller
         Product::findOrFail($request->id)->delete();
         return response()->json('Suppression réussis !',200);
     }
-
 }

@@ -257,6 +257,20 @@ export const createProduct = ({commit,dispatch},object)=>{
             commit("loading", false)
         })
 }
+//update a product
+export const updateProduct = ({commit,dispatch},{id, object})=>{
+    commit("loading", true)
+    axios.post('/api/auth/UpdateProduct/'+id,object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        .then( response => {
+            dispatch('getProductAdminList')
+            commit("loading", false)
+        })
+        .catch(error =>{
+            alert('erreur server')
+            console.log(error)
+            commit("loading", false)
+        })
+}
 //delete a product
 export const deleteProduct = ({commit, dispatch},{id})=>{
     commit("loading", true)
@@ -266,6 +280,21 @@ export const deleteProduct = ({commit, dispatch},{id})=>{
                 commit("loading", false)
             })
             .catch(error =>{
+                alert('erreur serveur')
+                commit("loading", false)
+            })
+}
+
+//delete secondary image from a product
+export const deleteImages = ({commit, dispatch},object)=>{
+    commit("loading", true)
+    axios.post('/api/auth/DeleteImage',object,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+            .then(response =>{
+                dispatch('getProductAdminList')
+                commit("loading", false)
+            })
+            .catch(error =>{
+                console.log(error)
                 alert('erreur serveur')
                 commit("loading", false)
             })

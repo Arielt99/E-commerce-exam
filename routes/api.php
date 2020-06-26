@@ -38,7 +38,10 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
 
     Route::get('AdminProduct', 'AdminProductController@index');
     Route::post('AddProduct', 'AdminProductController@store');
+    Route::post('UpdateProduct/{id}', 'AdminProductController@update');
     Route::delete('DeleteProduct/{id}', 'AdminProductController@destroy');
+
+    Route::post('DeleteImage', 'AdminImageController@destroy');
 
     Route::get('AdminNews', 'AdminNewsController@index');
     Route::post('AddNews', 'AdminNewsController@store');

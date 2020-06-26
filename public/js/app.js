@@ -77913,7 +77913,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, deleteProduct, getNewsAdminList, createNews, updateNews, deleteNews */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, updateProduct, deleteProduct, deleteImages, getNewsAdminList, createNews, updateNews, deleteNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77935,7 +77935,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteBrand", function() { return deleteBrand; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProductAdminList", function() { return getProductAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProduct", function() { return createProduct; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateProduct", function() { return updateProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProduct", function() { return deleteProduct; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteImages", function() { return deleteImages; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNewsAdminList", function() { return getNewsAdminList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNews", function() { return createNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateNews", function() { return updateNews; });
@@ -78233,12 +78235,32 @@ var createProduct = function createProduct(_ref23, object) {
     console.log(error);
     commit("loading", false);
   });
-}; //delete a product
+}; //update a product
 
-var deleteProduct = function deleteProduct(_ref24, _ref25) {
+var updateProduct = function updateProduct(_ref24, _ref25) {
   var commit = _ref24.commit,
       dispatch = _ref24.dispatch;
-  var id = _ref25.id;
+  var id = _ref25.id,
+      object = _ref25.object;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateProduct/' + id, object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getProductAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    alert('erreur server');
+    console.log(error);
+    commit("loading", false);
+  });
+}; //delete a product
+
+var deleteProduct = function deleteProduct(_ref26, _ref27) {
+  var commit = _ref26.commit,
+      dispatch = _ref26.dispatch;
+  var id = _ref27.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteProduct/' + id, {
     headers: {
@@ -78251,10 +78273,28 @@ var deleteProduct = function deleteProduct(_ref24, _ref25) {
     alert('erreur serveur');
     commit("loading", false);
   });
+}; //delete secondary image from a product
+
+var deleteImages = function deleteImages(_ref28, object) {
+  var commit = _ref28.commit,
+      dispatch = _ref28.dispatch;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/DeleteImage', object, {
+    headers: {
+      'Authorization': "Bearer ".concat(localStorage.getItem("token"))
+    }
+  }).then(function (response) {
+    dispatch('getProductAdminList');
+    commit("loading", false);
+  })["catch"](function (error) {
+    console.log(error);
+    alert('erreur serveur');
+    commit("loading", false);
+  });
 }; //getting all the news, also the inactives ones
 
-var getNewsAdminList = function getNewsAdminList(_ref26) {
-  var commit = _ref26.commit;
+var getNewsAdminList = function getNewsAdminList(_ref29) {
+  var commit = _ref29.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
     headers: {
@@ -78270,9 +78310,9 @@ var getNewsAdminList = function getNewsAdminList(_ref26) {
   });
 }; //add a news
 
-var createNews = function createNews(_ref27, object) {
-  var commit = _ref27.commit,
-      dispatch = _ref27.dispatch;
+var createNews = function createNews(_ref30, object) {
+  var commit = _ref30.commit,
+      dispatch = _ref30.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddNews', object, {
     headers: {
@@ -78288,11 +78328,11 @@ var createNews = function createNews(_ref27, object) {
   });
 }; //add a news
 
-var updateNews = function updateNews(_ref28, _ref29) {
-  var commit = _ref28.commit,
-      dispatch = _ref28.dispatch;
-  var id = _ref29.id,
-      object = _ref29.object;
+var updateNews = function updateNews(_ref31, _ref32) {
+  var commit = _ref31.commit,
+      dispatch = _ref31.dispatch;
+  var id = _ref32.id,
+      object = _ref32.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateNews/' + id, object, {
     headers: {
@@ -78308,10 +78348,10 @@ var updateNews = function updateNews(_ref28, _ref29) {
   });
 }; //delete a news
 
-var deleteNews = function deleteNews(_ref30, _ref31) {
-  var commit = _ref30.commit,
-      dispatch = _ref30.dispatch;
-  var id = _ref31.id;
+var deleteNews = function deleteNews(_ref33, _ref34) {
+  var commit = _ref33.commit,
+      dispatch = _ref33.dispatch;
+  var id = _ref34.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteNews/' + id, {
     headers: {
