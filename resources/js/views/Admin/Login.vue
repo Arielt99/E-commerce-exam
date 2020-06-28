@@ -3,7 +3,7 @@
     <h1> login</h1>
     <form>
       <input type="text" v-model="form.email" placeholder="email">
-      <input type="text" v-model="form.password" placeholder="password">
+      <input type="login" v-model="form.password" placeholder="password">
       <button type="button" @click="send()">connect</button>
     </form>
   </div>

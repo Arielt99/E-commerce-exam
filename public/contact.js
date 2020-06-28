@@ -1349,18 +1349,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       OrderData: {
-        FirstName: "Ariel",
-        LastName: "Thibault",
-        email: "arielthibault@yahoo.fr",
-        address: "375 parc de cassan",
-        city: "L'isle-Adam",
-        postalCode: "95290"
-      }
+        FirstName: "",
+        LastName: "",
+        email: "",
+        address: "",
+        city: "",
+        postalCode: ""
+      },
+      cardNumber: "",
+      cardValidity: "",
+      cardSecurCode: ""
     };
   },
   validations: {
@@ -1384,13 +1398,23 @@ __webpack_require__.r(__webpack_exports__);
       postalCode: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
       }
+    },
+    cardNumber: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+    },
+    cardValidity: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+    },
+    cardSecurCode: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+      numeric: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["numeric"]
     }
   },
   methods: {
     command: function command() {
       this.$v.$touch();
 
-      if (!this.$v.OrderData.$invalid) {
+      if (!this.$v.$invalid) {
         this.$store.dispatch('Order', {
           FirstName: this.OrderData.FirstName,
           LastName: this.OrderData.LastName,
@@ -2154,7 +2178,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.Command .CommandCard{\n    background-color: white;\n    border-radius: 10px;\n    width: 94vw;\n    margin-right: auto;\n    margin-left: auto;\n}\n.Command .CommandCard .CommandLabel{\n    padding-left: 10px;\n    padding-top: 10px;\n}\n.Command .CommandCard .Cart .CartItemResume{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: auto;\n    margin: 0px 10px;\n    padding: 10px;\n    border-bottom: 1px solid rgb(48, 48, 48);\n}\n.Command .CommandCard .Cart div:last-child{\n    border-bottom: none !important;\n}\n.Command .CommandCard .Cart .CartItemResume .ProductInfo{\n    display: flex;\n    flex-direction: row;\n    padding-left: 5px;\n}\n.Command .CommandCard .Cart .CartItemResume .ProductInfo >*{\n    display: flex;\n    flex-direction: row;\n    padding-left: 5px;\n}\n.Command .CommandCard .Cart .CartItemResume .ProductPrice{\n    display: flex;\n    flex-direction: row;\n    margin-left: auto;\n}\n.Command .CommandCard .TotalPrice{\n    display: flex;\n    justify-content: flex-end;\n    border-top: 1px solid rgb(48, 48, 48);\n    padding:20px 0px;\n    font-size: 20px;\n    font-weight: bold;\n    padding-right: 20px;\n    margin: 0;\n}\n.Command .CommandCard .Delivering input{\n    border: 1px solid #b90000 !important;\n}\n", ""]);
+exports.push([module.i, "\n.Command .CommandCard{\n    background-color: white;\n    border-radius: 10px;\n    width: 94vw;\n    margin-right: auto;\n    margin-left: auto;\n}\n.Command .CommandCard .CommandLabel{\n    padding-left: 10px;\n    padding-top: 10px;\n}\n.Command .CommandCard .Cart .CartItemResume{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: auto;\n    margin: 0px 10px;\n    padding: 10px;\n    border-bottom: 1px solid rgb(48, 48, 48);\n}\n.Command .CommandCard .Cart div:last-child{\n    border-bottom: none !important;\n}\n.Command .CommandCard .Cart .CartItemResume .ProductInfo{\n    display: flex;\n    flex-direction: row;\n    padding-left: 5px;\n}\n.Command .CommandCard .Cart .CartItemResume .ProductInfo >*{\n    display: flex;\n    flex-direction: row;\n    padding-left: 5px;\n}\n.Command .CommandCard .Cart .CartItemResume .ProductPrice{\n    display: flex;\n    flex-direction: row;\n    margin-left: auto;\n}\n.Command .CommandCard .TotalPrice{\n    display: flex;\n    justify-content: flex-end;\n    border-top: 1px solid rgb(48, 48, 48);\n    padding:20px 0px;\n    font-size: 20px;\n    font-weight: bold;\n    padding-right: 20px;\n    margin: 0;\n}\n.Command .CommandCard .Delivering{\n    height: -webkit-fit-content;\n    height: -moz-fit-content;\n    height: fit-content;\n    padding-bottom: 10px;\n    display: flex;\n    flex-direction: column;\n    width: 80%;\n    margin-left: auto;\n    margin-right: auto;\n}\n.Command .CommandCard .Delivering .error{\n    border: 1px solid #b90000 !important;\n}\n.Command .CommandCard .Delivering input{\n    background-color :rgb(230, 230, 230);\n    font-weight: bold;\n    padding-left: 5px;\n    border: 1px solid rgb(230, 230, 230);\n    height: 30px;\n    border-radius: 5px;\n    margin: 10px 0;\n    max-width: 400px;\n}\n.Command .CommandCard .Delivering input:focus{\n   outline: none;\n}\n.Command .CommandCard .Delivering .CreditCard{\n    display: flex;\n    flex-direction: column;\n}\n.Command .CommandCard .Delivering button{\n    border-radius: 5px;\n    margin : 10px 0;\n    width: 150px;\n    height: 40px;\n    font-weight: bold;\n    font-size: 15px;\n    border: 1px solid rgb(230, 230, 230);\n    background-color :rgb(230, 230, 230);\n    color: rgb(48, 48, 48);\n}\n.Command .CommandCard .Delivering button:hover{\n    cursor: pointer;\n}\n.Command .CommandCard .Delivering button:focus{\n   outline: none;\n}\n\n", ""]);
 
 // exports
 
@@ -4584,7 +4608,7 @@ var render = function() {
             expression: "form.password"
           }
         ],
-        attrs: { type: "text", placeholder: "password" },
+        attrs: { type: "login", placeholder: "password" },
         domProps: { value: _vm.form.password },
         on: {
           input: function($event) {
@@ -5121,65 +5145,67 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("form", { staticClass: "Delivering" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.OrderData.FirstName.$model,
-              expression: "$v.OrderData.FirstName.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.OrderData.FirstName.$error },
-          attrs: { type: "text", placeholder: "Prénom" },
-          domProps: { value: _vm.$v.OrderData.FirstName.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "Identity" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.$v.OrderData.FirstName.$model,
+                expression: "$v.OrderData.FirstName.$model",
+                modifiers: { trim: true }
               }
-              _vm.$set(
-                _vm.$v.OrderData.FirstName,
-                "$model",
-                $event.target.value.trim()
-              )
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.OrderData.LastName.$model,
-              expression: "$v.OrderData.LastName.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.OrderData.LastName.$error },
-          attrs: { type: "text", placeholder: "Nom" },
-          domProps: { value: _vm.$v.OrderData.LastName.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+            ],
+            class: { error: _vm.$v.OrderData.FirstName.$error },
+            attrs: { type: "text", placeholder: "Prénom" },
+            domProps: { value: _vm.$v.OrderData.FirstName.$model },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.$v.OrderData.FirstName,
+                  "$model",
+                  $event.target.value.trim()
+                )
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
               }
-              _vm.$set(
-                _vm.$v.OrderData.LastName,
-                "$model",
-                $event.target.value.trim()
-              )
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
             }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.$v.OrderData.LastName.$model,
+                expression: "$v.OrderData.LastName.$model",
+                modifiers: { trim: true }
+              }
+            ],
+            class: { error: _vm.$v.OrderData.LastName.$error },
+            attrs: { type: "text", placeholder: "Nom" },
+            domProps: { value: _vm.$v.OrderData.LastName.$model },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.$v.OrderData.LastName,
+                  "$model",
+                  $event.target.value.trim()
+                )
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -5222,7 +5248,7 @@ var render = function() {
             }
           ],
           class: { error: _vm.$v.OrderData.address.$error },
-          attrs: { type: "text", placeholder: "Adresse" },
+          attrs: { type: "text", placeholder: "Adresse de livraison" },
           domProps: { value: _vm.$v.OrderData.address.$model },
           on: {
             input: function($event) {
@@ -5241,65 +5267,167 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.OrderData.city.$model,
-              expression: "$v.OrderData.city.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.OrderData.city.$error },
-          attrs: { type: "text", placeholder: "Ville" },
-          domProps: { value: _vm.$v.OrderData.city.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "City" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.$v.OrderData.city.$model,
+                expression: "$v.OrderData.city.$model",
+                modifiers: { trim: true }
               }
-              _vm.$set(
-                _vm.$v.OrderData.city,
-                "$model",
-                $event.target.value.trim()
-              )
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
+            ],
+            class: { error: _vm.$v.OrderData.city.$error },
+            attrs: { type: "text", placeholder: "Ville" },
+            domProps: { value: _vm.$v.OrderData.city.$model },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.$v.OrderData.city,
+                  "$model",
+                  $event.target.value.trim()
+                )
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
+              }
             }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.$v.OrderData.postalCode.$model,
+                expression: "$v.OrderData.postalCode.$model",
+                modifiers: { trim: true }
+              }
+            ],
+            class: { error: _vm.$v.OrderData.postalCode.$error },
+            attrs: { type: "text", placeholder: "Code Postal" },
+            domProps: { value: _vm.$v.OrderData.postalCode.$model },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.$v.OrderData.postalCode,
+                  "$model",
+                  $event.target.value.trim()
+                )
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.OrderData.postalCode.$model,
-              expression: "$v.OrderData.postalCode.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.OrderData.postalCode.$error },
-          attrs: { type: "text", placeholder: "Code Postal" },
-          domProps: { value: _vm.$v.OrderData.postalCode.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "CreditCard" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.trim",
+                value: _vm.$v.cardNumber.$model,
+                expression: "$v.cardNumber.$model",
+                modifiers: { trim: true }
               }
-              _vm.$set(
-                _vm.$v.OrderData.postalCode,
-                "$model",
-                $event.target.value.trim()
-              )
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
+            ],
+            staticClass: "CreditCardNumber",
+            class: { error: _vm.$v.cardNumber.$error },
+            attrs: { type: "text", placeholder: "Card Number" },
+            domProps: { value: _vm.$v.cardNumber.$model },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.$v.cardNumber,
+                  "$model",
+                  $event.target.value.trim()
+                )
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
+              }
             }
-          }
-        }),
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "CardSecurity" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.trim",
+                  value: _vm.$v.cardValidity.$model,
+                  expression: "$v.cardValidity.$model",
+                  modifiers: { trim: true }
+                }
+              ],
+              class: { error: _vm.$v.cardValidity.$error },
+              attrs: { type: "text", placeholder: "Card Validity Period" },
+              domProps: { value: _vm.$v.cardValidity.$model },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.$v.cardValidity,
+                    "$model",
+                    $event.target.value.trim()
+                  )
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.trim",
+                  value: _vm.$v.cardSecurCode.$model,
+                  expression: "$v.cardSecurCode.$model",
+                  modifiers: { trim: true }
+                }
+              ],
+              class: { error: _vm.$v.cardSecurCode.$error },
+              attrs: {
+                type: "text",
+                maxlength: "3",
+                pattern: "[0-9]",
+                placeholder: "Card Secure Code"
+              },
+              domProps: { value: _vm.$v.cardSecurCode.$model },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.$v.cardSecurCode,
+                    "$model",
+                    $event.target.value.trim()
+                  )
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
+                }
+              }
+            })
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "button",
