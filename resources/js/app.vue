@@ -116,9 +116,7 @@ export default {
                 }
                 if (this.getterCart.basket.length === 0){
                     localStorage.removeItem('tempBasket')
-                    setTimeout(() =>{
-                        this.$store.dispatch('tempBasket');
-                    },300)
+                    this.$store.dispatch('getCart');
                 }
             })
         },

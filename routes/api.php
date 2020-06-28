@@ -25,6 +25,7 @@ Route::get('news', 'NewsController@index');
 Route::get('news/{news_id}', 'NewsController@show');
 
 Route::post('contact', 'ContactController@send');
+Route::post('Order', 'OrderController@index');
 
 Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
     Route::post('signin', 'SignInController');
@@ -47,5 +48,5 @@ Route::group(['prefix' => 'auth','namespace'=>'Auth'], function () {
     Route::post('AddNews', 'AdminNewsController@store');
     Route::post('UpdateNews/{id}', 'AdminNewsController@update');
     Route::delete('DeleteNews/{id}', 'AdminNewsController@destroy');
-    
+
 });

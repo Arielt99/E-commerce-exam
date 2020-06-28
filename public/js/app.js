@@ -2151,9 +2151,8 @@ __webpack_require__.r(__webpack_exports__);
 
         if (_this2.getterCart.basket.length === 0) {
           localStorage.removeItem('tempBasket');
-          setTimeout(function () {
-            _this2.$store.dispatch('tempBasket');
-          }, 300);
+
+          _this2.$store.dispatch('getCart');
         }
       });
     }
@@ -78285,7 +78284,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, getCart, modifyQuantity, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, updateProduct, deleteProduct, deleteImages, getNewsAdminList, createNews, updateNews, deleteNews */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, getCart, modifyQuantity, Order, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, updateProduct, deleteProduct, deleteImages, getNewsAdminList, createNews, updateNews, deleteNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78300,6 +78299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sentMailContact", function() { return sentMailContact; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return getCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modifyQuantity", function() { return modifyQuantity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Order", function() { return Order; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attempt", function() { return attempt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
@@ -78446,6 +78446,7 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
     commit("loading", false);
   });
 }; //cart
+//get the cart
 
 var getCart = function getCart(_ref13) {
   var commit = _ref13.commit;
@@ -78460,7 +78461,8 @@ var getCart = function getCart(_ref13) {
     commit('displayCart', "");
     commit('lengthArray', null);
   }
-};
+}; //update the quantity
+
 var modifyQuantity = function modifyQuantity(_ref14, object) {
   var commit = _ref14.commit;
 
@@ -78469,12 +78471,45 @@ var modifyQuantity = function modifyQuantity(_ref14, object) {
       commit('changeQuantity', object);
     }
   }
+}; //Order
+
+var Order = function Order(_ref15, _ref16) {
+  var commit = _ref15.commit,
+      state = _ref15.state;
+  var FirstName = _ref16.FirstName,
+      LastName = _ref16.LastName,
+      email = _ref16.email,
+      address = _ref16.address,
+      city = _ref16.city,
+      postalCode = _ref16.postalCode;
+  commit("loading", true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/Order", {
+    FirstName: FirstName,
+    LastName: LastName,
+    email: email,
+    address: address,
+    city: city,
+    postalCode: postalCode,
+    OrderProduct: JSON.parse(localStorage.getItem("tempBasket"))
+  }).then(function (response) {
+    //console.log(response.data)
+    state.totalPrice = 0;
+    state.displayArray = '';
+    state.arrayLength = 0;
+    localStorage.removeItem("tempBasket");
+    alert("Commande passée avec succès !");
+    commit("loading", false);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
+    alert("erreur du serveur, réessayez plus tard");
+    commit("loading", false);
+  });
 }; //admin action
 //login admin
 
-var login = function login(_ref15, credentials) {
-  var commit = _ref15.commit,
-      dispatch = _ref15.dispatch;
+var login = function login(_ref17, credentials) {
+  var commit = _ref17.commit,
+      dispatch = _ref17.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/signin', credentials).then(function (response) {
     if (response) {
@@ -78485,9 +78520,9 @@ var login = function login(_ref15, credentials) {
   });
 }; //check if connected
 
-var attempt = function attempt(_ref16, token) {
-  var commit = _ref16.commit,
-      state = _ref16.state;
+var attempt = function attempt(_ref18, token) {
+  var commit = _ref18.commit,
+      state = _ref18.state;
   commit("loading", true);
 
   if (token) {
@@ -78513,9 +78548,10 @@ var attempt = function attempt(_ref16, token) {
   }
 }; //logout admin
 
-var signOut = function signOut(_ref17) {
-  var commit = _ref17.commit,
-      state = _ref17.state;
+var signOut = function signOut(_ref19) {
+  var commit = _ref19.commit,
+      state = _ref19.state,
+      dispatch = _ref19.dispatch;
   commit("loading", true);
 
   if (state.token != null) {
@@ -78529,6 +78565,11 @@ var signOut = function signOut(_ref17) {
         commit('set_user', null);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        dispatch('getBrandList');
+        dispatch('getProductList');
+        dispatch('getNewsList');
+        dispatch('getRandomProductList');
+        dispatch('getBrandProductList');
         commit("loading", false);
       })["catch"](function (error) {
         console.log(error);
@@ -78541,8 +78582,8 @@ var signOut = function signOut(_ref17) {
 }; //admin brand section
 //getting all the brands, also the inactives ones
 
-var getBrandAdminList = function getBrandAdminList(_ref18) {
-  var commit = _ref18.commit;
+var getBrandAdminList = function getBrandAdminList(_ref20) {
+  var commit = _ref20.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminBrand', {
     headers: {
@@ -78559,9 +78600,9 @@ var getBrandAdminList = function getBrandAdminList(_ref18) {
   });
 }; //add a brand
 
-var createBrand = function createBrand(_ref19, object) {
-  var commit = _ref19.commit,
-      dispatch = _ref19.dispatch;
+var createBrand = function createBrand(_ref21, object) {
+  var commit = _ref21.commit,
+      dispatch = _ref21.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
     headers: {
@@ -78577,11 +78618,11 @@ var createBrand = function createBrand(_ref19, object) {
   });
 }; //update a brand
 
-var updateBrand = function updateBrand(_ref20, _ref21) {
-  var commit = _ref20.commit,
-      dispatch = _ref20.dispatch;
-  var id = _ref21.id,
-      object = _ref21.object;
+var updateBrand = function updateBrand(_ref22, _ref23) {
+  var commit = _ref22.commit,
+      dispatch = _ref22.dispatch;
+  var id = _ref23.id,
+      object = _ref23.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateBrand/' + id, object, {
     headers: {
@@ -78597,10 +78638,10 @@ var updateBrand = function updateBrand(_ref20, _ref21) {
   });
 }; //delete a brand
 
-var deleteBrand = function deleteBrand(_ref22, _ref23) {
-  var commit = _ref22.commit,
-      dispatch = _ref22.dispatch;
-  var id = _ref23.id;
+var deleteBrand = function deleteBrand(_ref24, _ref25) {
+  var commit = _ref24.commit,
+      dispatch = _ref24.dispatch;
+  var id = _ref25.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteBrand/' + id, {
     headers: {
@@ -78616,8 +78657,8 @@ var deleteBrand = function deleteBrand(_ref22, _ref23) {
   });
 }; //getting all the products, also the inactives ones
 
-var getProductAdminList = function getProductAdminList(_ref24) {
-  var commit = _ref24.commit;
+var getProductAdminList = function getProductAdminList(_ref26) {
+  var commit = _ref26.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminProduct ', {
     headers: {
@@ -78634,9 +78675,9 @@ var getProductAdminList = function getProductAdminList(_ref24) {
   });
 }; //add a product
 
-var createProduct = function createProduct(_ref25, object) {
-  var commit = _ref25.commit,
-      dispatch = _ref25.dispatch;
+var createProduct = function createProduct(_ref27, object) {
+  var commit = _ref27.commit,
+      dispatch = _ref27.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddProduct', object, {
     headers: {
@@ -78652,11 +78693,11 @@ var createProduct = function createProduct(_ref25, object) {
   });
 }; //update a product
 
-var updateProduct = function updateProduct(_ref26, _ref27) {
-  var commit = _ref26.commit,
-      dispatch = _ref26.dispatch;
-  var id = _ref27.id,
-      object = _ref27.object;
+var updateProduct = function updateProduct(_ref28, _ref29) {
+  var commit = _ref28.commit,
+      dispatch = _ref28.dispatch;
+  var id = _ref29.id,
+      object = _ref29.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateProduct/' + id, object, {
     headers: {
@@ -78672,10 +78713,10 @@ var updateProduct = function updateProduct(_ref26, _ref27) {
   });
 }; //delete a product
 
-var deleteProduct = function deleteProduct(_ref28, _ref29) {
-  var commit = _ref28.commit,
-      dispatch = _ref28.dispatch;
-  var id = _ref29.id;
+var deleteProduct = function deleteProduct(_ref30, _ref31) {
+  var commit = _ref30.commit,
+      dispatch = _ref30.dispatch;
+  var id = _ref31.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteProduct/' + id, {
     headers: {
@@ -78690,9 +78731,9 @@ var deleteProduct = function deleteProduct(_ref28, _ref29) {
   });
 }; //delete secondary image from a product
 
-var deleteImages = function deleteImages(_ref30, object) {
-  var commit = _ref30.commit,
-      dispatch = _ref30.dispatch;
+var deleteImages = function deleteImages(_ref32, object) {
+  var commit = _ref32.commit,
+      dispatch = _ref32.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/DeleteImage', object, {
     headers: {
@@ -78708,8 +78749,8 @@ var deleteImages = function deleteImages(_ref30, object) {
   });
 }; //getting all the news, also the inactives ones
 
-var getNewsAdminList = function getNewsAdminList(_ref31) {
-  var commit = _ref31.commit;
+var getNewsAdminList = function getNewsAdminList(_ref33) {
+  var commit = _ref33.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
     headers: {
@@ -78725,9 +78766,9 @@ var getNewsAdminList = function getNewsAdminList(_ref31) {
   });
 }; //add a news
 
-var createNews = function createNews(_ref32, object) {
-  var commit = _ref32.commit,
-      dispatch = _ref32.dispatch;
+var createNews = function createNews(_ref34, object) {
+  var commit = _ref34.commit,
+      dispatch = _ref34.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddNews', object, {
     headers: {
@@ -78743,11 +78784,11 @@ var createNews = function createNews(_ref32, object) {
   });
 }; //add a news
 
-var updateNews = function updateNews(_ref33, _ref34) {
-  var commit = _ref33.commit,
-      dispatch = _ref33.dispatch;
-  var id = _ref34.id,
-      object = _ref34.object;
+var updateNews = function updateNews(_ref35, _ref36) {
+  var commit = _ref35.commit,
+      dispatch = _ref35.dispatch;
+  var id = _ref36.id,
+      object = _ref36.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateNews/' + id, object, {
     headers: {
@@ -78763,10 +78804,10 @@ var updateNews = function updateNews(_ref33, _ref34) {
   });
 }; //delete a news
 
-var deleteNews = function deleteNews(_ref35, _ref36) {
-  var commit = _ref35.commit,
-      dispatch = _ref35.dispatch;
-  var id = _ref36.id;
+var deleteNews = function deleteNews(_ref37, _ref38) {
+  var commit = _ref37.commit,
+      dispatch = _ref37.dispatch;
+  var id = _ref38.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteNews/' + id, {
     headers: {
@@ -78787,7 +78828,7 @@ var deleteNews = function deleteNews(_ref35, _ref36) {
 /*!***************************************!*\
   !*** ./resources/js/store/getters.js ***!
   \***************************************/
-/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, getterCart, getterCartLength, getterTotalPrice, getterOrderPrice, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews, loading */
+/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, getterCart, getterCartLength, getterTotalPrice, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews, loading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78802,7 +78843,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterCart", function() { return getterCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterCartLength", function() { return getterCartLength; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterTotalPrice", function() { return getterTotalPrice; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterOrderPrice", function() { return getterOrderPrice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authentificated", function() { return authentificated; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminBrands", function() { return EveryAdminBrands; });
@@ -78840,9 +78880,6 @@ var getterCartLength = function getterCartLength(state) {
 };
 var getterTotalPrice = function getterTotalPrice(state) {
   return state.totalPrice;
-};
-var getterOrderPrice = function getterOrderPrice(state) {
-  return state.orderPrice;
 }; //admin
 
 var authentificated = function authentificated(state) {
@@ -78928,46 +78965,17 @@ __webpack_require__.r(__webpack_exports__);
 //brandList = response.data from getBrandList in action
 var getBrandList = function getBrandList(state, brandList) {
   state.EveryBrands = [];
-
-  for (var i = 0; i < brandList.length; i++) {
-    state.EveryBrands.push({
-      banner: brandList[i].banner,
-      description: brandList[i].description,
-      id: brandList[i].id,
-      image: brandList[i].image,
-      name: brandList[i].name
-    });
-  }
+  state.EveryBrands = brandList;
 }; //productList = response.data from getProductList in action
 
 var getProductList = function getProductList(state, productList) {
   state.EveryProducts = [];
-
-  for (var i = 0; i < productList.length; i++) {
-    state.EveryProducts.push({
-      id: productList[i].id,
-      principal_images: productList[i].principal_images,
-      name: productList[i].name,
-      price: productList[i].price,
-      brand_id: productList[i].brand_id
-    });
-  }
+  state.EveryProducts = productList;
 }; //newsList = response.data from getNewsList in action
 
 var getNewsList = function getNewsList(state, newsList) {
   state.EveryNews = [];
-
-  for (var i = 0; i < newsList.length; i++) {
-    state.EveryNews.push({
-      title: newsList[i].title,
-      resume: newsList[i].resume,
-      id: newsList[i].id,
-      image: newsList[i].image,
-      content: newsList[i].content,
-      author: newsList[i].author,
-      releaseDate: newsList[i].created_at
-    });
-  }
+  state.EveryNews = newsList;
 }; //BrandProductList = response.data from getBrandProductList in action
 
 var getBrandProductList = function getBrandProductList(state, BrandProductList) {
@@ -78977,14 +78985,7 @@ var getBrandProductList = function getBrandProductList(state, BrandProductList) 
 
 var getProduct = function getProduct(state, GetedProduct) {
   state.product = [];
-  state.product.push({
-    id: GetedProduct.id,
-    principal_images: GetedProduct.principal_images,
-    color: GetedProduct.color,
-    name: GetedProduct.name,
-    price: GetedProduct.price,
-    brand_id: GetedProduct.brand_id
-  });
+  state.product = GetedProduct;
 }; //RandomProductList = response.data from getRandomProductList in action
 
 var getRandomProductList = function getRandomProductList(state, RandomProductList) {
@@ -78994,17 +78995,7 @@ var getRandomProductList = function getRandomProductList(state, RandomProductLis
 
 var searchResponse = function searchResponse(state, search) {
   state.searchResponse = [];
-
-  for (var i = 0; i < search.length; i++) {
-    state.searchResponse.push({
-      id: search[i].id,
-      principal_images: search[i].principal_images,
-      name: search[i].name,
-      color: search[i].color,
-      price: search[i].price,
-      brand_id: search[i].brand_id
-    });
-  }
+  state.searchResponse = search;
 }; //cart
 
 var displayCart = function displayCart(state, data) {
@@ -79025,9 +79016,7 @@ var changeQuantity = function changeQuantity(state, data) {
 };
 var calculPrice = function calculPrice(state, data) {
   state.totalPrice = 0;
-  state.orderPrice = 0;
   data.basket.forEach(function (element) {
-    state.orderPrice += element.product.price * element.quantity;
     return state.totalPrice += element.product.price * element.quantity;
   });
 }; //loading
@@ -79104,7 +79093,6 @@ __webpack_require__.r(__webpack_exports__);
   displayArray: '',
   arrayLength: null,
   totalPrice: 0,
-  orderPrice: 0,
   //admin
   user: [],
   token: [],

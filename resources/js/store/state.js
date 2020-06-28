@@ -12,7 +12,6 @@ export default{
     displayArray:'',
     arrayLength:null,
     totalPrice:0,
-    orderPrice:0,
     //admin
     user:[],
     token:[],

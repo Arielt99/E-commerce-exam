@@ -122,6 +122,7 @@ export const sentMailContact = ({ commit }, {last_name, first_name, email, subje
     })
 }
 //cart
+//get the cart
 export const getCart=({commit})=>{
     if (localStorage.getItem("tempBasket")) {
         if (localStorage.getItem("tempBasket").basket !== 0){
@@ -135,12 +136,32 @@ export const getCart=({commit})=>{
         commit('lengthArray',null)
     }
 }
+//update the quantity
 export const modifyQuantity=({commit},object)=>{
     if (localStorage.getItem("tempBasket")) {
         if (localStorage.getItem("tempBasket").basket !== 0){
             commit('changeQuantity',object)
         }
     }
+}
+//Order
+export const Order=({commit,state},{FirstName, LastName, email, address, city, postalCode})=>{
+    commit("loading", true)
+    axios.post("/api/Order",{FirstName, LastName, email, address, city, postalCode, OrderProduct: JSON.parse(localStorage.getItem("tempBasket"))})
+        .then( response => {
+            //console.log(response.data)
+            state.totalPrice = 0
+            state.displayArray=''
+            state.arrayLength = 0
+            localStorage.removeItem("tempBasket")
+            alert("Commande passée avec succès !")
+            commit("loading", false)
+        })
+        .catch( error =>  {
+            //console.log(error.response.data)
+            alert("erreur du serveur, réessayez plus tard")
+            commit("loading", false)
+        })
 }
 
 
@@ -180,7 +201,7 @@ export const  attempt = ({commit,state}, token)=>{
     }
 }
 //logout admin
-export const signOut = ({commit,state})=>{
+export const signOut = ({commit,state, dispatch})=>{
     commit("loading", true)
     if (state.token != null) {
     try {
@@ -190,6 +211,11 @@ export const signOut = ({commit,state})=>{
                 commit('set_user', null)
                 localStorage.removeItem('token')
                 localStorage.removeItem('user')
+                dispatch('getBrandList')
+                dispatch('getProductList')
+                dispatch('getNewsList')
+                dispatch('getRandomProductList')
+                dispatch('getBrandProductList')
                 commit("loading", false)
             })
             .catch(error=>{

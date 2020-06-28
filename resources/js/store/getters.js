@@ -30,9 +30,6 @@ export const getterCartLength=state=>{
 export const getterTotalPrice=state=>{
     return state.totalPrice
 };
-export const getterOrderPrice=state=>{
-    return state.orderPrice
-};
 
 //admin
 export const authentificated = state => {

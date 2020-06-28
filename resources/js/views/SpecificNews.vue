@@ -25,7 +25,6 @@ export default {
     },
     methods:{
       configDateTime(date) {
-          console.log( this.$moment(date).startOf('second').locale('fr-FR').fromNow())
         return this.$moment(date).startOf('second').locale('fr-FR').fromNow()
       },
     },
