@@ -1,21 +1,22 @@
 <template>
   <div class="Home">
-    <h2>random product list</h2>
-    <carousel :autoplay="true" :scrollPerPage="false" :paginationEnabled="false" :perPage="3" :navigationEnabled="true" :loop="true" :autoplayTimeout="5000" class="productSlider" v-if="this.RandomProducts[0]">
-      <slide class="slide" v-for="product in RandomProducts" :key="product.id">
-      <ProductCard v-bind:emitedProduct="product"/>
-      </slide>
-    </carousel>
-    <h2>last article</h2>
+    <NewsHead class="NewsHeadCard" v-if="this.News[0]" v-bind:emitedNews="News[0]"/>
     <div class="news-list" v-if="this.News[0]">
-      <NewsCard v-for="News in News.slice(0, 5)" :key="News.id" v-bind:emitedNews="News"/>
+        <NewsCard v-for="OneNews in News.slice(1, 5)" :key="OneNews.id" v-bind:emitedNews="OneNews"/>
     </div>
+    <h2>Notre selection</h2>
+    <carousel :autoplay="true" :scrollPerPage="false" :paginationEnabled="false" :perPage="3" :navigationEnabled="true" :loop="true" :autoplayTimeout="5000" class="productSlider" v-if="this.RandomProducts[0]">
+        <slide class="slide" v-for="product in RandomProducts" :key="product.id">
+            <ProductCard v-bind:emitedProduct="product"/>
+        </slide>
+    </carousel>
   </div>
 </template>
 <script>
 import { Carousel, Slide } from 'vue-carousel';
 import ProductCard from "../components/PoductCard";
 import NewsCard from "../components/NewsCard";
+import NewsHead from "../components/NewsHead";
 export default {
     data (){
       return {
@@ -24,6 +25,7 @@ export default {
     components:{
       ProductCard,
       NewsCard,
+      NewsHead,
       Carousel,
       Slide
     },
@@ -48,9 +50,11 @@ export default {
 }
 </script>
 <style>
-.home{
-  display: flex;
-  justify-content: center;
+.Home h2{
+    margin-left: 3%;
+}
+.NewsHeadCard{
+    margin-top: 20px;
 }
 .news-list{
   padding: 10px 0px;

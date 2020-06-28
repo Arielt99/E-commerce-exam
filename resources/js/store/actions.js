@@ -112,7 +112,6 @@ export const sentMailContact = ({ commit }, {last_name, first_name, email, subje
     axios.post('/api/contact', {last_name, first_name, email, subject, message})
     .then( response => {
         //console.log(response.data)
-        alert("E-mail envoyé avec succès, nous vous repondrons dans les plus bref délais")
         commit("loading", false)
     })
     .catch( error =>  {

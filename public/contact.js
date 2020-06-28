@@ -1447,6 +1447,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1455,7 +1470,8 @@ __webpack_require__.r(__webpack_exports__);
       first_name: "",
       email: "",
       subject: "",
-      message: ""
+      message: "",
+      AlertMessage: null
     };
   },
   validations: {
@@ -1478,11 +1494,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     send: function send() {
+      var _this = this;
+
       this.$v.$touch();
 
-      if (this.$v.$invalid) {
-        alert("vous devez remplir tout les champs !");
-      } else {
+      if (!this.$v.$invalid) {
         this.$store.dispatch('sentMailContact', {
           last_name: this.last_name,
           first_name: this.first_name,
@@ -1490,6 +1506,15 @@ __webpack_require__.r(__webpack_exports__);
           subject: this.subject,
           message: this.message
         });
+        this.AlertMessage = "Message envoyé";
+        setTimeout(function () {
+          _this.AlertMessage = null;
+        }, 1500);
+      } else {
+        this.AlertMessage = "Remplissez bien le formulaire";
+        setTimeout(function () {
+          _this.AlertMessage = null;
+        }, 1500);
       }
     }
   }
@@ -2148,7 +2173,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.Contact .error{\n    border: 1px solid #b90000 !important;\n}\n.Contact .Maps{\n    width: 94%;\n    height: 16vh;\n    margin-left: 3%;\n    margin-right: 3% ;\n    border-radius: 10px;\n}\n.Contact .ContactCard{\n    width: 94%;\n    height: 60vh;\n    margin-left: 3%;\n    margin-right: 3% ;\n    border-radius: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.Contact .error{\n    border: 1px solid #b90000 !important;\n    background-color: #ad5151 !important ;\n}\n.Contact .error::-moz-placeholder{\n    color: white;\n}\n.Contact .error:-ms-input-placeholder{\n    color: white;\n}\n.Contact .error::-ms-input-placeholder{\n    color: white;\n}\n.Contact .error::placeholder{\n    color: white;\n}\n.Contact .ContactCard .MapAndForm .Maps{\n    display: flex;\n    height: 100%;\n    width: 50%;\n}\n.Contact .ContactCard{\n    width: 94%;\n    margin-left: 3%;\n    margin-right: 3% ;\n    margin-top: 20px;\n    border-radius: 10px;\n    overflow: hidden;\n    display: flex;\n    flex-direction: column !important;\n}\n.Contact .ContactCard .MapAndForm{\n    height: 65vh;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n.Contact .ContactCard .MapAndForm .ContactForm{\n    display: flex;\n    height: 100%;\n    width: 50%;\n    background-color: rgb(48, 48, 48);\n    color: white;\n    flex-direction: column;\n}\n.Contact .ContactCard .MapAndForm .ContactForm h1{\n    padding: 0 5%;\n    height: 10%;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form{\n    padding: 0 5%;\n    height: 90%;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form .Sender{\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    width: 100%;\n    justify-content: space-between;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form .MailData{\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form input:focus{\n    font-weight: bold;\n    outline: none;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form .Sender input{\n    display: flex;\n    width: 40%;\n    min-width: 150px;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form input{\n    background-color :rgb(230, 230, 230);\n    font-weight: bold;\n    padding-left: 5px;\n    border: 1px solid rgb(230, 230, 230);\n    height: 30px;\n    border-radius: 5px;\n    margin: 10px 0;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form textarea{\n    background-color :rgb(230, 230, 230);\n    font-weight: bold;\n    padding-left: 5px;\n    width: 100%;\n    border: 1px solid rgb(230, 230, 230);\n    border-radius: 5px;\n    margin: 10px 0;\n    height: auto;\n    height: 40%;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form .BottomForm{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form .BottomForm label{\n    padding-left: 10px;\n    display: flex;\n}\n.Contact .ContactCard .MapAndForm .ContactForm form button{\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border-radius: 5px;\n    width: 100px;\n    height: 30px;\n    margin-top: auto;\n    margin-bottom: auto;\n    font-weight: bold;\n    font-size: 15px;\n    border: 1px solid rgb(230, 230, 230);\n    background-color :rgb(230, 230, 230);\n    color: rgb(48, 48, 48);\n}\nbutton:hover{\n    cursor: pointer;\n    background-color: rgb(148, 148, 148);\n}\nbutton:focus{\n    outline: none;\n}\ntextarea:focus{\n    font-weight: bold;\n    outline: none;\n}\n.Contact .ContactInfo{\n    background-color: rgb(148, 148, 148);\n    color:white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    flex-direction: column;\n    padding: 10px 0px;\n    font-size: 15px;\n    font-weight: bold;\n    width: 100%;\n    height: 10vh;\n    margin-top: auto;\n    margin-bottom: auto;\n}\n.Contact .ContactInfo p{\n    margin: 0;\n    padding: 5px;\n}\n", ""]);
 
 // exports
 
@@ -5309,177 +5334,214 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "Contact" }, [
     _c("div", { staticClass: "ContactCard" }, [
-      _c("h1", [_vm._v(" Nous contacter")]),
-      _vm._v(" "),
-      _c("form", [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.last_name.$model,
-              expression: "$v.last_name.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.last_name.$error },
-          attrs: { type: "text", placeholder: "Nom" },
-          domProps: { value: _vm.$v.last_name.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.$v.last_name, "$model", $event.target.value.trim())
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
-            }
+      _c("div", { staticClass: "MapAndForm" }, [
+        _c("iframe", {
+          staticClass: "Maps",
+          staticStyle: { border: "0" },
+          attrs: {
+            src:
+              "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1312.1762293794682!2d2.3636126082747095!3d48.87055714482218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e0989542143%3A0x9384848c375ced98!2s%C3%89cole%20Webstart!5e0!3m2!1sfr!2sfr!4v1591205795725!5m2!1sfr!2sfr",
+            width: "800",
+            height: "400",
+            frameborder: "0",
+            allowfullscreen: "",
+            "aria-hidden": "false",
+            tabindex: "0"
           }
         }),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.first_name.$model,
-              expression: "$v.first_name.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.first_name.$error },
-          attrs: { type: "text", placeholder: "Prénom" },
-          domProps: { value: _vm.$v.first_name.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "ContactForm" }, [
+          _c("h1", [_vm._v(" Nous contacter")]),
+          _vm._v(" "),
+          _c("form", [
+            _c("div", { staticClass: "Sender" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.$v.last_name.$model,
+                    expression: "$v.last_name.$model",
+                    modifiers: { trim: true }
+                  }
+                ],
+                class: { error: _vm.$v.last_name.$error },
+                attrs: { type: "text", placeholder: "Nom" },
+                domProps: { value: _vm.$v.last_name.$model },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.$v.last_name,
+                      "$model",
+                      $event.target.value.trim()
+                    )
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.$v.first_name.$model,
+                    expression: "$v.first_name.$model",
+                    modifiers: { trim: true }
+                  }
+                ],
+                class: { error: _vm.$v.first_name.$error },
+                attrs: { type: "text", placeholder: "Prénom" },
+                domProps: { value: _vm.$v.first_name.$model },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.$v.first_name,
+                      "$model",
+                      $event.target.value.trim()
+                    )
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "MailData" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.$v.email.$model,
+                    expression: "$v.email.$model",
+                    modifiers: { trim: true }
+                  }
+                ],
+                class: { error: _vm.$v.email.$error },
+                attrs: { type: "text", placeholder: "email" },
+                domProps: { value: _vm.$v.email.$model },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.$v.email, "$model", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.$v.subject.$model,
+                    expression: "$v.subject.$model",
+                    modifiers: { trim: true }
+                  }
+                ],
+                class: { error: _vm.$v.subject.$error },
+                attrs: { type: "text", placeholder: "sujet" },
+                domProps: { value: _vm.$v.subject.$model },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.$v.subject,
+                      "$model",
+                      $event.target.value.trim()
+                    )
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.trim",
+                  value: _vm.$v.message.$model,
+                  expression: "$v.message.$model",
+                  modifiers: { trim: true }
+                }
+              ],
+              class: { error: _vm.$v.message.$error },
+              attrs: { placeholder: "votre message" },
+              domProps: { value: _vm.$v.message.$model },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.$v.message, "$model", $event.target.value.trim())
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
+                }
               }
-              _vm.$set(_vm.$v.first_name, "$model", $event.target.value.trim())
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.email.$model,
-              expression: "$v.email.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.email.$error },
-          attrs: { type: "text", placeholder: "email" },
-          domProps: { value: _vm.$v.email.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.$v.email, "$model", $event.target.value.trim())
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.subject.$model,
-              expression: "$v.subject.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.subject.$error },
-          attrs: { type: "text", placeholder: "le sujet" },
-          domProps: { value: _vm.$v.subject.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.$v.subject, "$model", $event.target.value.trim())
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model.trim",
-              value: _vm.$v.message.$model,
-              expression: "$v.message.$model",
-              modifiers: { trim: true }
-            }
-          ],
-          class: { error: _vm.$v.message.$error },
-          attrs: { type: "text", placeholder: "votre message" },
-          domProps: { value: _vm.$v.message.$model },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.$v.message, "$model", $event.target.value.trim())
-            },
-            blur: function($event) {
-              return _vm.$forceUpdate()
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                return _vm.send()
-              }
-            }
-          },
-          [_vm._v("test")]
-        )
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "BottomForm" }, [
+              _c(
+                "button",
+                {
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.send()
+                    }
+                  }
+                },
+                [_vm._v("Envoyer")]
+              ),
+              _vm._v(" "),
+              this.AlertMessage != null
+                ? _c("div", { staticClass: "added" }, [
+                    _c("label", [_vm._v(_vm._s(_vm.AlertMessage))])
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "ContactInfo" }, [
       _c("p", [_vm._v("addresse : 19 Rue Yves Toudic, 75010 Paris")]),
       _vm._v(" "),
       _c("p", [_vm._v("email : contact@ecole-webstart.com")]),
       _vm._v(" "),
       _c("p", [_vm._v("telephone : 0142419776")])
-    ]),
-    _vm._v(" "),
-    _c("iframe", {
-      staticClass: "Maps",
-      staticStyle: { border: "0" },
-      attrs: {
-        src:
-          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1312.1762293794682!2d2.3636126082747095!3d48.87055714482218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e0989542143%3A0x9384848c375ced98!2s%C3%89cole%20Webstart!5e0!3m2!1sfr!2sfr!4v1591205795725!5m2!1sfr!2sfr",
-        width: "800",
-        height: "400",
-        frameborder: "0",
-        allowfullscreen: "",
-        "aria-hidden": "false",
-        tabindex: "0"
-      }
-    })
-  ])
-}
-var staticRenderFns = []
+    ])
+  }
+]
 render._withStripped = true
 
 

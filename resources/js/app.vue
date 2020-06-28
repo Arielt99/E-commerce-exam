@@ -32,6 +32,9 @@
                             <p class="del" @click="deleteProduct(item.id, item.size)">X</p>
                         </div>
                     </div>
+                    <div class="emptyCart" v-if="getterCart.basket === undefined">
+                        <p>Panier vide</p>
+                    </div>
                 </div>
                 <div class="BottomCartMarkdown">
                     <p class="TotalPrice">total : {{getterTotalPrice}} €</p>
@@ -163,6 +166,13 @@ body{
   margin: 0;
   font-family: sans-serif;
   background-color: rgb(241, 241, 241);
+}
+.emptyCart{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #clientNav, #adminNav{
   z-index: 100000;
