@@ -6106,7 +6106,9 @@ var render = function() {
             _c("br"),
             _vm._v(" "),
             _c("label", [
-              _vm._v(_vm._s(_vm.configDateTime(this.CurrentNews[0].posted_at)))
+              _vm._v(
+                _vm._s(_vm.configDateTime(this.CurrentNews[0].releaseDate))
+              )
             ]),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(this.CurrentNews[0].resume))]),

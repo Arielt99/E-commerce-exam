@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -15,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::where('isActive', true)->orderBy('created_at','DESC')->get();
+        $news = News::where('isActive', true)->orderBy('created_at','DESC')->whereDate('releaseDate','<=', Carbon::now())->get();
         return response()->json($news);
     }
 
@@ -48,7 +49,7 @@ class NewsController extends Controller
      */
     public function show(News $news, $id)
     {
-        $result = $news::where('isActive', true) -> find($id);
+        $result = $news::where('isActive', true)->whereDate('releaseDate','<=', Carbon::now())-> find($id);
         if (!$result){
             return response()->json(['error' => true, 'message' => 'Unable to find News with ID '. $id], 404);
         }

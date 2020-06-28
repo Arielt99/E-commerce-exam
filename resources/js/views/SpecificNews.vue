@@ -7,7 +7,7 @@
         <div class="NewsContent">
             <h1>{{this.CurrentNews[0].title}}</h1>
             <label>{{this.CurrentNews[0].author}}</label><br>
-            <label>{{configDateTime(this.CurrentNews[0].posted_at)}}</label>
+            <label>{{configDateTime(this.CurrentNews[0].releaseDate)}}</label>
             <p>{{this.CurrentNews[0].resume}}</p>
             <p>{{this.CurrentNews[0].content}}</p>
         </div>
