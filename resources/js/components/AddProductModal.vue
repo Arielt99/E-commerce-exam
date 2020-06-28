@@ -18,7 +18,7 @@
             </label>
             <label for="Brand"> Brand :
                 <select name="Brand" v-model="ProductBrand">
-                    <option :value="null">Choisir la marque</option>
+                    <option disabled :value="null">Choisir la marque</option>
                     <option v-for="brand in AdminBrands" :key="brand.id" :value="brand.id">{{brand.name}}</option>
                 </select>
             </label>
@@ -225,12 +225,12 @@
     position: absolute; top: 0; bottom: 0;
     right: 76px;
     border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0px;
 }
 </style>

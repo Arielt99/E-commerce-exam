@@ -51,6 +51,7 @@ export const getProduct = (state, GetedProduct)=>{
     state.product.push({
         id : GetedProduct.id,
         principal_images : GetedProduct.principal_images,
+        color : GetedProduct.color,
         name : GetedProduct.name,
         price : GetedProduct.price,
         brand_id : GetedProduct.brand_id,
@@ -67,23 +68,53 @@ export const searchResponse = (state, search)=>{
     for (let i=0; i<search.length; i++){
         state.searchResponse.push({
             id : search[i].id,
-            images : search[i].images,
+            principal_images : search[i].principal_images,
             name : search[i].name,
+            color : search[i].color,
             price : search[i].price,
             brand_id : search[i].brand_id,
         })
     }
 }
 
+//cart
+export const displayCart=(state,data)=>{
+    return state.displayArray = data
+}
+export const lengthArray=(state,data)=>{
+    if (data !==null)
+    return state.arrayLength = data.basket.length
+}
+export const changeQuantity=(state,data)=>{
+    let cart = JSON.parse(localStorage.getItem("tempBasket"))
+    cart.basket.forEach(element =>{
+        if (element.id === data.id, element.size === data.size){
+            element.quantity = 0
+            element.quantity = data.newQuantity
+        }
+    })
+    localStorage.setItem("tempBasket",JSON.stringify(cart))
+}
+export const calculPrice=(state,data)=>{
+    state.totalPrice = 0
+    state.orderPrice = 0
+    data.basket.forEach(element =>{
+        state.orderPrice += (element.product.price * element.quantity)
+        return state.totalPrice += (element.product.price * element.quantity)
+    })
+}
 
 
-export const loading=(state, loading )=>{
+
+//loading
+export const loading = (state, loading )=>{
     state.loading = loading
 }
-export const set_token=(state, token )=>{
+//set admin data
+export const set_token = (state, token )=>{
     state.token = token
 }
-export const set_user=(state, user )=>{
+export const set_user = (state, user )=>{
     state.user = user
 }
 

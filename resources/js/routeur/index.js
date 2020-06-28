@@ -33,7 +33,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function () {
       return import(/* webpackChunkName: "contact" */ '../views/Brand.vue')
-    }
+    },
   },
   {
     path: '/Brand/:brandid/Product/:id',
@@ -78,13 +78,16 @@ const routes = [
     }
   },
   {
-    path: '/Cart',
-    name: 'Cart',
+    path:'/Command',
+    name: 'Command',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: function () {
-      return import(/* webpackChunkName: "contact" */ '../views/Cart.vue')
+      return import(/* webpackChunkName: "contact" */ '../views/Command.vue')
+    },
+    meta:{
+        requiresCart : true
     }
   },
   {
@@ -157,7 +160,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(routes => routes.meta.requiresAuth)
+  const requiresCart = to.matched.some(routes => routes.meta.requiresCart)
+  const currentCart = localStorage.getItem('tempBasket')
   const currentUser = localStorage.getItem('token')
+  if (requiresCart && currentCart === null ) {
+    next('/home')
+}
   if (requiresAuth && currentUser === null ) {
       next('/login')
   }

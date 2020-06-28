@@ -34,4 +34,5 @@ export default {
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 300px);
 }
+
 </style>

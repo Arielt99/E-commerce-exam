@@ -1,3 +1,4 @@
+//data client
 export const EveryBrands = state =>{
     return state.EveryBrands;
 };
@@ -18,6 +19,19 @@ export const RandomProducts = state =>{
 };
 export const searchResponse = state =>{
     return state.searchResponse;
+};
+//cart
+export const getterCart=state=>{
+    return state.displayArray
+};
+export const getterCartLength=state=>{
+    return state.arrayLength
+};
+export const getterTotalPrice=state=>{
+    return state.totalPrice
+};
+export const getterOrderPrice=state=>{
+    return state.orderPrice
 };
 
 //admin

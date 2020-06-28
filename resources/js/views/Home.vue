@@ -52,6 +52,14 @@ export default {
   display: flex;
   justify-content: center;
 }
+.news-list{
+  padding: 10px 0px;
+  width: 100%;
+  display: grid;
+  grid-gap: 46px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 300px);
+}
 .productSlider{
   width: 80vw;
   display: flex;

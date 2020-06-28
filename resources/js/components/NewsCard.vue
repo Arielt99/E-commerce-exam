@@ -3,7 +3,7 @@
         <img :src="emitedNews.image"/>
         <div class="item-resume">
             <h2>{{emitedNews.title}}</h2>
-            <label>{{emitedNews.author}}</label>
+            <label>par {{emitedNews.author}}</label>
         </div>
     </RouterLink>
 </template>
@@ -28,11 +28,13 @@ export default {
     display: flex;
     position: relative;
     padding: 0 !important;
+    overflow: hidden;
 }
 #news img{
     display: flex;
-    width: 100%;
-    height: auto;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
     object-fit: cover;
     position: absolute;
     z-index: 1;

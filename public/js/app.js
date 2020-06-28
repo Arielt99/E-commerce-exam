@@ -2023,6 +2023,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2058,10 +2060,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      searchContent: null
+      searchContent: null,
+      CartIsOpen: false
     };
   },
   methods: {
@@ -2069,6 +2099,12 @@ __webpack_require__.r(__webpack_exports__);
       if (this.searchContent != this.$route.params.search && this.searchContent.length != 0) {
         this.$router.push('/Result/' + this.searchContent);
       }
+    },
+    toggle: function toggle() {
+      this.CartIsOpen = !this.CartIsOpen;
+    },
+    hide: function hide() {
+      this.CartIsOpen = false;
     },
     deconnection: function deconnection() {
       var _this = this;
@@ -2087,12 +2123,55 @@ __webpack_require__.r(__webpack_exports__);
     },
     getNewsList: function getNewsList() {
       this.$store.dispatch('getNewsList');
+    },
+    getBasket: function getBasket() {
+      this.$store.dispatch('getCart');
+    },
+    changeQuantity: function changeQuantity(id, size, quantity) {
+      var obj = {
+        id: id,
+        size: size,
+        newQuantity: quantity
+      };
+      this.$store.dispatch('modifyQuantity', obj);
+      this.$store.dispatch('getCart');
+      this.newQuantity = null;
+    },
+    deleteProduct: function deleteProduct(id, size) {
+      var _this2 = this;
+
+      this.getterCart.basket.forEach(function (element) {
+        if (element.id === id && element.size === size) {
+          _this2.getterCart.basket.splice(_this2.getterCart.basket.indexOf(element), 1);
+
+          localStorage.setItem('tempBasket', JSON.stringify(_this2.getterCart));
+
+          _this2.$store.dispatch('getCart');
+        }
+
+        if (_this2.getterCart.basket.length === 0) {
+          localStorage.removeItem('tempBasket');
+          setTimeout(function () {
+            _this2.$store.dispatch('tempBasket');
+          }, 300);
+        }
+      });
     }
   },
   computed: {
     loading: function loading() {
       return this.$store.getters.loading;
+    },
+    getterCart: function getterCart() {
+      return this.$store.getters.getterCart;
+    },
+    getterTotalPrice: function getterTotalPrice() {
+      return this.$store.getters.getterTotalPrice;
     }
+  },
+  watch: {},
+  directives: {
+    ClickOutside: vue_click_outside__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   created: function created() {
     if (this.$store.getters.EveryBrands.length == 0) {
@@ -2105,6 +2184,10 @@ __webpack_require__.r(__webpack_exports__);
 
     if (this.$store.getters.EveryNews.length == 0) {
       this.getNewsList();
+    }
+
+    if (this.$store.getters.getterCart.length == 0) {
+      this.getBasket();
     }
   }
 });
@@ -2167,6 +2250,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ProductCard",
   props: {
@@ -2174,11 +2263,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     CurrentBrand: function CurrentBrand() {
-      var _this = this;
-
-      return this.$store.getters.EveryBrands.filter(function (brand) {
-        return brand.id === _this.emitedProduct.brand_id;
-      });
+      return this.$store.getters.EveryBrands;
     }
   }
 });
@@ -6689,7 +6774,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n#app{\r\n  position: relative;\r\n  min-height:100vh;\n}\nbody{\r\n  margin: 0;\r\n  font-family: sans-serif;\r\n  background-color: rgb(241, 241, 241);\n}\n#clientNav, #adminNav{\r\n  z-index: 100000;\r\n  position: fixed;\r\n  height: 10vh;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  flex-direction: row;\r\n  background-color: white;\r\n  width: 100%;\r\n  border-bottom: 0.5px solid lightgray;\r\n  align-items: center ;\r\n  justify-content: space-between;\n}\n.router-link-exact-active{\r\n  background-color: rgb(241, 241, 241);\r\n  border-radius: 10px;\n}\n#clientNav .Nav a, #adminNav .Nav a{\r\n  color: rgb(48, 48, 48);\r\n  text-decoration: none;\r\n  padding: 10px 20px;\n}\n.logo{\r\n  height: 100%;\r\n  width: 100px;\r\n  display: flex;\r\n  align-content: flex-start;\r\n  padding-left: 20px;\n}\n#clientNav .search{\r\n  border-radius: 5px;\r\n  background-color :rgb(230, 230, 230);\r\n  width: 30vw;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: space-between;\r\n  margin-left: 10vw;\n}\n#clientNav .search input{\r\n  width: 30vw;\r\n  font-weight: bold;\r\n  background-color :transparent;\r\n  border: none;\r\n  padding: 10px 0px 10px 15px;\n}\n#clientNav .search input[type=text]:focus{\r\n  font-weight: bold;\r\n  outline: none;\n}\n#clientNav .search input::-moz-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input:-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::-ms-input-placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search input::placeholder{\r\n  color: rgb(105, 105, 105);\r\n  font-weight: bold;\n}\n#clientNav .search button{\r\n  background-color :transparent;\r\n  border: none;\n}\n.Nav{\r\n  display: flex;\r\n  margin-right: 10px ;\n}\n.logo img{\r\n  width: auto;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.footer{\r\n  background: rgb(48, 48, 48);\r\n  color: white;\r\n  position:absolute;\r\n  bottom:0;\r\n  width:100%;\r\n  height:50px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\n}\n.appContent{\r\n  padding-top: 10vh;\r\n  padding-bottom: 50px;\n}\r\n/* width */\n::-webkit-scrollbar {\r\n  background: rgb(241, 241, 241);\r\n  width: 5px;\n}\r\n/* Track */\n::-webkit-scrollbar-track {\r\n  border-radius: 2px;\r\n  background: rgb(241, 241, 241);\n}\r\n/* Handle */\n::-webkit-scrollbar-thumb {\r\n  background: rgb(48, 48, 48); \r\n  border-radius: 2px;\n}\n.loading {\r\n    position: fixed;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    background-color: rgba(0, 0, 0, 0.3);\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.lds-ring {\r\n  display: inline-block;\r\n  position: relative;\r\n  width: 80px;\r\n  height: 80px;\n}\n.lds-ring div {\r\n  box-sizing: border-box;\r\n  display: block;\r\n  position: absolute;\r\n  width: 64px;\r\n  height: 64px;\r\n  margin: 8px;\r\n  border: 8px solid #fff;\r\n  border-radius: 50%;\r\n  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\r\n          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\r\n  border-color: #fff transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\r\n  -webkit-animation-delay: -0.45s;\r\n          animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\r\n  -webkit-animation-delay: -0.3s;\r\n          animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\r\n  -webkit-animation-delay: -0.15s;\r\n          animation-delay: -0.15s;\n}\n@-webkit-keyframes lds-ring {\n0% {\r\n    transform: rotate(0deg);\n}\n100% {\r\n    transform: rotate(360deg);\n}\n}\n@keyframes lds-ring {\n0% {\r\n    transform: rotate(0deg);\n}\n100% {\r\n    transform: rotate(360deg);\n}\n}\r\n", ""]);
+exports.push([module.i, "\n#app{\n  position: relative;\n  min-height:100vh;\n}\nbody{\n  color:  rgb(48, 48, 48);\n  margin: 0;\n  font-family: sans-serif;\n  background-color: rgb(241, 241, 241);\n}\n#clientNav, #adminNav{\n  z-index: 100000;\n  position: fixed;\n  height: 10vh;\n  display: flex;\n  flex-wrap: nowrap;\n  flex-direction: row;\n  background-color: white;\n  width: 100%;\n  border-bottom: 0.5px solid lightgray;\n  align-items: center ;\n  justify-content: space-between;\n}\n.router-link-exact-active{\n  background-color: rgb(241, 241, 241);\n  border-radius: 10px;\n}\n#clientNav .Nav a, #adminNav .Nav a{\n  color: rgb(48, 48, 48);\n  text-decoration: none;\n  padding: 10px 20px;\n}\n.logo{\n    height: 100%;\n    width: 100px;\n    display: flex;\n    align-content: flex-start;\n    padding-left: 20px;\n}\n#clientNav .cartIcon{\n    display: flex;\n    align-content: center;\n    align-items: center;\n    padding: 10px 20px;\n    margin: 0px 10px;\n}\n#clientNav .cartIcon:hover{\n  background-color: rgb(241, 241, 241);\n  border-radius: 10px;\n  cursor: pointer;\n}\n#clientNav .cartIcon i{\n    transform: scale(1.5,1.5);\n    color: rgb(48, 48, 48);\n    padding-bottom: 1px;\n}\n#clientNav .search{\n    border-radius: 5px;\n    background-color :rgb(230, 230, 230);\n    min-width: 212px;\n    width: 30vw;\n    display: flex;\n    flex-wrap: nowrap;\n    justify-content: space-between;\n    margin-left: 10vw;\n}\n#clientNav .search input{\n  width: 30vw;\n  font-weight: bold;\n  background-color :transparent;\n  border: none;\n  padding: 10px 0px 10px 15px;\n}\n#clientNav .search input[type=text]:focus{\n  font-weight: bold;\n  outline: none;\n}\n#clientNav .search input::-moz-placeholder{\n  color: rgb(105, 105, 105);\n  font-weight: bold;\n}\n#clientNav .search input:-ms-input-placeholder{\n  color: rgb(105, 105, 105);\n  font-weight: bold;\n}\n#clientNav .search input::-ms-input-placeholder{\n  color: rgb(105, 105, 105);\n  font-weight: bold;\n}\n#clientNav .search input::placeholder{\n  color: rgb(105, 105, 105);\n  font-weight: bold;\n}\n#clientNav .search button{\n  background-color :transparent;\n  border: none;\n}\n.Nav{\n  display: flex;\n  margin-right: 10px ;\n}\n.logo img{\n  width: auto;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.cartDropDown{\n    overflow: hidden;\n    z-index: 1000;\n    position: fixed;\n    right: 10px;\n    top:12vh;\n    height: auto;\n    width: 30vw;\n    min-width: 450px;\n    height: 50vh;\n    background-color: white;\n    border-radius: 10px;\n    border: 1px solid rgb(48, 48, 48);\n}\n.cartDropDown .CartContent{\n    height: 41vh;\n    overflow: auto;\n    padding-top: 1vh;\n}\n.cartDropDown .CartContent .CartProduct{\n    position: relative;\n    padding: 15px 5px;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    font-size: 15px ;\n    font-weight: bold;\n    height: 50px;\n    margin: 0px 10px;\n    border-top: 1px solid rgb(48, 48, 48) ;\n}\n.cartDropDown .CartContent .CartProduct .UnitPrice{\n    position: absolute;\n    right: 0;\n    margin-top: auto;\n    margin-bottom: auto;\n    display: flex;\n    flex-direction: row;\n    align-items: center ;\n}\n.cartDropDown .CartContent .CartProduct .UnitPrice .del{\n    padding:5px;\n    margin-left: 10px;\n}\n.cartDropDown .CartContent .CartProduct .UnitPrice .del:hover{\n    background-color: rgb(241, 241, 241);\n    border-radius: 10px;\n    cursor: pointer;\n}\n.cartDropDown .CartContent .CartProduct:first-child{\n    border-top: none;\n}\n.cartDropDown .CartContent .CartProduct .littleImgPreview{\n    height: 100%;\n    padding-right: 15px ;\n}\n.cartDropDown .CartContent .CartProduct .littleImgPreview img{\n    width: auto;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.cartDropDown .CartContent .CartProduct input[type=number]{\n    height: 50%;\n    font-size: 100%;\n    width: 35px;\n    border:none;\n    outline: none;\n}\n.cartDropDown .CartContent .CartProduct input[type=number]:active{\n    border:none;\n    outline: none;\n}\n.cartDropDown .BottomCartMarkdown{\n    position: fixed;\n    top: 54vh;\n    height: 8vh;\n    width: 30vw;\n    min-width: 450px;\n    right: 10px;\n    display: flex;\n    justify-content: center;\n    align-content: center;\n    align-items: center;\n    font-size: 20px;\n    font-weight: bolder;\n    border-top: 1px solid rgb(48, 48, 48);\n}\n.cartDropDown .TotalPrice{\n    padding: 0px 20px;\n}\n.cartDropDown .Command{\n    padding: 0px 20px;\n    font-size: 15px;\n    background-color: none;\n}\n.cartDropDown .command:hover{\n    background-color: transparent;\n}\n.cartDropDown .router-link-exact-active{\n    background-color: transparent !important;\n}\n.footer{\n  background: rgb(48, 48, 48);\n  color: white;\n  position:absolute;\n  bottom:0;\n  width:100%;\n  height:50px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  text-align: center;\n}\n.appContent{\n  padding-top: 10vh;\n  padding-bottom: 60px;\n}\n/* width */\n::-webkit-scrollbar {\n  background: rgb(241, 241, 241);\n  width: 5px;\n}\n/* Track */\n::-webkit-scrollbar-track {\n  border-radius: 2px;\n  background: rgb(241, 241, 241);\n}\n/* Handle */\n::-webkit-scrollbar-thumb {\n  background: rgb(48, 48, 48);\n  border-radius: 2px;\n}\n.loading {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.lds-ring {\n  display: inline-block;\n  position: relative;\n  width: 80px;\n  height: 80px;\n}\n.lds-ring div {\n  box-sizing: border-box;\n  display: block;\n  position: absolute;\n  width: 64px;\n  height: 64px;\n  margin: 8px;\n  border: 8px solid #fff;\n  border-radius: 50%;\n  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n  border-color: #fff transparent transparent transparent;\n}\n.lds-ring div:nth-child(1) {\n  -webkit-animation-delay: -0.45s;\n          animation-delay: -0.45s;\n}\n.lds-ring div:nth-child(2) {\n  -webkit-animation-delay: -0.3s;\n          animation-delay: -0.3s;\n}\n.lds-ring div:nth-child(3) {\n  -webkit-animation-delay: -0.15s;\n          animation-delay: -0.15s;\n}\n@-webkit-keyframes lds-ring {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n@keyframes lds-ring {\n0% {\n    transform: rotate(0deg);\n}\n100% {\n    transform: rotate(360deg);\n}\n}\n", ""]);
 
 // exports
 
@@ -6708,7 +6793,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#news{\r\n    --background: none;\r\n    width: 300px;\r\n    height: 300px;\r\n    display: flex;\r\n    position: relative;\r\n    padding: 0 !important;\n}\n#news img{\r\n    display: flex;\r\n    width: 100%;\r\n    height: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    position: absolute;\r\n    z-index: 1;\r\n    top:0;\r\n    bottom:0;\r\n    padding: 0;\r\n    margin: 0;\n}\n.item-resume{\r\n    position: absolute;\r\n    z-index: 2;\r\n    width: 100%;\r\n    height: 100%;\r\n    bottom:0;\r\n    justify-content: flex-end;\r\n    display: flex;\r\n    flex-direction: column;\r\n    background-color: rgba(48, 48, 48, 0.705);\r\n    color:rgba(255, 255, 255, 0.90);\r\n    transition: opacity 0.2s ease-out;\r\n    opacity: 1;\n}\n.item-resume h2{\r\n    padding-left: 10px;\r\n    margin: 0;\n}\n.item-resume label{\r\n    padding-left: 10px;\r\n    padding-bottom: 10px;\n}\n.item-resume:hover{\r\n    opacity: 0;\r\n    cursor: pointer;\r\n    transition: opacity 0.2s ease-out;\n}\r\n", ""]);
+exports.push([module.i, "\n#news{\n    --background: none;\n    width: 300px;\n    height: 300px;\n    display: flex;\n    position: relative;\n    padding: 0 !important;\n    overflow: hidden;\n}\n#news img{\n    display: flex;\n    min-width: 100%;\n    max-width: 100%;\n    min-height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    position: absolute;\n    z-index: 1;\n    top:0;\n    bottom:0;\n    padding: 0;\n    margin: 0;\n}\n.item-resume{\n    position: absolute;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    bottom:0;\n    justify-content: flex-end;\n    display: flex;\n    flex-direction: column;\n    background-color: rgba(48, 48, 48, 0.705);\n    color:rgba(255, 255, 255, 0.90);\n    transition: opacity 0.2s ease-out;\n    opacity: 1;\n}\n.item-resume h2{\n    padding-left: 10px;\n    margin: 0;\n}\n.item-resume label{\n    padding-left: 10px;\n    padding-bottom: 10px;\n}\n.item-resume:hover{\n    opacity: 0;\n    cursor: pointer;\n    transition: opacity 0.2s ease-out;\n}\n", ""]);
 
 // exports
 
@@ -6727,7 +6812,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.productCard{\r\n    border: 1px solid black;\r\n    border-radius: 10px;\r\n    width: 250px;\r\n    height: 350px;\n}\n.productCard:hover{\r\n    box-shadow: 0px 0px 7px 0px rgba(105,105,105,0.2);\n}\n.card-header{\r\n    width: 100%;\r\n    height: 250px;\r\n    display: flex;\n}\n.card-header img{\r\n    display: flex;\r\n    width: 100%;\r\n    height: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 10px 10px 0px 0px;\n}\r\n", ""]);
+exports.push([module.i, "\n.productCard{\n    border-radius: 10px;\n    width: 250px;\n    height: 350px;\n    background-color: white;\n}\n.productCard a{\n    text-decoration: none !important;\n    color: rgb(48, 48, 48) !important;\n}\n.productCard .card{\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n}\n.productCard p{\n    margin: 0;\n}\n.productCard .card-body{\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    width: 90%;\n    padding:5% 0px;\n    height: 125px;\n}\n.productCard .card-body .ProductName{\n    font-weight: bolder;\n    font-size: 25px;\n    padding-top: 10px;\n}\n.productCard .card-body .PriceAndColor{\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n}\n.productCard .card-body .PriceAndColor .ProductColor{\n    margin-bottom: 20px;\n}\n.productCard .card-body .PriceAndColor .ProductPrice{\n    font-weight: bolder;\n    margin-top: 30px;\n    font-size: 20px;\n}\n.productCard .card-body .ProductBrand{\n    display: flex;\n    flex-direction: row;\n    align-items: flex-end;\n}\n.productCard .card-body .ProductBrand .ProductBrandLogo{\n    height: 30px !important;\n    width: auto;\n}\n.productCard .card-body .ProductBrand .ProductBrandName{\n    padding-left: 10px;\n}\n.productCard:hover{\n    box-shadow: 0px 0px 7px 0px rgba(105,105,105,0.2);\n}\n.card-header{\n    width: 90%;\n    height: 200px;\n    display: flex;\n    justify-content: center;\n}\n.card-header img{\n    display: flex;\n    margin-top: 5%;\n    width: 100%;\n    height: auto;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n", ""]);
 
 // exports
 
@@ -6746,7 +6831,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.home{\r\n  display: flex;\r\n  justify-content: center;\n}\n.productSlider{\r\n  width: 80vw;\r\n  display: flex;\r\n  margin: 0px auto ;\r\n  cursor: -webkit-grab;\r\n  cursor: grab;\n}\n.productSlider .slide{\r\n  display: flex;\r\n  justify-content: center;\n}\n.productSlider:active{\r\n  cursor: -webkit-grabbing;\r\n  cursor: grabbing;\n}\r\n", ""]);
+exports.push([module.i, "\n.home{\n  display: flex;\n  justify-content: center;\n}\n.news-list{\n  padding: 10px 0px;\n  width: 100%;\n  display: grid;\n  grid-gap: 46px;\n  justify-content: center;\n  grid-template-columns: repeat(auto-fit, 300px);\n}\n.productSlider{\n  width: 80vw;\n  display: flex;\n  margin: 0px auto ;\n  cursor: -webkit-grab;\n  cursor: grab;\n}\n.productSlider .slide{\n  display: flex;\n  justify-content: center;\n}\n.productSlider:active{\n  cursor: -webkit-grabbing;\n  cursor: grabbing;\n}\n", ""]);
 
 // exports
 
@@ -59775,6 +59860,87 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-click-outside/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/vue-click-outside/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function validate(binding) {
+  if (typeof binding.value !== 'function') {
+    console.warn('[Vue-click-outside:] provided expression', binding.expression, 'is not a function.')
+    return false
+  }
+
+  return true
+}
+
+function isPopup(popupItem, elements) {
+  if (!popupItem || !elements)
+    return false
+
+  for (var i = 0, len = elements.length; i < len; i++) {
+    try {
+      if (popupItem.contains(elements[i])) {
+        return true
+      }
+      if (elements[i].contains(popupItem)) {
+        return false
+      }
+    } catch(e) {
+      return false
+    }
+  }
+
+  return false
+}
+
+function isServer(vNode) {
+  return typeof vNode.componentInstance !== 'undefined' && vNode.componentInstance.$isServer
+}
+
+exports = module.exports = {
+  bind: function (el, binding, vNode) {
+    if (!validate(binding)) return
+
+    // Define Handler and cache it on the element
+    function handler(e) {
+      if (!vNode.context) return
+
+      // some components may have related popup item, on which we shall prevent the click outside event handler.
+      var elements = e.path || (e.composedPath && e.composedPath())
+      elements && elements.length > 0 && elements.unshift(e.target)
+
+      if (el.contains(e.target) || isPopup(vNode.context.popupItem, elements)) return
+
+      el.__vueClickOutside__.callback(e)
+    }
+
+    // add Event Listeners
+    el.__vueClickOutside__ = {
+      handler: handler,
+      callback: binding.value
+    }
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && document.addEventListener(clickHandler, handler)
+  },
+
+  update: function (el, binding) {
+    if (validate(binding)) el.__vueClickOutside__.callback = binding.value
+  },
+
+  unbind: function (el, binding, vNode) {
+    // Remove Event Listeners
+    const clickHandler = 'ontouchstart' in document.documentElement ? 'touchstart' : 'click';
+    !isServer(vNode) && el.__vueClickOutside__ && document.removeEventListener(clickHandler, el.__vueClickOutside__.handler)
+    delete el.__vueClickOutside__
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=template&id=f348271a&":
 /*!*******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App.vue?vue&type=template&id=f348271a& ***!
@@ -59874,9 +60040,175 @@ var render = function() {
                     _vm._v("Contact")
                   ]),
                   _vm._v(" "),
-                  _c("router-link", { attrs: { to: "/Cart" } }, [
-                    _vm._v("Panier")
-                  ])
+                  !this.$route.meta.requiresCart
+                    ? _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "click-outside",
+                              rawName: "v-click-outside",
+                              value: _vm.hide,
+                              expression: "hide"
+                            }
+                          ]
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "cartIcon",
+                              on: { click: _vm.toggle }
+                            },
+                            [_c("i", { staticClass: "fa fa-shopping-cart" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.CartIsOpen,
+                                  expression: "CartIsOpen"
+                                }
+                              ],
+                              staticClass: "cartDropDown"
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "CartContent" },
+                                _vm._l(_vm.getterCart.basket, function(
+                                  item,
+                                  index
+                                ) {
+                                  return _c(
+                                    "div",
+                                    { key: index, staticClass: "CartProduct" },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: item.quantity,
+                                            expression: "item.quantity"
+                                          }
+                                        ],
+                                        staticClass: "quantity",
+                                        attrs: { type: "number", min: "1" },
+                                        domProps: { value: item.quantity },
+                                        on: {
+                                          change: function($event) {
+                                            return _vm.changeQuantity(
+                                              item.id,
+                                              item.size,
+                                              item.quantity
+                                            )
+                                          },
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              item,
+                                              "quantity",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "littleImgPreview" },
+                                        [
+                                          _c("img", {
+                                            attrs: {
+                                              src:
+                                                item.product.principal_images,
+                                              alt: item.product.name
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v(_vm._s(item.product.name))
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _c("p", [_vm._v(_vm._s(item.color))]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(" en " + _vm._s(item.size))
+                                        ])
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "UnitPrice" }, [
+                                        _c("p", [
+                                          _vm._v(
+                                            _vm._s(item.product.price) + " €/u"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass: "del",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.deleteProduct(
+                                                  item.id,
+                                                  item.size
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("X")]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "BottomCartMarkdown" },
+                                [
+                                  _c("p", { staticClass: "TotalPrice" }, [
+                                    _vm._v(
+                                      "total : " +
+                                        _vm._s(_vm.getterTotalPrice) +
+                                        " €"
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  this.getterTotalPrice != 0
+                                    ? _c(
+                                        "router-link",
+                                        {
+                                          staticClass: "Command",
+                                          attrs: {
+                                            to: { name: "Command" },
+                                            exact: ""
+                                          }
+                                        },
+                                        [_vm._v("Valider et payer")]
+                                      )
+                                    : _vm._e()
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
                 ],
                 1
               )
@@ -59990,7 +60322,7 @@ var render = function() {
       _c("div", { staticClass: "item-resume" }, [
         _c("h2", [_vm._v(_vm._s(_vm.emitedNews.title))]),
         _vm._v(" "),
-        _c("label", [_vm._v(_vm._s(_vm.emitedNews.author))])
+        _c("label", [_vm._v("par " + _vm._s(_vm.emitedNews.author))])
       ])
     ]
   )
@@ -60040,11 +60372,40 @@ var render = function() {
             _vm._v(" "),
             this.CurrentBrand[0]
               ? _c("div", { staticClass: "card-body" }, [
-                  _c("p", [_vm._v(_vm._s(_vm.emitedProduct.name))]),
+                  _c("p", { staticClass: "ProductName" }, [
+                    _vm._v(_vm._s(_vm.emitedProduct.name))
+                  ]),
                   _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.emitedProduct.price) + " €")]),
+                  _c("div", { staticClass: "PriceAndColor" }, [
+                    _c("p", { staticClass: "ProductColor" }, [
+                      _vm._v(_vm._s(_vm.emitedProduct.color))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "ProductPrice" }, [
+                      _vm._v(_vm._s(_vm.emitedProduct.price) + " €")
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.CurrentBrand[0].name))])
+                  _c("div", { staticClass: "ProductBrand" }, [
+                    _c("img", {
+                      staticClass: "ProductBrandLogo",
+                      attrs: {
+                        src: _vm.CurrentBrand.filter(function(brand) {
+                          return brand.id === _vm.emitedProduct.brand_id
+                        })[0].image
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "ProductBrandName" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.CurrentBrand.filter(function(brand) {
+                            return brand.id === _vm.emitedProduct.brand_id
+                          })[0].name
+                        )
+                      )
+                    ])
+                  ])
                 ])
               : _vm._e()
           ])
@@ -77822,13 +78183,16 @@ var routes = [{
     return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/SpecificNews.vue */ "./resources/js/views/SpecificNews.vue"));
   }
 }, {
-  path: '/Cart',
-  name: 'Cart',
+  path: '/Command',
+  name: 'Command',
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
   component: function component() {
-    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Cart.vue */ "./resources/js/views/Cart.vue"));
+    return Promise.all(/*! import() | contact */[__webpack_require__.e("vendors~contact"), __webpack_require__.e("contact")]).then(__webpack_require__.bind(null, /*! ../views/Command.vue */ "./resources/js/views/Command.vue"));
+  },
+  meta: {
+    requiresCart: true
   }
 }, {
   path: '/Contact',
@@ -77894,7 +78258,15 @@ router.beforeEach(function (to, from, next) {
   var requiresAuth = to.matched.some(function (routes) {
     return routes.meta.requiresAuth;
   });
+  var requiresCart = to.matched.some(function (routes) {
+    return routes.meta.requiresCart;
+  });
+  var currentCart = localStorage.getItem('tempBasket');
   var currentUser = localStorage.getItem('token');
+
+  if (requiresCart && currentCart === null) {
+    next('/home');
+  }
 
   if (requiresAuth && currentUser === null) {
     next('/login');
@@ -77913,7 +78285,7 @@ router.beforeEach(function (to, from, next) {
 /*!***************************************!*\
   !*** ./resources/js/store/actions.js ***!
   \***************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, updateProduct, deleteProduct, deleteImages, getNewsAdminList, createNews, updateNews, deleteNews */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, search, sentMailContact, getCart, modifyQuantity, login, attempt, signOut, getBrandAdminList, createBrand, updateBrand, deleteBrand, getProductAdminList, createProduct, updateProduct, deleteProduct, deleteImages, getNewsAdminList, createNews, updateNews, deleteNews */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77926,6 +78298,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomProductList", function() { return getRandomProductList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "search", function() { return search; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sentMailContact", function() { return sentMailContact; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return getCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modifyQuantity", function() { return modifyQuantity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "attempt", function() { return attempt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
@@ -77949,56 +78323,73 @@ __webpack_require__.r(__webpack_exports__);
 
 var getBrandList = function getBrandList(_ref) {
   var commit = _ref.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/brands').then(function (response) {
     //console.log(response.data)
     commit("getBrandList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
-    alert("erreur du serveur, réessayez plus tard");
+    //alert("erreur du serveur, réessayez plus tard")
+    commit("loading", false);
   });
 }; //getting all the Products
 
 var getProductList = function getProductList(_ref2) {
   var commit = _ref2.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products').then(function (response) {
     //console.log(response.data)
     commit("getProductList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
-    alert("erreur du serveur, réessayez plus tard");
+    //alert("erreur du serveur, réessayez plus tard")
+    commit("loading", false);
   });
 }; //getting all the News
 
 var getNewsList = function getNewsList(_ref3) {
   var commit = _ref3.commit;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/news').then(function (response) {
     //console.log(response.data)
     commit("getNewsList", response.data);
+    commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
-    alert("erreur du serveur, réessayez plus tard");
+    ////alert("erreur du serveur, réessayez plus tard")
+    commit("loading", false);
   });
 }; //getting all the Product of a brand
 
 var getBrandProductList = function getBrandProductList(_ref4, _ref5) {
   var commit = _ref4.commit;
   var id = _ref5.id;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/brands/' + id + '/products').then(function (response) {
     //console.log(response.data)
     commit("getBrandProductList", response.data);
-  })["catch"](function (error) {//console.log(error.response.data)
+    commit("loading", false);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
     //alert("erreur du serveur, réessayez plus tard")
+    commit("loading", false);
   });
 }; //getting a specific product
 
 var getProduct = function getProduct(_ref6, _ref7) {
   var commit = _ref6.commit;
   var id = _ref7.id;
+  commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/products/' + id).then(function (response) {
     //console.log(response.data)
     commit("getProduct", response.data);
-  })["catch"](function (error) {//console.log(error.response.data)
+    commit("loading", false);
+  })["catch"](function (error) {
+    //console.log(error.response.data)
     //alert("erreur du serveur, réessayez plus tard")
+    commit("loading", false);
   });
 }; //getting a list of random product
 
@@ -78011,7 +78402,7 @@ var getRandomProductList = function getRandomProductList(_ref8) {
     commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
-    alert("erreur du serveur, réessayez plus tard");
+    //alert("erreur du serveur, réessayez plus tard")
     commit("loading", false);
   });
 }; //getting a specific product
@@ -78026,7 +78417,7 @@ var search = function search(_ref9, _ref10) {
     commit("loading", false);
   })["catch"](function (error) {
     //console.log(error.response.data)
-    alert("erreur du serveur, réessayez plus tard");
+    //alert("erreur du serveur, réessayez plus tard")
     commit("loading", false);
   });
 }; //sending an e-email
@@ -78054,12 +78445,36 @@ var sentMailContact = function sentMailContact(_ref11, _ref12) {
     alert("erreur du serveur, réessayez plus tard");
     commit("loading", false);
   });
+}; //cart
+
+var getCart = function getCart(_ref13) {
+  var commit = _ref13.commit;
+
+  if (localStorage.getItem("tempBasket")) {
+    if (localStorage.getItem("tempBasket").basket !== 0) {
+      commit('displayCart', JSON.parse(localStorage.getItem("tempBasket")));
+      commit('lengthArray', JSON.parse(localStorage.getItem("tempBasket")));
+      commit('calculPrice', JSON.parse(localStorage.getItem("tempBasket")));
+    }
+  } else {
+    commit('displayCart', "");
+    commit('lengthArray', null);
+  }
+};
+var modifyQuantity = function modifyQuantity(_ref14, object) {
+  var commit = _ref14.commit;
+
+  if (localStorage.getItem("tempBasket")) {
+    if (localStorage.getItem("tempBasket").basket !== 0) {
+      commit('changeQuantity', object);
+    }
+  }
 }; //admin action
 //login admin
 
-var login = function login(_ref13, credentials) {
-  var commit = _ref13.commit,
-      dispatch = _ref13.dispatch;
+var login = function login(_ref15, credentials) {
+  var commit = _ref15.commit,
+      dispatch = _ref15.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/signin', credentials).then(function (response) {
     if (response) {
@@ -78070,9 +78485,9 @@ var login = function login(_ref13, credentials) {
   });
 }; //check if connected
 
-var attempt = function attempt(_ref14, token) {
-  var commit = _ref14.commit,
-      state = _ref14.state;
+var attempt = function attempt(_ref16, token) {
+  var commit = _ref16.commit,
+      state = _ref16.state;
   commit("loading", true);
 
   if (token) {
@@ -78098,9 +78513,9 @@ var attempt = function attempt(_ref14, token) {
   }
 }; //logout admin
 
-var signOut = function signOut(_ref15) {
-  var commit = _ref15.commit,
-      state = _ref15.state;
+var signOut = function signOut(_ref17) {
+  var commit = _ref17.commit,
+      state = _ref17.state;
   commit("loading", true);
 
   if (state.token != null) {
@@ -78126,8 +78541,8 @@ var signOut = function signOut(_ref15) {
 }; //admin brand section
 //getting all the brands, also the inactives ones
 
-var getBrandAdminList = function getBrandAdminList(_ref16) {
-  var commit = _ref16.commit;
+var getBrandAdminList = function getBrandAdminList(_ref18) {
+  var commit = _ref18.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminBrand', {
     headers: {
@@ -78144,9 +78559,9 @@ var getBrandAdminList = function getBrandAdminList(_ref16) {
   });
 }; //add a brand
 
-var createBrand = function createBrand(_ref17, object) {
-  var commit = _ref17.commit,
-      dispatch = _ref17.dispatch;
+var createBrand = function createBrand(_ref19, object) {
+  var commit = _ref19.commit,
+      dispatch = _ref19.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddBrand', object, {
     headers: {
@@ -78162,11 +78577,11 @@ var createBrand = function createBrand(_ref17, object) {
   });
 }; //update a brand
 
-var updateBrand = function updateBrand(_ref18, _ref19) {
-  var commit = _ref18.commit,
-      dispatch = _ref18.dispatch;
-  var id = _ref19.id,
-      object = _ref19.object;
+var updateBrand = function updateBrand(_ref20, _ref21) {
+  var commit = _ref20.commit,
+      dispatch = _ref20.dispatch;
+  var id = _ref21.id,
+      object = _ref21.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateBrand/' + id, object, {
     headers: {
@@ -78182,10 +78597,10 @@ var updateBrand = function updateBrand(_ref18, _ref19) {
   });
 }; //delete a brand
 
-var deleteBrand = function deleteBrand(_ref20, _ref21) {
-  var commit = _ref20.commit,
-      dispatch = _ref20.dispatch;
-  var id = _ref21.id;
+var deleteBrand = function deleteBrand(_ref22, _ref23) {
+  var commit = _ref22.commit,
+      dispatch = _ref22.dispatch;
+  var id = _ref23.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteBrand/' + id, {
     headers: {
@@ -78201,8 +78616,8 @@ var deleteBrand = function deleteBrand(_ref20, _ref21) {
   });
 }; //getting all the products, also the inactives ones
 
-var getProductAdminList = function getProductAdminList(_ref22) {
-  var commit = _ref22.commit;
+var getProductAdminList = function getProductAdminList(_ref24) {
+  var commit = _ref24.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminProduct ', {
     headers: {
@@ -78219,9 +78634,9 @@ var getProductAdminList = function getProductAdminList(_ref22) {
   });
 }; //add a product
 
-var createProduct = function createProduct(_ref23, object) {
-  var commit = _ref23.commit,
-      dispatch = _ref23.dispatch;
+var createProduct = function createProduct(_ref25, object) {
+  var commit = _ref25.commit,
+      dispatch = _ref25.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddProduct', object, {
     headers: {
@@ -78237,11 +78652,11 @@ var createProduct = function createProduct(_ref23, object) {
   });
 }; //update a product
 
-var updateProduct = function updateProduct(_ref24, _ref25) {
-  var commit = _ref24.commit,
-      dispatch = _ref24.dispatch;
-  var id = _ref25.id,
-      object = _ref25.object;
+var updateProduct = function updateProduct(_ref26, _ref27) {
+  var commit = _ref26.commit,
+      dispatch = _ref26.dispatch;
+  var id = _ref27.id,
+      object = _ref27.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateProduct/' + id, object, {
     headers: {
@@ -78257,10 +78672,10 @@ var updateProduct = function updateProduct(_ref24, _ref25) {
   });
 }; //delete a product
 
-var deleteProduct = function deleteProduct(_ref26, _ref27) {
-  var commit = _ref26.commit,
-      dispatch = _ref26.dispatch;
-  var id = _ref27.id;
+var deleteProduct = function deleteProduct(_ref28, _ref29) {
+  var commit = _ref28.commit,
+      dispatch = _ref28.dispatch;
+  var id = _ref29.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteProduct/' + id, {
     headers: {
@@ -78275,9 +78690,9 @@ var deleteProduct = function deleteProduct(_ref26, _ref27) {
   });
 }; //delete secondary image from a product
 
-var deleteImages = function deleteImages(_ref28, object) {
-  var commit = _ref28.commit,
-      dispatch = _ref28.dispatch;
+var deleteImages = function deleteImages(_ref30, object) {
+  var commit = _ref30.commit,
+      dispatch = _ref30.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/DeleteImage', object, {
     headers: {
@@ -78293,8 +78708,8 @@ var deleteImages = function deleteImages(_ref28, object) {
   });
 }; //getting all the news, also the inactives ones
 
-var getNewsAdminList = function getNewsAdminList(_ref29) {
-  var commit = _ref29.commit;
+var getNewsAdminList = function getNewsAdminList(_ref31) {
+  var commit = _ref31.commit;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/auth/AdminNews ', {
     headers: {
@@ -78310,9 +78725,9 @@ var getNewsAdminList = function getNewsAdminList(_ref29) {
   });
 }; //add a news
 
-var createNews = function createNews(_ref30, object) {
-  var commit = _ref30.commit,
-      dispatch = _ref30.dispatch;
+var createNews = function createNews(_ref32, object) {
+  var commit = _ref32.commit,
+      dispatch = _ref32.dispatch;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/AddNews', object, {
     headers: {
@@ -78328,11 +78743,11 @@ var createNews = function createNews(_ref30, object) {
   });
 }; //add a news
 
-var updateNews = function updateNews(_ref31, _ref32) {
-  var commit = _ref31.commit,
-      dispatch = _ref31.dispatch;
-  var id = _ref32.id,
-      object = _ref32.object;
+var updateNews = function updateNews(_ref33, _ref34) {
+  var commit = _ref33.commit,
+      dispatch = _ref33.dispatch;
+  var id = _ref34.id,
+      object = _ref34.object;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/auth/UpdateNews/' + id, object, {
     headers: {
@@ -78348,10 +78763,10 @@ var updateNews = function updateNews(_ref31, _ref32) {
   });
 }; //delete a news
 
-var deleteNews = function deleteNews(_ref33, _ref34) {
-  var commit = _ref33.commit,
-      dispatch = _ref33.dispatch;
-  var id = _ref34.id;
+var deleteNews = function deleteNews(_ref35, _ref36) {
+  var commit = _ref35.commit,
+      dispatch = _ref35.dispatch;
+  var id = _ref36.id;
   commit("loading", true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/api/auth/DeleteNews/' + id, {
     headers: {
@@ -78372,7 +78787,7 @@ var deleteNews = function deleteNews(_ref33, _ref34) {
 /*!***************************************!*\
   !*** ./resources/js/store/getters.js ***!
   \***************************************/
-/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews, loading */
+/*! exports provided: EveryBrands, EveryProducts, EveryNews, productList, product, RandomProducts, searchResponse, getterCart, getterCartLength, getterTotalPrice, getterOrderPrice, authentificated, user, EveryAdminBrands, EveryAdminProducts, EveryAdminNews, loading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78384,12 +78799,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "product", function() { return product; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RandomProducts", function() { return RandomProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterCart", function() { return getterCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterCartLength", function() { return getterCartLength; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterTotalPrice", function() { return getterTotalPrice; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getterOrderPrice", function() { return getterOrderPrice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authentificated", function() { return authentificated; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminBrands", function() { return EveryAdminBrands; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminProducts", function() { return EveryAdminProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EveryAdminNews", function() { return EveryAdminNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loading", function() { return loading; });
+//data client
 var EveryBrands = function EveryBrands(state) {
   return state.EveryBrands;
 };
@@ -78410,6 +78830,19 @@ var RandomProducts = function RandomProducts(state) {
 };
 var searchResponse = function searchResponse(state) {
   return state.searchResponse;
+}; //cart
+
+var getterCart = function getterCart(state) {
+  return state.displayArray;
+};
+var getterCartLength = function getterCartLength(state) {
+  return state.arrayLength;
+};
+var getterTotalPrice = function getterTotalPrice(state) {
+  return state.totalPrice;
+};
+var getterOrderPrice = function getterOrderPrice(state) {
+  return state.orderPrice;
 }; //admin
 
 var authentificated = function authentificated(state) {
@@ -78470,7 +78903,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
   \*****************************************/
-/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, loading, set_token, set_user, getBrandAdminList, getProductAdminList, getNewsAdminList */
+/*! exports provided: getBrandList, getProductList, getNewsList, getBrandProductList, getProduct, getRandomProductList, searchResponse, displayCart, lengthArray, changeQuantity, calculPrice, loading, set_token, set_user, getBrandAdminList, getProductAdminList, getNewsAdminList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78482,6 +78915,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRandomProductList", function() { return getRandomProductList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchResponse", function() { return searchResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCart", function() { return displayCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lengthArray", function() { return lengthArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeQuantity", function() { return changeQuantity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "calculPrice", function() { return calculPrice; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loading", function() { return loading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_token", function() { return set_token; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "set_user", function() { return set_user; });
@@ -78543,6 +78980,7 @@ var getProduct = function getProduct(state, GetedProduct) {
   state.product.push({
     id: GetedProduct.id,
     principal_images: GetedProduct.principal_images,
+    color: GetedProduct.color,
     name: GetedProduct.name,
     price: GetedProduct.price,
     brand_id: GetedProduct.brand_id
@@ -78560,16 +78998,44 @@ var searchResponse = function searchResponse(state, search) {
   for (var i = 0; i < search.length; i++) {
     state.searchResponse.push({
       id: search[i].id,
-      images: search[i].images,
+      principal_images: search[i].principal_images,
       name: search[i].name,
+      color: search[i].color,
       price: search[i].price,
       brand_id: search[i].brand_id
     });
   }
+}; //cart
+
+var displayCart = function displayCart(state, data) {
+  return state.displayArray = data;
 };
+var lengthArray = function lengthArray(state, data) {
+  if (data !== null) return state.arrayLength = data.basket.length;
+};
+var changeQuantity = function changeQuantity(state, data) {
+  var cart = JSON.parse(localStorage.getItem("tempBasket"));
+  cart.basket.forEach(function (element) {
+    if (element.id === data.id, element.size === data.size) {
+      element.quantity = 0;
+      element.quantity = data.newQuantity;
+    }
+  });
+  localStorage.setItem("tempBasket", JSON.stringify(cart));
+};
+var calculPrice = function calculPrice(state, data) {
+  state.totalPrice = 0;
+  state.orderPrice = 0;
+  data.basket.forEach(function (element) {
+    state.orderPrice += element.product.price * element.quantity;
+    return state.totalPrice += element.product.price * element.quantity;
+  });
+}; //loading
+
 var loading = function loading(state, _loading) {
   state.loading = _loading;
-};
+}; //set admin data
+
 var set_token = function set_token(state, token) {
   state.token = token;
 };
@@ -78625,6 +79091,7 @@ var getNewsAdminList = function getNewsAdminList(state, NewsAdminList) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  //data client
   EveryBrands: [],
   EveryProducts: [],
   EveryNews: [],
@@ -78633,6 +79100,11 @@ __webpack_require__.r(__webpack_exports__);
   RandomProducts: [],
   searchResponse: [],
   loading: false,
+  //cart
+  displayArray: '',
+  arrayLength: null,
+  totalPrice: 0,
+  orderPrice: 0,
   //admin
   user: [],
   token: [],
@@ -78748,8 +79220,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ariel\Exam-E_-commerce\Sneaked\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ariel\Exam-E_-commerce\Sneaked\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\ariel\Exam-E_-commerce\sneak-heir\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ariel\Exam-E_-commerce\sneak-heir\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

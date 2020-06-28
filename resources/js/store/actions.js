@@ -3,62 +3,77 @@ import axios from "axios";
 // client action
 //getting all the brands
 export const getBrandList = ({ commit })=>{
+    commit("loading", true)
     axios.get('/api/brands')
     .then( response => {
         //console.log(response.data)
         commit("getBrandList", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
+        //alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //getting all the Products
 export const getProductList = ({ commit })=>{
+    commit("loading", true)
     axios.get('/api/products')
     .then( response => {
         //console.log(response.data)
         commit("getProductList", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
+        //alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //getting all the News
 export const getNewsList = ({ commit })=>{
+    commit("loading", true)
     axios.get('/api/news')
     .then( response => {
         //console.log(response.data)
         commit("getNewsList", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
+        ////alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //getting all the Product of a brand
 export const getBrandProductList = ({ commit },{id})=>{
+    commit("loading", true)
     axios.get('/api/brands/'+id+'/products')
     .then( response => {
         //console.log(response.data)
         commit("getBrandProductList", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
         //alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //getting a specific product
 export const getProduct = ({ commit },{id})=>{
+    commit("loading", true)
     axios.get('/api/products/'+id)
     .then( response => {
         //console.log(response.data)
         commit("getProduct", response.data)
+        commit("loading", false)
     })
     .catch( error =>  {
         //console.log(error.response.data)
         //alert("erreur du serveur, réessayez plus tard")
+        commit("loading", false)
     })
 }
 //getting a list of random product
@@ -72,7 +87,7 @@ export const getRandomProductList = ({ commit })=>{
     })
     .catch( error =>  {
         //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
+        //alert("erreur du serveur, réessayez plus tard")
         commit("loading", false)
     })
 }
@@ -87,7 +102,7 @@ export const search = ({ commit },{searchContent})=>{
     })
     .catch( error =>  {
         //console.log(error.response.data)
-        alert("erreur du serveur, réessayez plus tard")
+        //alert("erreur du serveur, réessayez plus tard")
         commit("loading", false)
     })
 }
@@ -105,6 +120,27 @@ export const sentMailContact = ({ commit }, {last_name, first_name, email, subje
         alert("erreur du serveur, réessayez plus tard")
         commit("loading", false)
     })
+}
+//cart
+export const getCart=({commit})=>{
+    if (localStorage.getItem("tempBasket")) {
+        if (localStorage.getItem("tempBasket").basket !== 0){
+            commit('displayCart',JSON.parse(localStorage.getItem("tempBasket")))
+            commit('lengthArray',JSON.parse(localStorage.getItem("tempBasket")))
+            commit('calculPrice',JSON.parse(localStorage.getItem("tempBasket")))
+        }
+    }
+    else{
+        commit('displayCart',"")
+        commit('lengthArray',null)
+    }
+}
+export const modifyQuantity=({commit},object)=>{
+    if (localStorage.getItem("tempBasket")) {
+        if (localStorage.getItem("tempBasket").basket !== 0){
+            commit('changeQuantity',object)
+        }
+    }
 }
 
 
