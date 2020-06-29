@@ -17,7 +17,7 @@
                 <input v-model="emitedNews.title" type="text" name="title">
             </label>
             <label for="resume"> resume :
-                <input v-model="emitedNews.resume" type="text" name="resume">
+                <textarea v-model="emitedNews.resume" name="resume"></textarea>
             </label>
             <label for="content"> description :
                 <textarea v-model="emitedNews.content" name="content"></textarea>
@@ -128,7 +128,12 @@
     height: 75vh;
     flex-direction: column;
   }
-
+    .modal textarea{
+        width: 94%;
+        margin-right: 3%;
+        margin-left: 3%;
+        min-height: 100px;
+    }
   .modal-header,
   .modal-footer {
     padding: 15px;
@@ -208,12 +213,12 @@
     position: absolute; top: 0; bottom: 0;
     right: 76px;
     border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0px;
 }
 </style>

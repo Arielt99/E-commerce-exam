@@ -156,7 +156,7 @@
             this.activeProduct = this.emitedProductIsActive
         },
         emitedProductSecondaryImages(){
-            this.ActualSecondaryImage.push(this.emitedProductSecondaryImages) 
+            this.ActualSecondaryImage.push(this.emitedProductSecondaryImages)
         }
     }
 
@@ -193,7 +193,12 @@
     padding: 15px;
     display: flex;
   }
-
+    .modalModifProduct textarea{
+        width: 94%!important;
+        margin-right: 3%!important;
+        margin-left: 3%!important;
+        min-height: 100px !important;
+    }
   .modal-header {
     border-bottom: 1px solid #eeeeee;
     color: #4AAE9B;
@@ -267,13 +272,13 @@
     position: absolute; top: 0; bottom: 0;
     right: 76px;
     border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0px;
 }
 .carrousselProductEdit{
     width: 90% !important;

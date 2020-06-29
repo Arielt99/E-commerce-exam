@@ -1,7 +1,7 @@
 <template>
   <div class="ProductAdmin">
-    <p>ProductAdmin</p>
-    <button type="button" @click="showAddModal"> ajouter </button>
+    <p>Admin des Produits</p>
+    <button type="button" class="AdminSupAction" @click="showAddModal"><i class="fa fa-plus  fa-2x" aria-hidden="true"></i></button>
     <table class="adminproductlist">
     <thead>
         <tr>
@@ -25,7 +25,7 @@
             <td>{{CurrentBrand.filter(brand =>brand.id === product.brand_id)[0].name}}</td>
             <td>{{product.price}} €</td>
             <td>{{product.color}}</td>
-            <td>{{product.isActive}}</td>
+            <td>{{product.isActive == 1  ?  'Activé' : 'Désactivé'}}</td>
             <td>{{product.description}}</td>
             <td class="carroussel">
               <carousel :autoplay="true" :scrollPerPage="true" :centerMode="true" :paginationEnabled="false" :per-page="1" :navigationEnabled="true" :loop="true" :autoplayTimeout="5000">
@@ -35,8 +35,8 @@
               </carousel>
             </td>
             <td>
-              <button type="button" @click="showUpdateModal(product)">modifier</button>
-              <button type="button" @click="del(product.id)">X</button>
+              <button type="button" class="AdminAction" @click="showUpdateModal(product)"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></button>
+              <button type="button" class="AdminAction" @click="del(product.id)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
             </td>
         </tr>
     </tbody>
@@ -145,5 +145,32 @@ td .VueCarousel-slide {
     display: flex;
     justify-content: center;
 
+}
+.AdminSupAction{
+    margin-bottom: 10px;
+    border : none;
+    width: 50px;
+    height: 50px;
+    background-color :rgb(201, 201, 201);
+    border-radius: 5px;
+}
+.AdminAction{
+    border : none;
+    width: 30px;
+    height: 30px;
+    background-color :rgb(201, 201, 201);
+    border-radius: 5px;
+}
+.AdminSupAction:hover{
+    cursor: pointer;
+}
+.AdminAction:hover{
+    cursor: pointer;
+}
+.AdminSupAction:focus{
+    outline: none;
+}
+.AdminAction:focus{
+    outline: none;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="newsAdmin">
-    <p>newsAdmin</p>
-    <button type="button" @click="showAddModal"> ajouter </button>
+    <p>Admin des News</p>
+    <button type="button" class="AdminSupAction" @click="showAddModal"><i class="fa fa-plus  fa-2x" aria-hidden="true"></i></button>
     <table class="adminnewslist">
       <thead>
           <tr>
@@ -25,11 +25,11 @@
               <td>{{news.content}}</td>
               <td>{{news.author}}</td>
               <td>{{news.releaseDate}}</td>
-              <td>{{news.isActive}}</td>
+              <td>{{news.isActive == 1  ?  'Activé' : 'Désactivé'}}</td>
 
               <td>
-                <button type="button" @click="showUpdateModal(news)">modifier</button>
-                <button type="button" @click="del(news.id)">X</button>
+                <button type="button" class="AdminAction" @click="showUpdateModal(news)"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></button>
+                <button type="button" class="AdminAction" @click="del(news.id)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
               </td>
           </tr>
       </tbody>
@@ -114,5 +114,32 @@ table, th, td {
 td{
   max-width: 25vw;
   text-align: center;
+}
+.AdminSupAction{
+    margin-bottom: 10px;
+    border : none;
+    width: 50px;
+    height: 50px;
+    background-color :rgb(201, 201, 201);
+    border-radius: 5px;
+}
+.AdminAction{
+    border : none;
+    width: 30px;
+    height: 30px;
+    background-color :rgb(201, 201, 201);
+    border-radius: 5px;
+}
+.AdminSupAction:hover{
+    cursor: pointer;
+}
+.AdminAction:hover{
+    cursor: pointer;
+}
+.AdminSupAction:focus{
+    outline: none;
+}
+.AdminAction:focus{
+    outline: none;
 }
 </style>

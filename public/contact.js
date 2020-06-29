@@ -146,9 +146,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       ImageNews: "",
-      Title: "News",
-      Resume: "Ma nouvelle news",
-      Content: "Description de la news",
+      Title: "",
+      Resume: "",
+      Content: "",
       ReleaseDate: this.$moment().startOf('minute').format('YYYY-MM-DD[T]HH:mm:ss'),
       min: this.$moment().startOf('minute').format('YYYY-MM-DD[T]HH:mm:ss'),
       IsActive: true
@@ -1949,7 +1949,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.modal {\n  background: #FFFFFF;\n  box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: flex;\n  flex-direction: column;\n  width: 60vw;\n  height: 75vh;\n  flex-direction: column;\n}\n.modal-header,\n.modal-footer {\n  padding: 15px;\n  display: flex;\n}\n.modal-header {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  justify-content: space-between;\n}\n.modal-footer {\n  border-top: 1px solid #eeeeee;\n  justify-content: flex-end;\n}\n.modal-body {\n  position: relative;\n  padding: 20px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.btn-close {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.modal {\n  background: #FFFFFF;\n  box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: flex;\n  flex-direction: column;\n  width: 60vw;\n  height: 75vh;\n  flex-direction: column;\n}\n.modal textarea{\n      width: 94%;\n      margin-right: 3%;\n      margin-left: 3%;\n      min-height: 100px;\n}\n.modal-header,\n.modal-footer {\n  padding: 15px;\n  display: flex;\n}\n.modal-header {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  justify-content: space-between;\n}\n.modal-footer {\n  border-top: 1px solid #eeeeee;\n  justify-content: flex-end;\n}\n.modal-body {\n  position: relative;\n  padding: 20px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.btn-close {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n", ""]);
 
 // exports
 
@@ -1968,7 +1968,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal textarea{\n        width: 94%;\n        margin-right: 3%;\n        margin-left: 3%;\n        min-height: 100px;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
 
 // exports
 
@@ -1987,7 +1987,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal textarea{\n        width: 94%;\n        margin-right: 3%;\n        margin-left: 3%;\n        min-height: 100px;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
 
 // exports
 
@@ -2025,7 +2025,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.modal {\n  background: #FFFFFF;\n  box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: flex;\n  flex-direction: column;\n  width: 60vw;\n  height: 75vh;\n  flex-direction: column;\n}\n.modal-header,\n.modal-footer {\n  padding: 15px;\n  display: flex;\n}\n.modal-header {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  justify-content: space-between;\n}\n.modal-footer {\n  border-top: 1px solid #eeeeee;\n  justify-content: flex-end;\n}\n.modal-body {\n  position: relative;\n  padding: 20px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.btn-close {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: rgba(0, 0, 0, 0.3);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.modal {\n  background: #FFFFFF;\n  box-shadow: 2px 2px 20px 1px;\n  overflow-x: auto;\n  display: flex;\n  flex-direction: column;\n  width: 60vw;\n  height: 75vh;\n  flex-direction: column;\n}\n.modal textarea{\n      width: 94%;\n      margin-right: 3%;\n      margin-left: 3%;\n      min-height: 100px;\n}\n.modal-header,\n.modal-footer {\n  padding: 15px;\n  display: flex;\n}\n.modal-header {\n  border-bottom: 1px solid #eeeeee;\n  color: #4AAE9B;\n  justify-content: space-between;\n}\n.modal-footer {\n  border-top: 1px solid #eeeeee;\n  justify-content: flex-end;\n}\n.modal-body {\n  position: relative;\n  padding: 20px 10px;\n  display: flex;\n  flex-direction: column;\n}\n.btn-close {\n  border: none;\n  font-size: 20px;\n  padding: 20px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #4AAE9B;\n  background: transparent;\n}\n.btn-green {\n  color: white;\n  background: #4AAE9B;\n  border: 1px solid #4AAE9B;\n  border-radius: 2px;\n}\n", ""]);
 
 // exports
 
@@ -2044,7 +2044,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modal {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    flex-direction: column;\n    width: 60vw;\n    height: 75vh;\n    flex-direction: column;\n}\n.modal textarea{\n        width: 94%;\n        margin-right: 3%;\n        margin-left: 3%;\n        min-height: 100px;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n", ""]);
 
 // exports
 
@@ -2063,7 +2063,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modalModifProduct {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    margin-top: 10vh;\n    flex-direction: column;\n    width: 60vw;\n    height: 85vh;\n    flex-direction: column;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n.carrousselProductEdit{\n    width: 90% !important;\n    margin: 20px 0px;\n    height: auto;\n    margin-left: auto;\n    margin-right: auto;\n}\n.carrousselProductEdit > *{\n  margin-left: auto;\n  margin-right: auto;\n  width: 80% !important;\n}\n.carrousselProductEdit .VueCarousel-slide > div {\n    width: 90% !important;\n    position: relative;\n    height: auto;\n}\n.carrousselProductEdit .VueCarousel-slide div > img {\n    width: 100% !important;\n    height: auto;\n}\n.carrousselProductEdit .VueCarousel-slide .deleteImg {\n    width: 18px;\n    position: absolute;\n    text-align: center;\n    top: 5px;\n    right: 5px;\n    height: 18px !important;\n    border: 1px solid white;\n    border-radius: 10px;\n    color: white;\n    background-color: red;\n    height: auto;\n}\n.carrousselProductEdit .VueCarousel-slide .deleteImg:hover{\n    cursor: pointer;\n}\n.VueCarousel-slide {\n    display: flex;\n    justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.modal-backdrop {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    background-color: rgba(0, 0, 0, 0.3);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.modalModifProduct {\n    background: #FFFFFF;\n    box-shadow: 2px 2px 20px 1px;\n    overflow-x: auto;\n    display: flex;\n    margin-top: 10vh;\n    flex-direction: column;\n    width: 60vw;\n    height: 85vh;\n    flex-direction: column;\n}\n.modal-header,\n  .modal-footer {\n    padding: 15px;\n    display: flex;\n}\n.modalModifProduct textarea{\n        width: 94%!important;\n        margin-right: 3%!important;\n        margin-left: 3%!important;\n        min-height: 100px !important;\n}\n.modal-header {\n    border-bottom: 1px solid #eeeeee;\n    color: #4AAE9B;\n    justify-content: space-between;\n}\n.modal-footer {\n    border-top: 1px solid #eeeeee;\n    justify-content: flex-end;\n}\n.modal-body {\n    position: relative;\n    padding: 20px 10px;\n    display: flex;\n    flex-direction: column;\n}\n.btn-close {\n    border: none;\n    font-size: 20px;\n    padding: 20px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #4AAE9B;\n    background: transparent;\n}\n.btn-green {\n    color: white;\n    background: #4AAE9B;\n    border: 1px solid #4AAE9B;\n    border-radius: 2px;\n}\n.onoffswitch {\n    position: relative; width: 100px;\n    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;\n}\n.onoffswitch-checkbox {\n    position: absolute;\n    opacity: 0;\n    pointer-events: none;\n}\n.onoffswitch-label {\n    display: block; overflow: hidden; cursor: pointer;\n    border: 2px solid #999999; border-radius: 20px;\n}\n.onoffswitch-inner {\n    display: block; width: 200%; margin-left: -100%;\n    transition: margin 0.3s ease-in 0s;\n}\n.onoffswitch-inner:before, .onoffswitch-inner:after {\n    display: block; float: left; width: 50%; height: 20px; padding: 0; line-height: 20px;\n    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;\n    box-sizing: border-box;\n}\n.onoffswitch-inner:before {\n    content: \"Active\";\n    padding-left: 10px;\n    background-color: #34A7C1; color: #FFFFFF;\n}\n.onoffswitch-inner:after {\n    content: \"Inactive\";\n    padding-right: 10px;\n    background-color: #EEEEEE; color: #999999;\n    text-align: right;\n}\n.onoffswitch-switch {\n    display: block; width: 20px; margin: 0px;\n    background: #FFFFFF;\n    position: absolute; top: 0; bottom: 0;\n    right: 76px;\n    border: 2px solid #999999; border-radius: 20px;\n    transition: all 0.3s ease-in 0s;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {\n    margin-left: 0;\n}\n.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {\n    right: 0px;\n}\n.carrousselProductEdit{\n    width: 90% !important;\n    margin: 20px 0px;\n    height: auto;\n    margin-left: auto;\n    margin-right: auto;\n}\n.carrousselProductEdit > *{\n  margin-left: auto;\n  margin-right: auto;\n  width: 80% !important;\n}\n.carrousselProductEdit .VueCarousel-slide > div {\n    width: 90% !important;\n    position: relative;\n    height: auto;\n}\n.carrousselProductEdit .VueCarousel-slide div > img {\n    width: 100% !important;\n    height: auto;\n}\n.carrousselProductEdit .VueCarousel-slide .deleteImg {\n    width: 18px;\n    position: absolute;\n    text-align: center;\n    top: 5px;\n    right: 5px;\n    height: 18px !important;\n    border: 1px solid white;\n    border-radius: 10px;\n    color: white;\n    background-color: red;\n    height: auto;\n}\n.carrousselProductEdit .VueCarousel-slide .deleteImg:hover{\n    cursor: pointer;\n}\n.VueCarousel-slide {\n    display: flex;\n    justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -2101,7 +2101,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.BrandAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminbrandlist{\n  max-width: 100vw;\n}\n.adminbrandlist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable{\n  width: 90vw;\n  border-collapse: collapse;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.BrandAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminbrandlist{\n  max-width: 100vw;\n}\n.adminbrandlist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable{\n  width: 90vw;\n  border-collapse: collapse;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n.AdminSupAction{\n    margin-bottom: 10px;\n    border : none;\n    width: 50px;\n    height: 50px;\n    background-color :rgb(201, 201, 201);\n    border-radius: 5px;\n}\n.AdminAction{\n    border : none;\n    width: 30px;\n    height: 30px;\n    background-color :rgb(201, 201, 201);\n    border-radius: 5px;\n}\n.AdminSupAction:hover{\n    cursor: pointer;\n}\n.AdminAction:hover{\n    cursor: pointer;\n}\n.AdminSupAction:focus{\n    outline: none;\n}\n.AdminAction:focus{\n    outline: none;\n}\n", ""]);
 
 // exports
 
@@ -2120,7 +2120,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.newsAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminnewslist{\n  max-width: 100vw;\n}\n.adminnewslist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable{\n  width: 90vw;\n  border-collapse: collapse;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.newsAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminnewslist{\n  max-width: 100vw;\n}\n.adminnewslist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable{\n  width: 90vw;\n  border-collapse: collapse;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n.AdminSupAction{\n    margin-bottom: 10px;\n    border : none;\n    width: 50px;\n    height: 50px;\n    background-color :rgb(201, 201, 201);\n    border-radius: 5px;\n}\n.AdminAction{\n    border : none;\n    width: 30px;\n    height: 30px;\n    background-color :rgb(201, 201, 201);\n    border-radius: 5px;\n}\n.AdminSupAction:hover{\n    cursor: pointer;\n}\n.AdminAction:hover{\n    cursor: pointer;\n}\n.AdminSupAction:focus{\n    outline: none;\n}\n.AdminAction:focus{\n    outline: none;\n}\n", ""]);
 
 // exports
 
@@ -2139,7 +2139,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.ProductAdmin{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.adminproductlist{\r\n  max-width: 100vw;\n}\ntable {\r\n  border-collapse: collapse;\n}\n.adminproductlist img{\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n  width: 100px;\r\n  height: auto;\n}\ntable, th, td {\r\n  border: 1px solid black;\n}\ntd{\r\n  max-width: 25vw;\r\n  text-align: center;\n}\n.carroussel{\r\n  width: 25vw;\n}\n.carroussel > *{\r\n  margin-left: auto;\r\n  margin-right: auto;\r\n  width: 20vw;\n}\ntd .VueCarousel-slide > img {\r\n    width: 18vw;\n}\ntd .VueCarousel-slide {\r\n    display: flex;\r\n    justify-content: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.ProductAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminproductlist{\n  max-width: 100vw;\n}\ntable {\n  border-collapse: collapse;\n}\n.adminproductlist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n.carroussel{\n  width: 25vw;\n}\n.carroussel > *{\n  margin-left: auto;\n  margin-right: auto;\n  width: 20vw;\n}\ntd .VueCarousel-slide > img {\n    width: 18vw;\n}\ntd .VueCarousel-slide {\n    display: flex;\n    justify-content: center;\n}\n.AdminSupAction{\n    margin-bottom: 10px;\n    border : none;\n    width: 50px;\n    height: 50px;\n    background-color :rgb(201, 201, 201);\n    border-radius: 5px;\n}\n.AdminAction{\n    border : none;\n    width: 30px;\n    height: 30px;\n    background-color :rgb(201, 201, 201);\n    border-radius: 5px;\n}\n.AdminSupAction:hover{\n    cursor: pointer;\n}\n.AdminAction:hover{\n    cursor: pointer;\n}\n.AdminSupAction:focus{\n    outline: none;\n}\n.AdminAction:focus{\n    outline: none;\n}\n", ""]);
 
 // exports
 
@@ -3106,7 +3106,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("label", { attrs: { for: "resume" } }, [
                   _vm._v(" resume :\n              "),
-                  _c("input", {
+                  _c("textarea", {
                     directives: [
                       {
                         name: "model",
@@ -3884,7 +3884,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("label", { attrs: { for: "resume" } }, [
                   _vm._v(" resume :\n              "),
-                  _c("input", {
+                  _c("textarea", {
                     directives: [
                       {
                         name: "model",
@@ -3893,7 +3893,7 @@ var render = function() {
                         expression: "emitedNews.resume"
                       }
                     ],
-                    attrs: { type: "text", name: "resume" },
+                    attrs: { name: "resume" },
                     domProps: { value: _vm.emitedNews.resume },
                     on: {
                       input: function($event) {
@@ -4493,12 +4493,21 @@ var render = function() {
     "div",
     { staticClass: "BrandAdmin" },
     [
-      _c("p", [_vm._v("BrandAdmin")]),
+      _c("p", [_vm._v("Admin des Marques")]),
       _vm._v(" "),
       _c(
         "button",
-        { attrs: { type: "button" }, on: { click: _vm.showAddModal } },
-        [_vm._v(" ajouter ")]
+        {
+          staticClass: "AdminSupAction",
+          attrs: { type: "button" },
+          on: { click: _vm.showAddModal }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-plus fa-2x",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
       ),
       _vm._v(" "),
       _c("table", { staticClass: "adminbrandlist" }, [
@@ -4522,6 +4531,7 @@ var render = function() {
                 _c(
                   "button",
                   {
+                    staticClass: "AdminAction",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -4529,12 +4539,18 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("modifier")]
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-pencil-square-o fa-lg",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
                   "button",
                   {
+                    staticClass: "AdminAction",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -4542,7 +4558,12 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("X")]
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-trash fa-lg",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
                 )
               ])
             ])
@@ -4709,12 +4730,21 @@ var render = function() {
     "div",
     { staticClass: "newsAdmin" },
     [
-      _c("p", [_vm._v("newsAdmin")]),
+      _c("p", [_vm._v("Admin des News")]),
       _vm._v(" "),
       _c(
         "button",
-        { attrs: { type: "button" }, on: { click: _vm.showAddModal } },
-        [_vm._v(" ajouter ")]
+        {
+          staticClass: "AdminSupAction",
+          attrs: { type: "button" },
+          on: { click: _vm.showAddModal }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-plus  fa-2x",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
       ),
       _vm._v(" "),
       _c("table", { staticClass: "adminnewslist" }, [
@@ -4738,12 +4768,15 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(news.releaseDate))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(news.isActive))]),
+              _c("td", [
+                _vm._v(_vm._s(news.isActive == 1 ? "Activé" : "Désactivé"))
+              ]),
               _vm._v(" "),
               _c("td", [
                 _c(
                   "button",
                   {
+                    staticClass: "AdminAction",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -4751,12 +4784,18 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("modifier")]
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-pencil-square-o fa-lg",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
                   "button",
                   {
+                    staticClass: "AdminAction",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -4764,7 +4803,12 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("X")]
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-trash fa-lg",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
                 )
               ])
             ])
@@ -4860,12 +4904,21 @@ var render = function() {
     "div",
     { staticClass: "ProductAdmin" },
     [
-      _c("p", [_vm._v("ProductAdmin")]),
+      _c("p", [_vm._v("Admin des Produits")]),
       _vm._v(" "),
       _c(
         "button",
-        { attrs: { type: "button" }, on: { click: _vm.showAddModal } },
-        [_vm._v(" ajouter ")]
+        {
+          staticClass: "AdminSupAction",
+          attrs: { type: "button" },
+          on: { click: _vm.showAddModal }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-plus  fa-2x",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
       ),
       _vm._v(" "),
       _c("table", { staticClass: "adminproductlist" }, [
@@ -4897,7 +4950,9 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(product.color))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(product.isActive))]),
+              _c("td", [
+                _vm._v(_vm._s(product.isActive == 1 ? "Activé" : "Désactivé"))
+              ]),
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(product.description))]),
               _vm._v(" "),
@@ -4941,6 +4996,7 @@ var render = function() {
                 _c(
                   "button",
                   {
+                    staticClass: "AdminAction",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -4948,12 +5004,18 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("modifier")]
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-pencil-square-o fa-lg",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
                   "button",
                   {
+                    staticClass: "AdminAction",
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
@@ -4961,7 +5023,12 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("X")]
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-trash fa-lg",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
                 )
               ])
             ])

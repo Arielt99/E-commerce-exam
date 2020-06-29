@@ -92,7 +92,12 @@
     height: 75vh;
     flex-direction: column;
   }
-
+    .modal textarea{
+        width: 94%;
+        margin-right: 3%;
+        margin-left: 3%;
+        min-height: 100px;
+    }
   .modal-header,
   .modal-footer {
     padding: 15px;
