@@ -162,7 +162,7 @@ export default {
   min-height:100vh;
 }
 body{
-  color:  rgb(48, 48, 48);
+  color:  #303030;
   margin: 0;
   font-family: sans-serif;
   background-color: rgb(241, 241, 241);

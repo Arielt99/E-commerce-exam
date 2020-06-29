@@ -2083,7 +2083,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.BrandAdmin{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.adminbrandlist{\r\n  max-width: 100vw;\n}\n.adminbrandlist img{\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n  width: 100px;\r\n  height: auto;\n}\ntable{\r\n  width: 90vw;\n}\r\n", ""]);
+exports.push([module.i, "\n.BrandAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminbrandlist{\n  max-width: 100vw;\n}\n.adminbrandlist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable{\n  width: 90vw;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -2102,7 +2102,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.newsAdmin{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.adminnewslist{\r\n  max-width: 100vw;\n}\n.adminnewslist img{\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\r\n  width: 100px;\r\n  height: auto;\n}\ntable{\r\n  width: 90vw;\n}\r\n", ""]);
+exports.push([module.i, "\n.newsAdmin{\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.adminnewslist{\n  max-width: 100vw;\n}\n.adminnewslist img{\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: auto;\n}\ntable{\n  width: 90vw;\n}\ntable, th, td {\n  border: 1px solid black;\n}\ntd{\n  max-width: 25vw;\n  text-align: center;\n}\n", ""]);
 
 // exports
 

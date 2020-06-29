@@ -107,4 +107,11 @@ export default {
 table{
   width: 90vw;
 }
+table, th, td {
+  border: 1px solid black;
+}
+td{
+  max-width: 25vw;
+  text-align: center;
+}
 </style>

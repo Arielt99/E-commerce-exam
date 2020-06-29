@@ -72,9 +72,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
 }
-.productCard .card-body .PriceAndColor .ProductColor{
-    margin-bottom: 20px;
-}
 .productCard .card-body .PriceAndColor .ProductPrice{
     font-weight: bolder;
     margin-top: 30px;
