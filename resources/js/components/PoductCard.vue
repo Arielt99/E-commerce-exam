@@ -80,7 +80,7 @@ export default {
 .productCard .card-body .ProductBrand{
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
 }
 .productCard .card-body .ProductBrand .ProductBrandLogo{
     height: 30px !important;
