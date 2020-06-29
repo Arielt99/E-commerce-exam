@@ -74,7 +74,7 @@ export default {
 }
 .productCard .card-body .PriceAndColor .ProductPrice{
     font-weight: bolder;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 20px;
 }
 .productCard .card-body .ProductBrand{
