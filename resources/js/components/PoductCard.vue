@@ -65,7 +65,6 @@ export default {
 .productCard .card-body .ProductName{
     font-weight: bolder;
     font-size: 25px;
-    padding-top: 10px;
 }
 .productCard .card-body .PriceAndColor{
     display: flex;
@@ -74,7 +73,7 @@ export default {
 }
 .productCard .card-body .PriceAndColor .ProductPrice{
     font-weight: bolder;
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 20px;
 }
 .productCard .card-body .ProductBrand{
