@@ -1,18 +1,17 @@
 <template>
   <div class="Admin">
-    <div v-if="EveryAdminBrands">
+    <div class="AdminResume" v-if="EveryAdminBrands">
       <p> {{EveryAdminBrands.length}} Marque{{ EveryAdminBrands.length > 1  ?  's' : ' '}} </p>
     </div>
-    <div v-if="EveryAdminProducts">
+    <div class="AdminResume" v-if="EveryAdminProducts">
       <p> {{EveryAdminProducts.length}} Produit{{ EveryAdminProducts.length > 1  ?  's' : ' '}} </p>
     </div>
-    <div v-if="EveryAdminNews">
+    <div class="AdminResume" v-if="EveryAdminNews">
       <p> {{EveryAdminNews.length}} actualité{{ EveryAdminNews.length > 1  ?  's' : ' '}} </p>
     </div>
 
   </div>
 </template>
-
 <script>
 export default {
   name: 'Admin',
@@ -57,3 +56,25 @@ created: function(){
 }
 
 </script>
+<style>
+.Admin{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.Admin .AdminResume{
+    margin-top: 20px;
+    min-width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    font-size: 40px;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    color: rgb(48, 48, 48);
+    background-color: rgb(230, 230, 230);
+}
+.Admin .AdminResume p{
+    padding : 20px
+}
+</style>
