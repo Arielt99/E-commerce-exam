@@ -33,14 +33,14 @@ export default {
     overflow: hidden;
 }
 #newsInHead img{
+    object-position: 50% 120%;
     display: flex;
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: auto;
+    top: -80px;
     object-fit: cover;
     position: absolute;
     z-index: 1;
-    top:0;
     bottom:0;
     padding: 0;
     margin: 0;
