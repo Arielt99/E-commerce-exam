@@ -257,11 +257,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       PrincipalImage: "",
       SecondaryImage: [],
-      Name: "TestProduit",
+      Name: "",
       ProductBrand: "",
-      Description: "Description produit test",
-      Price: 123,
-      Color: "bleu",
+      Description: "",
+      Price: "",
+      Color: "",
       IsActive: true
     };
   },
