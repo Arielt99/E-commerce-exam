@@ -40,7 +40,7 @@ export default {
     data () {
 		return {
 			page: 1,
-			perPage: 12,
+			perPage: 5,
             pages: [],
             active: true
 		}
