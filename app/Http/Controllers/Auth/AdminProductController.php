@@ -36,10 +36,10 @@ class AdminProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:products',
+            'name' => 'required',
             'color' => 'required',
             'principal_images'=>'required|mimes:jpeg,jpg,png',
-            'price'=>'required|numeric',
+            'price'=>'required',
             'description'=>'required',
             'isActive'=>'required',
             'brand_id'=>'required|integer',

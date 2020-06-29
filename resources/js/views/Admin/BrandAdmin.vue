@@ -99,6 +99,7 @@ export default {
 }
 table{
   width: 90vw;
+  border-collapse: collapse;
 }
 table, th, td {
   border: 1px solid black;
